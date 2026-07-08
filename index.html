@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -260,18 +261,18 @@ body{background:linear-gradient(180deg,#dfeaf1,#cfe0ea);background-attachment:fi
 
 /* ── App-wide motion polish ─────────────────────────────────────────────── */
 @keyframes pageIn{
-  0%{ opacity:0; transform:translateY(10px); }
-  100%{ opacity:1; transform:translateY(0); }
+0%{ opacity:0; transform:translateY(10px); }
+100%{ opacity:1; transform:translateY(0); }
 }
 .page.active{ animation:pageIn .32s cubic-bezier(.25,.8,.35,1); }
 
 @keyframes cardPop{
-  0%{ opacity:0; transform:translateY(8px) scale(0.98); }
-  100%{ opacity:1; transform:translateY(0) scale(1); }
+0%{ opacity:0; transform:translateY(8px) scale(0.98); }
+100%{ opacity:1; transform:translateY(0) scale(1); }
 }
 .guide-card, .meal-card, .n-card, .rotation-week, .day-view-card,
 .week-day-row, .month-cell, .addl-box, .summary-box, .disclaimer-card{
-  animation:cardPop .3s cubic-bezier(.25,.8,.35,1) both;
+animation:cardPop .3s cubic-bezier(.25,.8,.35,1) both;
 }
 .guide-card:nth-of-type(2){ animation-delay:.03s; }
 .guide-card:nth-of-type(3){ animation-delay:.06s; }
@@ -283,34 +284,34 @@ body{background:linear-gradient(180deg,#dfeaf1,#cfe0ea);background-attachment:fi
 .tab, .addins-btn, .save-btn, .fed-btn, .nav-btn, .view-btn, .swap-option,
 .protein-pick-item, .month-cell, .week-note, .n-card, .usda-result-item,
 .export-row, .day-cell{
-  transition:transform .15s ease, background .2s ease, border-color .2s ease;
+transition:transform .15s ease, background .2s ease, border-color .2s ease;
 }
 .tab:active, .addins-btn:active, .save-btn:active, .fed-btn:active,
 .nav-btn:active, .view-btn:active, .swap-option:active, .protein-pick-item:active,
 .month-cell:active, .n-card:active, .usda-result-item:active{
-  transform:scale(0.96);
+transform:scale(0.96);
 }
 .fed-btn.active{ animation:fedPulse .4s ease; }
 @keyframes fedPulse{
-  0%{ transform:scale(1); }
-  40%{ transform:scale(1.06); }
-  100%{ transform:scale(1); }
+0%{ transform:scale(1); }
+40%{ transform:scale(1.06); }
+100%{ transform:scale(1); }
 }
 .tab.active{ animation:tabPop .3s ease; }
 @keyframes tabPop{
-  0%{ transform:scale(0.92); }
-  60%{ transform:scale(1.04); }
-  100%{ transform:scale(1); }
+0%{ transform:scale(0.92); }
+60%{ transform:scale(1.04); }
+100%{ transform:scale(1); }
 }
 
 /* modal entrance */
 @keyframes modalUp{
-  0%{ transform:translateY(100%); opacity:0.4; }
-  100%{ transform:translateY(0); opacity:1; }
+0%{ transform:translateY(100%); opacity:0.4; }
+100%{ transform:translateY(0); opacity:1; }
 }
 @keyframes overlayFade{
-  0%{ opacity:0; }
-  100%{ opacity:1; }
+0%{ opacity:0; }
+100%{ opacity:1; }
 }
 .overlay{ animation:overlayFade .2s ease; }
 .overlay .modal{ animation:modalUp .32s cubic-bezier(.25,.8,.35,1); }
@@ -322,42 +323,42 @@ body{background:linear-gradient(180deg,#dfeaf1,#cfe0ea);background-attachment:fi
 
 /* ── Onboarding walkthrough (first-launch carousel) ────────────────────── */
 .onb-overlay{
-  position:fixed;top:0;left:0;right:0;bottom:0;
-  background:rgba(0,0,0,0.75);
-  z-index:400;
-  display:flex;align-items:center;justify-content:center;
-  padding:20px;
-  animation:overlayFade .25s ease;
+position:fixed;top:0;left:0;right:0;bottom:0;
+background:rgba(0,0,0,0.75);
+z-index:400;
+display:flex;align-items:center;justify-content:center;
+padding:20px;
+animation:overlayFade .25s ease;
 }
 .onb-card{
-  background:#ffffff;
-  border:1px solid rgba(200,147,58,0.3);
-  border-radius:20px;
-  width:100%;
-  max-width:360px;
-  padding:26px 22px 22px;
-  text-align:center;
-  animation:modalUp .35s cubic-bezier(.25,.8,.35,1);
+background:#ffffff;
+border:1px solid rgba(200,147,58,0.3);
+border-radius:20px;
+width:100%;
+max-width:360px;
+padding:26px 22px 22px;
+text-align:center;
+animation:modalUp .35s cubic-bezier(.25,.8,.35,1);
 }
 .onb-slide-wrap{ position:relative; min-height:230px; }
 .onb-slide{
-  position:absolute; top:0;left:0;right:0;
-  opacity:0; transform:translateX(24px);
-  transition:opacity .35s ease, transform .35s ease;
-  pointer-events:none;
-  display:flex; flex-direction:column; align-items:center;
+position:absolute; top:0;left:0;right:0;
+opacity:0; transform:translateX(24px);
+transition:opacity .35s ease, transform .35s ease;
+pointer-events:none;
+display:flex; flex-direction:column; align-items:center;
 }
 .onb-slide.active{ opacity:1; transform:translateX(0); pointer-events:auto; }
 .onb-badge{
-  width:34px;height:34px;border-radius:50%;
-  background:#c8933a;color:#0f1720;font-weight:800;font-size:14px;
-  display:flex;align-items:center;justify-content:center;margin-bottom:12px;
+width:34px;height:34px;border-radius:50%;
+background:#c8933a;color:#0f1720;font-weight:800;font-size:14px;
+display:flex;align-items:center;justify-content:center;margin-bottom:12px;
 }
 .onb-icon{
-  width:80px;height:80px;border-radius:22px;
-  background:rgba(200,147,58,0.12);
-  display:flex;align-items:center;justify-content:center;
-  font-size:38px;margin-bottom:14px;
+width:80px;height:80px;border-radius:22px;
+background:rgba(200,147,58,0.12);
+display:flex;align-items:center;justify-content:center;
+font-size:38px;margin-bottom:14px;
 }
 .onb-title{ font-size:16px;font-weight:800;color:#2c4a5e;margin-bottom:8px; }
 .onb-desc{ font-size:12.5px;color:#5b7d90;line-height:1.6;max-width:280px; }
@@ -371,20 +372,20 @@ body{background:linear-gradient(180deg,#dfeaf1,#cfe0ea);background-attachment:fi
 
 /* ── Directional slide transitions (day/history/nutrition navigation) ───── */
 @keyframes slideInFromRight{
-  0%{ opacity:0; transform:translateX(26px); }
-  100%{ opacity:1; transform:translateX(0); }
+0%{ opacity:0; transform:translateX(26px); }
+100%{ opacity:1; transform:translateX(0); }
 }
 @keyframes slideInFromLeft{
-  0%{ opacity:0; transform:translateX(-26px); }
-  100%{ opacity:1; transform:translateX(0); }
+0%{ opacity:0; transform:translateX(-26px); }
+100%{ opacity:1; transform:translateX(0); }
 }
 .slide-in-right{ animation:slideInFromRight .32s cubic-bezier(.25,.8,.35,1); }
 .slide-in-left{ animation:slideInFromLeft .32s cubic-bezier(.25,.8,.35,1); }
 
 /* ── Feeding tab extra polish ─────────────────────────────────────────────
-   Meal cards get a smooth color wash when Fed toggles, and everything that
-   pops into a card on swap/amount-change (swap notes, add-item lines) gets
-   its own little entrance instead of just appearing. */
+Meal cards get a smooth color wash when Fed toggles, and everything that
+pops into a card on swap/amount-change (swap notes, add-item lines) gets
+its own little entrance instead of just appearing. */
 .meal-card{ transition:background .3s ease, border-color .3s ease; }
 .swap-note, .addl-item{ animation:cardPop .28s cubic-bezier(.25,.8,.35,1) both; }
 .recipe-line, .supp-check-row{ animation:cardPop .25s cubic-bezier(.25,.8,.35,1) both; }
@@ -395,27 +396,27 @@ body{background:linear-gradient(180deg,#dfeaf1,#cfe0ea);background-attachment:fi
 .supp-check-row:nth-of-type(5){ animation-delay:.12s; }
 
 @keyframes checkPop{
-  0%{ transform:scale(1); }
-  50%{ transform:scale(1.35); }
-  100%{ transform:scale(1); }
+0%{ transform:scale(1); }
+50%{ transform:scale(1.35); }
+100%{ transform:scale(1); }
 }
 .supp-check-row input:checked, .export-row input:checked{ animation:checkPop .25s ease; }
 
 @keyframes ozTagPulse{
-  0%{ color:#c8933a; }
-  50%{ color:#f0c060; }
-  100%{ color:#c8933a; }
+0%{ color:#c8933a; }
+50%{ color:#f0c060; }
+100%{ color:#c8933a; }
 }
 .amt-tag:active{ animation:ozTagPulse .3s ease; }
 
 /* ── Onboarding-style visual pass, applied app-wide ───────────────────────
-   Rounder, softer cards everywhere (matching the onboarding card's 20px
-   radius) plus a reusable "icon chip" treatment — the same rounded amber
-   icon box used in the onboarding steps — for card titles across the app. */
+Rounder, softer cards everywhere (matching the onboarding card’s 20px
+radius) plus a reusable “icon chip” treatment — the same rounded amber
+icon box used in the onboarding steps — for card titles across the app. */
 .guide-card, .meal-card, .n-card, .summary-box, .addl-box, .rotation-week,
 .day-view-card, .week-day-row, .disclaimer-card, .month-cell, .usda-modal-panel,
 .aafco-cell, .protein-pick-item, .usda-result-item, .day-cell{
-  border-radius:16px;
+border-radius:16px;
 }
 .overlay .modal{ border-radius:22px 22px 0 0; }
 .save-btn, .fed-btn, .addins-btn{ border-radius:13px; }
@@ -425,19 +426,19 @@ body{background:linear-gradient(180deg,#dfeaf1,#cfe0ea);background-attachment:fi
 
 .title-icon-row{ display:flex; align-items:center; gap:10px; }
 .icon-chip{
-  width:34px;height:34px;flex-shrink:0;
-  border-radius:11px;
-  background:rgba(200,147,58,0.14);
-  display:flex;align-items:center;justify-content:center;
-  font-size:17px;
+width:34px;height:34px;flex-shrink:0;
+border-radius:11px;
+background:rgba(200,147,58,0.14);
+display:flex;align-items:center;justify-content:center;
+font-size:17px;
 }
 .title-text{ color:inherit; font-weight:inherit; }
 
 .slot-icon-chip{
-  width:22px;height:22px;border-radius:8px;
-  background:rgba(200,147,58,0.16);
-  display:inline-flex;align-items:center;justify-content:center;
-  font-size:12px;margin-right:6px;vertical-align:middle;
+width:22px;height:22px;border-radius:8px;
+background:rgba(200,147,58,0.16);
+display:inline-flex;align-items:center;justify-content:center;
+font-size:12px;margin-right:6px;vertical-align:middle;
 }
 
 .embedded-video-mount{ margin-bottom:14px; border-radius:14px; overflow:hidden; background:#e7f1f7; }
@@ -450,7 +451,7 @@ body{background:linear-gradient(180deg,#dfeaf1,#cfe0ea);background-attachment:fi
 <div class="header">
   <div class="header-top">
     <div style="flex:1;min-width:0">
-      <div class="app-title">Human Grade Dog Food Meal Planner <span class="version-tag">v.84</span></div>
+      <div class="app-title">Human Grade Dog Food Meal Planner <span class="version-tag">v.85</span></div>
       <div class="pet-info-box">
         <input type="text" id="petNameInput" class="pet-name-input" placeholder="Your dog's name" oninput="savePetName(this.value)">
         <div class="app-sub" id="appSub">60 lb &bull; Moderate activity &bull; ~1,335 kcal/day</div>
@@ -785,6 +786,7 @@ var FEEDING_VIDEO_HTML = `<!DOCTYPE html>
   .legend-item.active .legend-num{ color:#3d9dc4; }
   .legend-item.done{ opacity:.55; }
 </style>
+
 </head>
 <body>
 
@@ -800,30 +802,33 @@ var FEEDING_VIDEO_HTML = `<!DOCTYPE html>
       </div>
     </div>
 
-    <div class="hand" id="hand">
-      <div class="held-number" id="heldNumber"></div>
-      <svg viewBox="0 0 100 130">
-        <path d="M50 20
-                 C 30 20 20 35 20 55
-                 L 20 90
-                 C 20 110 34 122 50 122
-                 C 66 122 80 110 80 90
-                 L 80 55
-                 C 80 35 70 20 50 20 Z"
-              fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <path d="M50 20 C46 8 40 6 36 12 C33 17 36 26 40 30" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <path d="M64 22 C68 10 76 9 79 15 C81 20 77 29 72 33" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <line x1="38" y1="55" x2="38" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-        <line x1="50" y1="55" x2="50" y2="94" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-        <line x1="62" y1="55" x2="62" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-      </svg>
-    </div>
+```
+<div class="hand" id="hand">
+  <div class="held-number" id="heldNumber"></div>
+  <svg viewBox="0 0 100 130">
+    <path d="M50 20
+             C 30 20 20 35 20 55
+             L 20 90
+             C 20 110 34 122 50 122
+             C 66 122 80 110 80 90
+             L 80 55
+             C 80 35 70 20 50 20 Z"
+          fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <path d="M50 20 C46 8 40 6 36 12 C33 17 36 26 40 30" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <path d="M64 22 C68 10 76 9 79 15 C81 20 77 29 72 33" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <line x1="38" y1="55" x2="38" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+    <line x1="50" y1="55" x2="50" y2="94" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+    <line x1="62" y1="55" x2="62" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+  </svg>
+</div>
 
-    <div class="bowl-wrap">
-      <div class="bowl-rim"></div>
-      <div class="bowl-body"></div>
-      <div class="bowl-inside" id="bowlInside"></div>
-    </div>
+<div class="bowl-wrap">
+  <div class="bowl-rim"></div>
+  <div class="bowl-body"></div>
+  <div class="bowl-inside" id="bowlInside"></div>
+</div>
+```
+
   </div>
 
   <div class="progress" id="progressLabel">Cube 1 of 8</div>
@@ -1142,6 +1147,7 @@ var HOWTO_VIDEO_HTML = `<!DOCTYPE html>
     letter-spacing:.4px;
   }
 </style>
+
 </head>
 <body>
 
@@ -1451,6 +1457,7 @@ var PROTEINS_VIDEO_HTML = `<!DOCTYPE html>
   .legend-item.active .legend-name{ color:#215a72; }
   .legend-item.done{ opacity:.5; }
 </style>
+
 </head>
 <body>
 
@@ -1466,30 +1473,33 @@ var PROTEINS_VIDEO_HTML = `<!DOCTYPE html>
       </div>
     </div>
 
-    <div class="hand" id="hand">
-      <div class="held-icon" id="heldIcon"></div>
-      <svg viewBox="0 0 100 130">
-        <path d="M50 20
-                 C 30 20 20 35 20 55
-                 L 20 90
-                 C 20 110 34 122 50 122
-                 C 66 122 80 110 80 90
-                 L 80 55
-                 C 80 35 70 20 50 20 Z"
-              fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <path d="M50 20 C46 8 40 6 36 12 C33 17 36 26 40 30" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <path d="M64 22 C68 10 76 9 79 15 C81 20 77 29 72 33" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <line x1="38" y1="55" x2="38" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-        <line x1="50" y1="55" x2="50" y2="94" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-        <line x1="62" y1="55" x2="62" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-      </svg>
-    </div>
+```
+<div class="hand" id="hand">
+  <div class="held-icon" id="heldIcon"></div>
+  <svg viewBox="0 0 100 130">
+    <path d="M50 20
+             C 30 20 20 35 20 55
+             L 20 90
+             C 20 110 34 122 50 122
+             C 66 122 80 110 80 90
+             L 80 55
+             C 80 35 70 20 50 20 Z"
+          fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <path d="M50 20 C46 8 40 6 36 12 C33 17 36 26 40 30" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <path d="M64 22 C68 10 76 9 79 15 C81 20 77 29 72 33" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <line x1="38" y1="55" x2="38" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+    <line x1="50" y1="55" x2="50" y2="94" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+    <line x1="62" y1="55" x2="62" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+  </svg>
+</div>
 
-    <div class="bowl-wrap">
-      <div class="bowl-rim"></div>
-      <div class="bowl-body"></div>
-      <div class="bowl-inside" id="bowlInside"></div>
-    </div>
+<div class="bowl-wrap">
+  <div class="bowl-rim"></div>
+  <div class="bowl-body"></div>
+  <div class="bowl-inside" id="bowlInside"></div>
+</div>
+```
+
   </div>
 
   <div class="progress" id="progressLabel">Beef</div>
@@ -1840,6 +1850,7 @@ var ORGANS_VIDEO_HTML = `<!DOCTYPE html>
   .legend-item.active .legend-name{ color:#215a72; }
   .legend-item.done{ opacity:.5; }
 </style>
+
 </head>
 <body>
 
@@ -1855,30 +1866,33 @@ var ORGANS_VIDEO_HTML = `<!DOCTYPE html>
       </div>
     </div>
 
-    <div class="hand" id="hand">
-      <div class="held-icon" id="heldIcon"></div>
-      <svg viewBox="0 0 100 130">
-        <path d="M50 20
-                 C 30 20 20 35 20 55
-                 L 20 90
-                 C 20 110 34 122 50 122
-                 C 66 122 80 110 80 90
-                 L 80 55
-                 C 80 35 70 20 50 20 Z"
-              fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <path d="M50 20 C46 8 40 6 36 12 C33 17 36 26 40 30" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <path d="M64 22 C68 10 76 9 79 15 C81 20 77 29 72 33" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <line x1="38" y1="55" x2="38" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-        <line x1="50" y1="55" x2="50" y2="94" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-        <line x1="62" y1="55" x2="62" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-      </svg>
-    </div>
+```
+<div class="hand" id="hand">
+  <div class="held-icon" id="heldIcon"></div>
+  <svg viewBox="0 0 100 130">
+    <path d="M50 20
+             C 30 20 20 35 20 55
+             L 20 90
+             C 20 110 34 122 50 122
+             C 66 122 80 110 80 90
+             L 80 55
+             C 80 35 70 20 50 20 Z"
+          fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <path d="M50 20 C46 8 40 6 36 12 C33 17 36 26 40 30" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <path d="M64 22 C68 10 76 9 79 15 C81 20 77 29 72 33" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <line x1="38" y1="55" x2="38" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+    <line x1="50" y1="55" x2="50" y2="94" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+    <line x1="62" y1="55" x2="62" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+  </svg>
+</div>
 
-    <div class="bowl-wrap">
-      <div class="bowl-rim"></div>
-      <div class="bowl-body"></div>
-      <div class="bowl-inside" id="bowlInside"></div>
-    </div>
+<div class="bowl-wrap">
+  <div class="bowl-rim"></div>
+  <div class="bowl-body"></div>
+  <div class="bowl-inside" id="bowlInside"></div>
+</div>
+```
+
   </div>
 
   <div class="progress" id="progressLabel">&nbsp;</div>
@@ -2218,6 +2232,7 @@ var VEGETABLES_VIDEO_HTML = `<!DOCTYPE html>
   .legend-item.active .legend-name{ color:#215a72; }
   .legend-item.done{ opacity:.5; }
 </style>
+
 </head>
 <body>
 
@@ -2233,30 +2248,33 @@ var VEGETABLES_VIDEO_HTML = `<!DOCTYPE html>
       </div>
     </div>
 
-    <div class="hand" id="hand">
-      <div class="held-icon" id="heldIcon"></div>
-      <svg viewBox="0 0 100 130">
-        <path d="M50 20
-                 C 30 20 20 35 20 55
-                 L 20 90
-                 C 20 110 34 122 50 122
-                 C 66 122 80 110 80 90
-                 L 80 55
-                 C 80 35 70 20 50 20 Z"
-              fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <path d="M50 20 C46 8 40 6 36 12 C33 17 36 26 40 30" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <path d="M64 22 C68 10 76 9 79 15 C81 20 77 29 72 33" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <line x1="38" y1="55" x2="38" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-        <line x1="50" y1="55" x2="50" y2="94" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-        <line x1="62" y1="55" x2="62" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-      </svg>
-    </div>
+```
+<div class="hand" id="hand">
+  <div class="held-icon" id="heldIcon"></div>
+  <svg viewBox="0 0 100 130">
+    <path d="M50 20
+             C 30 20 20 35 20 55
+             L 20 90
+             C 20 110 34 122 50 122
+             C 66 122 80 110 80 90
+             L 80 55
+             C 80 35 70 20 50 20 Z"
+          fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <path d="M50 20 C46 8 40 6 36 12 C33 17 36 26 40 30" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <path d="M64 22 C68 10 76 9 79 15 C81 20 77 29 72 33" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <line x1="38" y1="55" x2="38" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+    <line x1="50" y1="55" x2="50" y2="94" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+    <line x1="62" y1="55" x2="62" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+  </svg>
+</div>
 
-    <div class="bowl-wrap">
-      <div class="bowl-rim"></div>
-      <div class="bowl-body"></div>
-      <div class="bowl-inside" id="bowlInside"></div>
-    </div>
+<div class="bowl-wrap">
+  <div class="bowl-rim"></div>
+  <div class="bowl-body"></div>
+  <div class="bowl-inside" id="bowlInside"></div>
+</div>
+```
+
   </div>
 
   <div class="progress" id="progressLabel">&nbsp;</div>
@@ -2596,6 +2614,7 @@ var STARCHES_VIDEO_HTML = `<!DOCTYPE html>
   .legend-item.active .legend-name{ color:#215a72; }
   .legend-item.done{ opacity:.5; }
 </style>
+
 </head>
 <body>
 
@@ -2611,30 +2630,33 @@ var STARCHES_VIDEO_HTML = `<!DOCTYPE html>
       </div>
     </div>
 
-    <div class="hand" id="hand">
-      <div class="held-icon" id="heldIcon"></div>
-      <svg viewBox="0 0 100 130">
-        <path d="M50 20
-                 C 30 20 20 35 20 55
-                 L 20 90
-                 C 20 110 34 122 50 122
-                 C 66 122 80 110 80 90
-                 L 80 55
-                 C 80 35 70 20 50 20 Z"
-              fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <path d="M50 20 C46 8 40 6 36 12 C33 17 36 26 40 30" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <path d="M64 22 C68 10 76 9 79 15 C81 20 77 29 72 33" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <line x1="38" y1="55" x2="38" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-        <line x1="50" y1="55" x2="50" y2="94" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-        <line x1="62" y1="55" x2="62" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-      </svg>
-    </div>
+```
+<div class="hand" id="hand">
+  <div class="held-icon" id="heldIcon"></div>
+  <svg viewBox="0 0 100 130">
+    <path d="M50 20
+             C 30 20 20 35 20 55
+             L 20 90
+             C 20 110 34 122 50 122
+             C 66 122 80 110 80 90
+             L 80 55
+             C 80 35 70 20 50 20 Z"
+          fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <path d="M50 20 C46 8 40 6 36 12 C33 17 36 26 40 30" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <path d="M64 22 C68 10 76 9 79 15 C81 20 77 29 72 33" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <line x1="38" y1="55" x2="38" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+    <line x1="50" y1="55" x2="50" y2="94" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+    <line x1="62" y1="55" x2="62" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+  </svg>
+</div>
 
-    <div class="bowl-wrap">
-      <div class="bowl-rim"></div>
-      <div class="bowl-body"></div>
-      <div class="bowl-inside" id="bowlInside"></div>
-    </div>
+<div class="bowl-wrap">
+  <div class="bowl-rim"></div>
+  <div class="bowl-body"></div>
+  <div class="bowl-inside" id="bowlInside"></div>
+</div>
+```
+
   </div>
 
   <div class="progress" id="progressLabel">&nbsp;</div>
@@ -2974,6 +2996,7 @@ var CONSTANTS_VIDEO_HTML = `<!DOCTYPE html>
   .legend-item.active .legend-name{ color:#215a72; }
   .legend-item.done{ opacity:.5; }
 </style>
+
 </head>
 <body>
 
@@ -2989,30 +3012,33 @@ var CONSTANTS_VIDEO_HTML = `<!DOCTYPE html>
       </div>
     </div>
 
-    <div class="hand" id="hand">
-      <div class="held-icon" id="heldIcon"></div>
-      <svg viewBox="0 0 100 130">
-        <path d="M50 20
-                 C 30 20 20 35 20 55
-                 L 20 90
-                 C 20 110 34 122 50 122
-                 C 66 122 80 110 80 90
-                 L 80 55
-                 C 80 35 70 20 50 20 Z"
-              fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <path d="M50 20 C46 8 40 6 36 12 C33 17 36 26 40 30" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <path d="M64 22 C68 10 76 9 79 15 C81 20 77 29 72 33" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
-        <line x1="38" y1="55" x2="38" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-        <line x1="50" y1="55" x2="50" y2="94" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-        <line x1="62" y1="55" x2="62" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
-      </svg>
-    </div>
+```
+<div class="hand" id="hand">
+  <div class="held-icon" id="heldIcon"></div>
+  <svg viewBox="0 0 100 130">
+    <path d="M50 20
+             C 30 20 20 35 20 55
+             L 20 90
+             C 20 110 34 122 50 122
+             C 66 122 80 110 80 90
+             L 80 55
+             C 80 35 70 20 50 20 Z"
+          fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <path d="M50 20 C46 8 40 6 36 12 C33 17 36 26 40 30" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <path d="M64 22 C68 10 76 9 79 15 C81 20 77 29 72 33" fill="#f2c199" stroke="#b5744a" stroke-width="4"/>
+    <line x1="38" y1="55" x2="38" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+    <line x1="50" y1="55" x2="50" y2="94" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+    <line x1="62" y1="55" x2="62" y2="90" stroke="#c98a5e" stroke-width="3" stroke-linecap="round"/>
+  </svg>
+</div>
 
-    <div class="bowl-wrap">
-      <div class="bowl-rim"></div>
-      <div class="bowl-body"></div>
-      <div class="bowl-inside" id="bowlInside"></div>
-    </div>
+<div class="bowl-wrap">
+  <div class="bowl-rim"></div>
+  <div class="bowl-body"></div>
+  <div class="bowl-inside" id="bowlInside"></div>
+</div>
+```
+
   </div>
 
   <div class="progress" id="progressLabel">&nbsp;</div>
@@ -3320,6 +3346,7 @@ var ABOUT_VIDEO_HTML = `<!DOCTYPE html>
     letter-spacing:.4px;
   }
 </style>
+
 </head>
 <body>
 
@@ -3664,6 +3691,7 @@ var MYA_AND_I_VIDEO_HTML = `<!DOCTYPE html>
 
   .caption{ margin-top:12px; font-size:12px; color:#5b7d90; text-align:center; font-weight:600; line-height:1.5; }
 </style>
+
 </head>
 <body>
 
@@ -3676,133 +3704,136 @@ var MYA_AND_I_VIDEO_HTML = `<!DOCTYPE html>
     <div class="cloud cloud1"></div>
     <div class="cloud cloud2"></div>
 
-    <div class="skyline">
-      <svg viewBox="0 0 480 90" preserveAspectRatio="none">
-        <rect x="0" y="40" width="480" height="50" fill="#9fb4c2"/>
-        <!-- generic low buildings, far left -->
-        <rect x="4"   y="60" width="14" height="30" fill="#a3b8c6"/>
-        <rect x="18"  y="52" width="16" height="38" fill="#8fa5b5"/>
-        <rect x="34"  y="44" width="16" height="46" fill="#7f97a8"/>
-        <rect x="50"  y="58" width="18" height="32" fill="#93a9b8"/>
-        <!-- Marina City style: twin corncob towers -->
-        <path d="M70 90 L70 40 Q78 34 86 40 L86 90 Z" fill="#899fae"/>
-        <path d="M72 42 Q78 38 84 42" stroke="#7f97a8" stroke-width="1.5" fill="none"/>
-        <path d="M72 50 Q78 46 84 50" stroke="#7f97a8" stroke-width="1.5" fill="none"/>
-        <path d="M72 58 Q78 54 84 58" stroke="#7f97a8" stroke-width="1.5" fill="none"/>
-        <path d="M92 90 L92 46 Q100 40 108 46 L108 90 Z" fill="#8fa5b5"/>
-        <path d="M94 48 Q100 44 106 48" stroke="#7f97a8" stroke-width="1.5" fill="none"/>
-        <path d="M94 56 Q100 52 106 56" stroke="#7f97a8" stroke-width="1.5" fill="none"/>
-        <rect x="114" y="50" width="16" height="40" fill="#93a9b8"/>
-        <!-- Willis Tower style: stepped top, twin antennae -->
-        <rect x="136" y="30" width="28" height="60" fill="#6d8494"/>
-        <rect x="136" y="18" width="18" height="12" fill="#6d8494"/>
-        <rect x="140" y="8" width="10" height="10" fill="#6d8494"/>
-        <rect x="143" y="0" width="2.5" height="8" fill="#6d8494"/>
-        <rect x="151" y="2" width="2.5" height="6" fill="#6d8494"/>
-        <rect x="168" y="52" width="16" height="38" fill="#8fa5b5"/>
-        <rect x="188" y="42" width="18" height="48" fill="#7f97a8"/>
-        <!-- Trump Tower style: stepped tiers -->
-        <rect x="210" y="46" width="24" height="44" fill="#93a9b8"/>
-        <rect x="214" y="32" width="16" height="14" fill="#8fa5b5"/>
-        <rect x="217" y="20" width="10" height="12" fill="#7f97a8"/>
-        <rect x="221" y="12" width="2.5" height="8" fill="#7f97a8"/>
-        <rect x="240" y="58" width="18" height="32" fill="#9fb4c2"/>
-        <rect x="262" y="48" width="16" height="42" fill="#8fa5b5"/>
-        <!-- John Hancock style: tapered with twin antennae -->
-        <polygon points="284,90 288,26 312,26 316,90" fill="#6d8494"/>
-        <rect x="293" y="14" width="2.5" height="14" fill="#6d8494"/>
-        <rect x="305" y="14" width="2.5" height="14" fill="#6d8494"/>
-        <rect x="322" y="56" width="18" height="34" fill="#93a9b8"/>
-        <rect x="344" y="46" width="16" height="44" fill="#8fa5b5"/>
-        <rect x="364" y="60" width="20" height="30" fill="#9fb4c2"/>
-        <rect x="388" y="42" width="18" height="48" fill="#7f97a8"/>
-        <rect x="410" y="54" width="16" height="36" fill="#8fa5b5"/>
-        <!-- second cluster, far right -->
-        <rect x="430" y="34" width="20" height="56" fill="#6d8494"/>
-        <rect x="436" y="24" width="8" height="10" fill="#6d8494"/>
-        <rect x="454" y="58" width="18" height="32" fill="#93a9b8"/>
-        <rect x="474" y="50" width="6" height="40" fill="#8fa5b5"/>
-      </svg>
-    </div>
+```
+<div class="skyline">
+  <svg viewBox="0 0 480 90" preserveAspectRatio="none">
+    <rect x="0" y="40" width="480" height="50" fill="#9fb4c2"/>
+    <!-- generic low buildings, far left -->
+    <rect x="4"   y="60" width="14" height="30" fill="#a3b8c6"/>
+    <rect x="18"  y="52" width="16" height="38" fill="#8fa5b5"/>
+    <rect x="34"  y="44" width="16" height="46" fill="#7f97a8"/>
+    <rect x="50"  y="58" width="18" height="32" fill="#93a9b8"/>
+    <!-- Marina City style: twin corncob towers -->
+    <path d="M70 90 L70 40 Q78 34 86 40 L86 90 Z" fill="#899fae"/>
+    <path d="M72 42 Q78 38 84 42" stroke="#7f97a8" stroke-width="1.5" fill="none"/>
+    <path d="M72 50 Q78 46 84 50" stroke="#7f97a8" stroke-width="1.5" fill="none"/>
+    <path d="M72 58 Q78 54 84 58" stroke="#7f97a8" stroke-width="1.5" fill="none"/>
+    <path d="M92 90 L92 46 Q100 40 108 46 L108 90 Z" fill="#8fa5b5"/>
+    <path d="M94 48 Q100 44 106 48" stroke="#7f97a8" stroke-width="1.5" fill="none"/>
+    <path d="M94 56 Q100 52 106 56" stroke="#7f97a8" stroke-width="1.5" fill="none"/>
+    <rect x="114" y="50" width="16" height="40" fill="#93a9b8"/>
+    <!-- Willis Tower style: stepped top, twin antennae -->
+    <rect x="136" y="30" width="28" height="60" fill="#6d8494"/>
+    <rect x="136" y="18" width="18" height="12" fill="#6d8494"/>
+    <rect x="140" y="8" width="10" height="10" fill="#6d8494"/>
+    <rect x="143" y="0" width="2.5" height="8" fill="#6d8494"/>
+    <rect x="151" y="2" width="2.5" height="6" fill="#6d8494"/>
+    <rect x="168" y="52" width="16" height="38" fill="#8fa5b5"/>
+    <rect x="188" y="42" width="18" height="48" fill="#7f97a8"/>
+    <!-- Trump Tower style: stepped tiers -->
+    <rect x="210" y="46" width="24" height="44" fill="#93a9b8"/>
+    <rect x="214" y="32" width="16" height="14" fill="#8fa5b5"/>
+    <rect x="217" y="20" width="10" height="12" fill="#7f97a8"/>
+    <rect x="221" y="12" width="2.5" height="8" fill="#7f97a8"/>
+    <rect x="240" y="58" width="18" height="32" fill="#9fb4c2"/>
+    <rect x="262" y="48" width="16" height="42" fill="#8fa5b5"/>
+    <!-- John Hancock style: tapered with twin antennae -->
+    <polygon points="284,90 288,26 312,26 316,90" fill="#6d8494"/>
+    <rect x="293" y="14" width="2.5" height="14" fill="#6d8494"/>
+    <rect x="305" y="14" width="2.5" height="14" fill="#6d8494"/>
+    <rect x="322" y="56" width="18" height="34" fill="#93a9b8"/>
+    <rect x="344" y="46" width="16" height="44" fill="#8fa5b5"/>
+    <rect x="364" y="60" width="20" height="30" fill="#9fb4c2"/>
+    <rect x="388" y="42" width="18" height="48" fill="#7f97a8"/>
+    <rect x="410" y="54" width="16" height="36" fill="#8fa5b5"/>
+    <!-- second cluster, far right -->
+    <rect x="430" y="34" width="20" height="56" fill="#6d8494"/>
+    <rect x="436" y="24" width="8" height="10" fill="#6d8494"/>
+    <rect x="454" y="58" width="18" height="32" fill="#93a9b8"/>
+    <rect x="474" y="50" width="6" height="40" fill="#8fa5b5"/>
+  </svg>
+</div>
 
-    <div class="lake">
-      <div class="wave" style="width:30px; top:14px; left:10%"></div>
-      <div class="wave" style="width:24px; top:30px; left:35%; animation-delay:.6s"></div>
-      <div class="wave" style="width:34px; top:20px; left:60%; animation-delay:1.2s"></div>
-      <div class="wave" style="width:22px; top:38px; left:80%; animation-delay:1.8s"></div>
-    </div>
+<div class="lake">
+  <div class="wave" style="width:30px; top:14px; left:10%"></div>
+  <div class="wave" style="width:24px; top:30px; left:35%; animation-delay:.6s"></div>
+  <div class="wave" style="width:34px; top:20px; left:60%; animation-delay:1.2s"></div>
+  <div class="wave" style="width:22px; top:38px; left:80%; animation-delay:1.8s"></div>
+</div>
 
-    <div class="sand" id="sandArea"></div>
+<div class="sand" id="sandArea"></div>
 
-    <!-- guy: athletic build, scruffy beard, backwards cap, running -->
-    <div class="guy-run-wrap">
-      <div class="guy">
-        <svg viewBox="0 0 46 92">
-          <!-- legs -->
-          <rect class="guy-leg" x="14" y="60" width="7" height="26" rx="3" fill="#3d5a6c"/>
-          <rect class="guy-leg guy-leg2" x="25" y="60" width="7" height="26" rx="3" fill="#3d5a6c"/>
-          <!-- shoes -->
-          <ellipse cx="17.5" cy="88" rx="5" ry="3" fill="#2c4a5e"/>
-          <ellipse cx="28.5" cy="88" rx="5" ry="3" fill="#2c4a5e"/>
-          <!-- torso (tank top, athletic) -->
-          <path d="M12 34 Q23 28 34 34 L33 62 Q23 68 13 62 Z" fill="#4a90c8"/>
-          <!-- arms -->
-          <rect class="guy-arm" x="6" y="36" width="7" height="24" rx="3.5" fill="#f2c199"/>
-          <rect class="guy-arm guy-arm2" x="33" y="36" width="7" height="24" rx="3.5" fill="#f2c199"/>
-          <!-- neck -->
-          <rect x="19" y="24" width="8" height="8" fill="#f2c199"/>
-          <!-- head -->
-          <circle cx="23" cy="16" r="13" fill="#f2c199"/>
-          <!-- scruffy beard -->
-          <path d="M11 16 Q10 28 23 29 Q36 28 35 16 Q36 24 30 27 Q23 30 16 27 Q10 24 11 16 Z" fill="#6b4a35"/>
-          <!-- mouth hint -->
-          <path d="M19 22 Q23 24 27 22" stroke="#4a3226" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-          <!-- backwards cap -->
-          <path d="M10 10 Q23 -1 36 10 L36 13 Q23 6 10 13 Z" fill="#e8683f"/>
-          <rect x="33" y="6" width="7" height="7" rx="2" fill="#e8683f"/>
-          <circle cx="23" cy="4" r="2" fill="#c34f2b"/>
-        </svg>
-      </div>
-    </div>
+<!-- guy: athletic build, scruffy beard, backwards cap, running -->
+<div class="guy-run-wrap">
+  <div class="guy">
+    <svg viewBox="0 0 46 92">
+      <!-- legs -->
+      <rect class="guy-leg" x="14" y="60" width="7" height="26" rx="3" fill="#3d5a6c"/>
+      <rect class="guy-leg guy-leg2" x="25" y="60" width="7" height="26" rx="3" fill="#3d5a6c"/>
+      <!-- shoes -->
+      <ellipse cx="17.5" cy="88" rx="5" ry="3" fill="#2c4a5e"/>
+      <ellipse cx="28.5" cy="88" rx="5" ry="3" fill="#2c4a5e"/>
+      <!-- torso (tank top, athletic) -->
+      <path d="M12 34 Q23 28 34 34 L33 62 Q23 68 13 62 Z" fill="#4a90c8"/>
+      <!-- arms -->
+      <rect class="guy-arm" x="6" y="36" width="7" height="24" rx="3.5" fill="#f2c199"/>
+      <rect class="guy-arm guy-arm2" x="33" y="36" width="7" height="24" rx="3.5" fill="#f2c199"/>
+      <!-- neck -->
+      <rect x="19" y="24" width="8" height="8" fill="#f2c199"/>
+      <!-- head -->
+      <circle cx="23" cy="16" r="13" fill="#f2c199"/>
+      <!-- scruffy beard -->
+      <path d="M11 16 Q10 28 23 29 Q36 28 35 16 Q36 24 30 27 Q23 30 16 27 Q10 24 11 16 Z" fill="#6b4a35"/>
+      <!-- mouth hint -->
+      <path d="M19 22 Q23 24 27 22" stroke="#4a3226" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <!-- backwards cap -->
+      <path d="M10 10 Q23 -1 36 10 L36 13 Q23 6 10 13 Z" fill="#e8683f"/>
+      <rect x="33" y="6" width="7" height="7" rx="2" fill="#e8683f"/>
+      <circle cx="23" cy="4" r="2" fill="#c34f2b"/>
+    </svg>
+  </div>
+</div>
 
-    <!-- Mya: pittie, brown with white face + neck -->
-    <div class="dog-wrap">
-      <div class="dog-bounce">
-        <svg viewBox="0 0 70 48" overflow="visible">
-          <!-- back legs -->
-          <rect class="leg leg3" x="16" y="30" width="6" height="16" rx="3" fill="#8a5638"/>
-          <rect class="leg leg4" x="26" y="30" width="6" height="16" rx="3" fill="#8a5638"/>
-          <!-- front legs -->
-          <rect class="leg leg2" x="42" y="28" width="6" height="18" rx="3" fill="#8a5638"/>
-          <rect class="leg" x="52" y="28" width="6" height="18" rx="3" fill="#8a5638"/>
-          <!-- tail -->
-          <path class="tail" d="M14 22 Q4 14 8 6" stroke="#8a5638" stroke-width="6" fill="none" stroke-linecap="round"/>
-          <!-- body -->
-          <ellipse cx="36" cy="24" rx="24" ry="13" fill="#a0654a"/>
-          <!-- white neck/chest patch -->
-          <path d="M46 16 Q56 18 56 30 Q50 34 44 30 Q42 22 46 16 Z" fill="#fdf6ec"/>
-          <!-- head -->
-          <ellipse cx="58" cy="15" rx="11" ry="9.5" fill="#a0654a"/>
-          <!-- white face patch -->
-          <path d="M52 12 Q58 8 64 12 Q65 20 58 22 Q51 20 52 12 Z" fill="#fdf6ec"/>
-          <!-- ears -->
-          <path d="M50 8 Q46 2 51 0 Q55 4 54 10 Z" fill="#8a5638"/>
-          <path d="M65 8 Q70 2 66 -1 Q61 3 62 9 Z" fill="#8a5638"/>
-          <!-- snout -->
-          <ellipse cx="67" cy="16" rx="5" ry="4" fill="#fdf6ec"/>
-          <circle cx="70.5" cy="15.5" r="1.6" fill="#3a2a20"/>
-          <!-- eye -->
-          <circle cx="60" cy="13" r="1.4" fill="#3a2a20"/>
-          <!-- tongue, happy panting -->
-          <path d="M63 20 Q65 25 62 27" stroke="#e88a9a" stroke-width="3" fill="none" stroke-linecap="round"/>
-        </svg>
-      </div>
-    </div>
+<!-- Mya: pittie, brown with white face + neck -->
+<div class="dog-wrap">
+  <div class="dog-bounce">
+    <svg viewBox="0 0 70 48" overflow="visible">
+      <!-- back legs -->
+      <rect class="leg leg3" x="16" y="30" width="6" height="16" rx="3" fill="#8a5638"/>
+      <rect class="leg leg4" x="26" y="30" width="6" height="16" rx="3" fill="#8a5638"/>
+      <!-- front legs -->
+      <rect class="leg leg2" x="42" y="28" width="6" height="18" rx="3" fill="#8a5638"/>
+      <rect class="leg" x="52" y="28" width="6" height="18" rx="3" fill="#8a5638"/>
+      <!-- tail -->
+      <path class="tail" d="M14 22 Q4 14 8 6" stroke="#8a5638" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <!-- body -->
+      <ellipse cx="36" cy="24" rx="24" ry="13" fill="#a0654a"/>
+      <!-- white neck/chest patch -->
+      <path d="M46 16 Q56 18 56 30 Q50 34 44 30 Q42 22 46 16 Z" fill="#fdf6ec"/>
+      <!-- head -->
+      <ellipse cx="58" cy="15" rx="11" ry="9.5" fill="#a0654a"/>
+      <!-- white face patch -->
+      <path d="M52 12 Q58 8 64 12 Q65 20 58 22 Q51 20 52 12 Z" fill="#fdf6ec"/>
+      <!-- ears -->
+      <path d="M50 8 Q46 2 51 0 Q55 4 54 10 Z" fill="#8a5638"/>
+      <path d="M65 8 Q70 2 66 -1 Q61 3 62 9 Z" fill="#8a5638"/>
+      <!-- snout -->
+      <ellipse cx="67" cy="16" rx="5" ry="4" fill="#fdf6ec"/>
+      <circle cx="70.5" cy="15.5" r="1.6" fill="#3a2a20"/>
+      <!-- eye -->
+      <circle cx="60" cy="13" r="1.4" fill="#3a2a20"/>
+      <!-- tongue, happy panting -->
+      <path d="M63 20 Q65 25 62 27" stroke="#e88a9a" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
+</div>
 
-    <!-- seagulls -->
-    <div class="gull gull1"><svg viewBox="0 0 24 14"><path d="M0 8 Q6 0 12 7 Q18 0 24 8" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></div>
-    <div class="gull gull2"><svg viewBox="0 0 24 14"><path d="M0 8 Q6 0 12 7 Q18 0 24 8" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></div>
-    <div class="gull gull3"><svg viewBox="0 0 24 14"><path d="M0 8 Q6 0 12 7 Q18 0 24 8" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></div>
+<!-- seagulls -->
+<div class="gull gull1"><svg viewBox="0 0 24 14"><path d="M0 8 Q6 0 12 7 Q18 0 24 8" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></div>
+<div class="gull gull2"><svg viewBox="0 0 24 14"><path d="M0 8 Q6 0 12 7 Q18 0 24 8" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></div>
+<div class="gull gull3"><svg viewBox="0 0 24 14"><path d="M0 8 Q6 0 12 7 Q18 0 24 8" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round"/></svg></div>
+```
+
   </div>
 
   <div class="caption">This app started as a way to track exactly what Mya was eating &mdash; now it's for any dog, anywhere.</div>
@@ -3971,6 +4002,7 @@ var SAFE_FOOD_VIDEO_HTML = `<!DOCTYPE html>
 
   .caption{ margin-top:12px; font-size:11.5px; color:#5b7d90; text-align:center; font-weight:600; line-height:1.5; }
 </style>
+
 </head>
 <body>
 
@@ -3988,55 +4020,58 @@ var SAFE_FOOD_VIDEO_HTML = `<!DOCTYPE html>
     <div class="qmark" id="qmark">?</div>
     <div class="big-x" id="bigX">&#10060;</div>
 
-    <div class="dog-zone" id="dogZone">
-      <div class="jump" id="dogJumpWrap">
-        <svg viewBox="0 0 160 130">
-          <!-- back legs -->
-          <rect x="46" y="94" width="10" height="24" rx="4" fill="#a0654a"/>
-          <rect x="96" y="94" width="10" height="24" rx="4" fill="#a0654a"/>
-          <!-- tail -->
-          <path class="tail wag-slow" id="tail" d="M24 78 Q4 66 10 46" stroke="#8a5638" stroke-width="9" fill="none" stroke-linecap="round"/>
-          <!-- body -->
-          <ellipse cx="76" cy="80" rx="46" ry="32" fill="#a0654a"/>
-          <!-- white chest -->
-          <path d="M60 66 Q76 58 92 66 Q96 92 76 100 Q56 92 60 66 Z" fill="#fdf6ec"/>
+```
+<div class="dog-zone" id="dogZone">
+  <div class="jump" id="dogJumpWrap">
+    <svg viewBox="0 0 160 130">
+      <!-- back legs -->
+      <rect x="46" y="94" width="10" height="24" rx="4" fill="#a0654a"/>
+      <rect x="96" y="94" width="10" height="24" rx="4" fill="#a0654a"/>
+      <!-- tail -->
+      <path class="tail wag-slow" id="tail" d="M24 78 Q4 66 10 46" stroke="#8a5638" stroke-width="9" fill="none" stroke-linecap="round"/>
+      <!-- body -->
+      <ellipse cx="76" cy="80" rx="46" ry="32" fill="#a0654a"/>
+      <!-- white chest -->
+      <path d="M60 66 Q76 58 92 66 Q96 92 76 100 Q56 92 60 66 Z" fill="#fdf6ec"/>
 
-          <g class="dog-head-group" id="headGroup">
-            <!-- ears -->
-            <path class="ear-l" d="M52 34 Q40 14 54 8 Q64 20 60 38 Z" fill="#8a5638"/>
-            <path class="ear-r" d="M108 34 Q120 14 106 8 Q96 20 100 38 Z" fill="#8a5638"/>
-            <!-- head -->
-            <ellipse cx="80" cy="42" rx="30" ry="26" fill="#a0654a"/>
-            <!-- white face patch -->
-            <path d="M62 34 Q80 22 98 34 Q100 56 80 60 Q60 56 62 34 Z" fill="#fdf6ec"/>
-            <!-- snout -->
-            <ellipse cx="80" cy="50" rx="15" ry="11" fill="#fdf6ec"/>
-            <circle cx="80" cy="46" r="4" fill="#3a2a20"/>
+      <g class="dog-head-group" id="headGroup">
+        <!-- ears -->
+        <path class="ear-l" d="M52 34 Q40 14 54 8 Q64 20 60 38 Z" fill="#8a5638"/>
+        <path class="ear-r" d="M108 34 Q120 14 106 8 Q96 20 100 38 Z" fill="#8a5638"/>
+        <!-- head -->
+        <ellipse cx="80" cy="42" rx="30" ry="26" fill="#a0654a"/>
+        <!-- white face patch -->
+        <path d="M62 34 Q80 22 98 34 Q100 56 80 60 Q60 56 62 34 Z" fill="#fdf6ec"/>
+        <!-- snout -->
+        <ellipse cx="80" cy="50" rx="15" ry="11" fill="#fdf6ec"/>
+        <circle cx="80" cy="46" r="4" fill="#3a2a20"/>
 
-            <!-- eyes: happy (curved) -->
-            <g id="eyesHappy">
-              <path d="M64 36 Q68 31 72 36" stroke="#3a2a20" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-              <path d="M88 36 Q92 31 96 36" stroke="#3a2a20" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-            </g>
-            <!-- eyes: neutral (dots) -->
-            <g id="eyesNeutral" style="display:none">
-              <circle cx="68" cy="35" r="2.6" fill="#3a2a20"/>
-              <circle cx="92" cy="35" r="2.6" fill="#3a2a20"/>
-            </g>
-            <!-- eyes: worried (wide) -->
-            <g id="eyesWorried" style="display:none">
-              <circle cx="68" cy="35" r="4.2" fill="#fff" stroke="#3a2a20" stroke-width="1.4"/>
-              <circle cx="92" cy="35" r="4.2" fill="#fff" stroke="#3a2a20" stroke-width="1.4"/>
-              <circle cx="68" cy="36" r="1.8" fill="#3a2a20"/>
-              <circle cx="92" cy="36" r="1.8" fill="#3a2a20"/>
-            </g>
+        <!-- eyes: happy (curved) -->
+        <g id="eyesHappy">
+          <path d="M64 36 Q68 31 72 36" stroke="#3a2a20" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+          <path d="M88 36 Q92 31 96 36" stroke="#3a2a20" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+        </g>
+        <!-- eyes: neutral (dots) -->
+        <g id="eyesNeutral" style="display:none">
+          <circle cx="68" cy="35" r="2.6" fill="#3a2a20"/>
+          <circle cx="92" cy="35" r="2.6" fill="#3a2a20"/>
+        </g>
+        <!-- eyes: worried (wide) -->
+        <g id="eyesWorried" style="display:none">
+          <circle cx="68" cy="35" r="4.2" fill="#fff" stroke="#3a2a20" stroke-width="1.4"/>
+          <circle cx="92" cy="35" r="4.2" fill="#fff" stroke="#3a2a20" stroke-width="1.4"/>
+          <circle cx="68" cy="36" r="1.8" fill="#3a2a20"/>
+          <circle cx="92" cy="36" r="1.8" fill="#3a2a20"/>
+        </g>
 
-            <!-- tongue: happy panting -->
-            <path id="tongue" d="M83 55 Q88 64 82 70" stroke="#e88a9a" stroke-width="5" fill="none" stroke-linecap="round"/>
-          </g>
-        </svg>
-      </div>
-    </div>
+        <!-- tongue: happy panting -->
+        <path id="tongue" d="M83 55 Q88 64 82 70" stroke="#e88a9a" stroke-width="5" fill="none" stroke-linecap="round"/>
+      </g>
+    </svg>
+  </div>
+</div>
+```
+
   </div>
 
   <div class="caption" id="captionLine">Every food, checked against the safe list</div>
@@ -4275,6 +4310,7 @@ var RECIPEBOX_VIDEO_HTML = `<!DOCTYPE html>
 
   .caption{ margin-top:12px; font-size:12px; color:#5b7d90; text-align:center; font-weight:600; line-height:1.5; }
 </style>
+
 </head>
 <body>
 
@@ -4286,88 +4322,91 @@ var RECIPEBOX_VIDEO_HTML = `<!DOCTYPE html>
     <div class="wall-tile"></div>
     <div class="counter"><div class="counter-shine"></div></div>
 
-    <!-- cookie jar -->
-    <div class="jar-wrap" id="jarWrap">
-      <svg viewBox="0 0 74 96" overflow="visible">
-        <ellipse cx="37" cy="90" rx="26" ry="5" fill="rgba(0,0,0,0.08)"/>
-        <path d="M12 40 Q10 88 37 88 Q64 88 62 40 Z" fill="#cfeaf5" opacity="0.55" stroke="#8fd0ec" stroke-width="2"/>
-        <ellipse cx="24" cy="66" rx="4" ry="8" fill="#fff" opacity="0.5"/>
-        <!-- treats visible inside -->
-        <ellipse cx="30" cy="70" rx="7" ry="4" fill="#c99a5b"/>
-        <ellipse cx="44" cy="74" rx="7" ry="4" fill="#c99a5b"/>
-        <ellipse cx="37" cy="64" rx="7" ry="4" fill="#b8873f"/>
-        <g class="jar-lid" id="jarLid">
-          <ellipse cx="37" cy="40" rx="27" ry="7" fill="#8fd0ec" stroke="#62b6d9" stroke-width="2"/>
-          <rect x="30" y="24" width="14" height="10" rx="4" fill="#62b6d9"/>
-          <ellipse cx="37" cy="24" rx="7" ry="3.5" fill="#8fd0ec" stroke="#62b6d9" stroke-width="2"/>
-        </g>
-      </svg>
-    </div>
+```
+<!-- cookie jar -->
+<div class="jar-wrap" id="jarWrap">
+  <svg viewBox="0 0 74 96" overflow="visible">
+    <ellipse cx="37" cy="90" rx="26" ry="5" fill="rgba(0,0,0,0.08)"/>
+    <path d="M12 40 Q10 88 37 88 Q64 88 62 40 Z" fill="#cfeaf5" opacity="0.55" stroke="#8fd0ec" stroke-width="2"/>
+    <ellipse cx="24" cy="66" rx="4" ry="8" fill="#fff" opacity="0.5"/>
+    <!-- treats visible inside -->
+    <ellipse cx="30" cy="70" rx="7" ry="4" fill="#c99a5b"/>
+    <ellipse cx="44" cy="74" rx="7" ry="4" fill="#c99a5b"/>
+    <ellipse cx="37" cy="64" rx="7" ry="4" fill="#b8873f"/>
+    <g class="jar-lid" id="jarLid">
+      <ellipse cx="37" cy="40" rx="27" ry="7" fill="#8fd0ec" stroke="#62b6d9" stroke-width="2"/>
+      <rect x="30" y="24" width="14" height="10" rx="4" fill="#62b6d9"/>
+      <ellipse cx="37" cy="24" rx="7" ry="3.5" fill="#8fd0ec" stroke="#62b6d9" stroke-width="2"/>
+    </g>
+  </svg>
+</div>
 
-    <!-- treat that flies from jar to dog -->
-    <div class="treat" id="flyingTreat">
-      <svg viewBox="0 0 26 14"><path d="M4 7 a3 3 0 1 1 6 -1 a3 3 0 1 1 8 2 a3 3 0 1 1 -6 1 a3 3 0 1 1 -8 -2 Z" fill="#c99a5b" stroke="#a87c3f" stroke-width="1"/></svg>
-    </div>
+<!-- treat that flies from jar to dog -->
+<div class="treat" id="flyingTreat">
+  <svg viewBox="0 0 26 14"><path d="M4 7 a3 3 0 1 1 6 -1 a3 3 0 1 1 8 2 a3 3 0 1 1 -6 1 a3 3 0 1 1 -8 -2 Z" fill="#c99a5b" stroke="#a87c3f" stroke-width="1"/></svg>
+</div>
 
-    <!-- guy -->
-    <div class="guy-wrap" id="guyWrap">
-      <svg viewBox="0 0 70 150">
-        <!-- legs -->
-        <rect x="20" y="104" width="10" height="40" rx="4" fill="#3d5a6c"/>
-        <rect x="36" y="104" width="10" height="40" rx="4" fill="#3d5a6c"/>
-        <ellipse cx="25" cy="146" rx="7" ry="4" fill="#2c4a5e"/>
-        <ellipse cx="41" cy="146" rx="7" ry="4" fill="#2c4a5e"/>
-        <!-- torso -->
-        <path d="M14 58 Q33 48 52 58 L50 106 Q33 114 16 106 Z" fill="#4a90c8"/>
-        <!-- still arm -->
-        <rect x="46" y="60" width="10" height="34" rx="5" fill="#f2c199" transform="rotate(6 51 60)"/>
-        <!-- reaching arm (animated) -->
-        <g class="guy-arm-reach" id="reachArm">
-          <rect x="4" y="58" width="10" height="34" rx="5" fill="#f2c199"/>
-          <circle cx="9" cy="94" r="6" fill="#f2c199"/>
-        </g>
-        <!-- neck -->
-        <rect x="28" y="44" width="12" height="12" fill="#f2c199"/>
-        <!-- head -->
-        <circle cx="34" cy="30" r="20" fill="#f2c199"/>
-        <!-- scruffy beard -->
-        <path d="M16 30 Q14 48 34 50 Q54 48 52 30 Q54 42 45 47 Q34 52 23 47 Q14 42 16 30 Z" fill="#6b4a35"/>
-        <path d="M27 40 Q34 43 41 40" stroke="#4a3226" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-        <!-- backwards cap -->
-        <path d="M13 18 Q34 -2 55 18 L55 23 Q34 12 13 23 Z" fill="#e8683f"/>
-        <rect x="50" y="10" width="11" height="11" rx="3" fill="#e8683f"/>
-        <circle cx="34" cy="4" r="3" fill="#c34f2b"/>
-      </svg>
-    </div>
+<!-- guy -->
+<div class="guy-wrap" id="guyWrap">
+  <svg viewBox="0 0 70 150">
+    <!-- legs -->
+    <rect x="20" y="104" width="10" height="40" rx="4" fill="#3d5a6c"/>
+    <rect x="36" y="104" width="10" height="40" rx="4" fill="#3d5a6c"/>
+    <ellipse cx="25" cy="146" rx="7" ry="4" fill="#2c4a5e"/>
+    <ellipse cx="41" cy="146" rx="7" ry="4" fill="#2c4a5e"/>
+    <!-- torso -->
+    <path d="M14 58 Q33 48 52 58 L50 106 Q33 114 16 106 Z" fill="#4a90c8"/>
+    <!-- still arm -->
+    <rect x="46" y="60" width="10" height="34" rx="5" fill="#f2c199" transform="rotate(6 51 60)"/>
+    <!-- reaching arm (animated) -->
+    <g class="guy-arm-reach" id="reachArm">
+      <rect x="4" y="58" width="10" height="34" rx="5" fill="#f2c199"/>
+      <circle cx="9" cy="94" r="6" fill="#f2c199"/>
+    </g>
+    <!-- neck -->
+    <rect x="28" y="44" width="12" height="12" fill="#f2c199"/>
+    <!-- head -->
+    <circle cx="34" cy="30" r="20" fill="#f2c199"/>
+    <!-- scruffy beard -->
+    <path d="M16 30 Q14 48 34 50 Q54 48 52 30 Q54 42 45 47 Q34 52 23 47 Q14 42 16 30 Z" fill="#6b4a35"/>
+    <path d="M27 40 Q34 43 41 40" stroke="#4a3226" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+    <!-- backwards cap -->
+    <path d="M13 18 Q34 -2 55 18 L55 23 Q34 12 13 23 Z" fill="#e8683f"/>
+    <rect x="50" y="10" width="11" height="11" rx="3" fill="#e8683f"/>
+    <circle cx="34" cy="4" r="3" fill="#c34f2b"/>
+  </svg>
+</div>
 
-    <!-- Mya -->
-    <div class="dog-wrap" id="dogWrap">
-      <svg viewBox="0 0 110 100" overflow="visible">
-        <!-- tail -->
-        <path class="dog-tail" d="M16 66 Q0 56 6 38" stroke="#8a5638" stroke-width="9" fill="none" stroke-linecap="round"/>
-        <!-- back legs (sitting) -->
-        <ellipse cx="30" cy="90" rx="10" ry="7" fill="#8a5638"/>
-        <ellipse cx="60" cy="90" rx="10" ry="7" fill="#8a5638"/>
-        <!-- body, sitting posture -->
-        <ellipse cx="45" cy="66" rx="34" ry="28" fill="#a0654a"/>
-        <path d="M28 52 Q45 42 62 52 Q66 78 45 86 Q24 78 28 52 Z" fill="#fdf6ec"/>
-        <!-- front paws -->
-        <ellipse cx="34" cy="94" rx="7" ry="5" fill="#a0654a"/>
-        <ellipse cx="56" cy="94" rx="7" ry="5" fill="#a0654a"/>
+<!-- Mya -->
+<div class="dog-wrap" id="dogWrap">
+  <svg viewBox="0 0 110 100" overflow="visible">
+    <!-- tail -->
+    <path class="dog-tail" d="M16 66 Q0 56 6 38" stroke="#8a5638" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <!-- back legs (sitting) -->
+    <ellipse cx="30" cy="90" rx="10" ry="7" fill="#8a5638"/>
+    <ellipse cx="60" cy="90" rx="10" ry="7" fill="#8a5638"/>
+    <!-- body, sitting posture -->
+    <ellipse cx="45" cy="66" rx="34" ry="28" fill="#a0654a"/>
+    <path d="M28 52 Q45 42 62 52 Q66 78 45 86 Q24 78 28 52 Z" fill="#fdf6ec"/>
+    <!-- front paws -->
+    <ellipse cx="34" cy="94" rx="7" ry="5" fill="#a0654a"/>
+    <ellipse cx="56" cy="94" rx="7" ry="5" fill="#a0654a"/>
 
-        <g class="dog-head" id="dogHead">
-          <ellipse cx="70" cy="42" rx="26" ry="23" fill="#a0654a"/>
-          <path d="M52 30 Q70 18 88 30 Q90 52 70 56 Q50 52 52 30 Z" fill="#fdf6ec"/>
-          <path d="M56 12 Q46 -2 58 -6 Q68 4 64 18 Z" fill="#8a5638"/>
-          <path d="M84 12 Q94 -2 82 -6 Q72 4 76 18 Z" fill="#8a5638"/>
-          <ellipse cx="78" cy="46" rx="13" ry="10" fill="#fdf6ec"/>
-          <circle cx="84" cy="42" r="3.6" fill="#3a2a20"/>
-          <circle cx="60" cy="34" r="3" fill="#3a2a20"/>
-          <circle cx="80" cy="34" r="3" fill="#3a2a20"/>
-          <path id="myaTongue" d="M74 54 Q78 63 72 68" stroke="#e88a9a" stroke-width="5" fill="none" stroke-linecap="round"/>
-        </g>
-      </svg>
-    </div>
+    <g class="dog-head" id="dogHead">
+      <ellipse cx="70" cy="42" rx="26" ry="23" fill="#a0654a"/>
+      <path d="M52 30 Q70 18 88 30 Q90 52 70 56 Q50 52 52 30 Z" fill="#fdf6ec"/>
+      <path d="M56 12 Q46 -2 58 -6 Q68 4 64 18 Z" fill="#8a5638"/>
+      <path d="M84 12 Q94 -2 82 -6 Q72 4 76 18 Z" fill="#8a5638"/>
+      <ellipse cx="78" cy="46" rx="13" ry="10" fill="#fdf6ec"/>
+      <circle cx="84" cy="42" r="3.6" fill="#3a2a20"/>
+      <circle cx="60" cy="34" r="3" fill="#3a2a20"/>
+      <circle cx="80" cy="34" r="3" fill="#3a2a20"/>
+      <path id="myaTongue" d="M74 54 Q78 63 72 68" stroke="#e88a9a" stroke-width="5" fill="none" stroke-linecap="round"/>
+    </g>
+  </svg>
+</div>
+```
+
   </div>
 
   <div class="caption" id="captionLine">Build the recipe once &mdash; log it by the serving anytime</div>
@@ -5712,6 +5751,15 @@ function openDayAddinsModal(ds,slot){
     +'<div class="modal-head"><div class="modal-title">Additional Items &mdash; '+lbl+'</div>'
     +'<button class="modal-close" onclick="closeModal()">&#10005;</button></div>'
     +'<div class="modal-hint">Enter ounces for anything extra fed at this meal</div>'
+
+    +(Object.keys(customProducts).length>0
+      ? '<div class="guide-section" style="margin-top:2px">&#127850; Your Products</div>'
+        +'<div class="usda-key-hint" style="margin-bottom:8px">Pick a recipe from your Recipe Box and log how many servings were fed</div>'
+        +'<div id="productRowsContainer">'+buildProductRowsHtml(savedProducts)+'</div>'
+        +'<div class="recipe-divider" style="margin:14px 0"></div>'
+      : '')
+
+    +'<div class="guide-section">Individual Ingredients</div>'
     +'<div id="addinRowsContainer">'+buildAddinRowsHtml(saved)+'</div>'
     +'<div class="usda-modal-toggle" onclick="toggleUsdaModalPanel()">&#128300; Look up a food on USDA &amp; add it to this list</div>'
     +'<div class="usda-modal-panel" id="usdaModalPanel" style="display:none">'
@@ -5724,19 +5772,10 @@ function openDayAddinsModal(ds,slot){
     +'<div class="usda-status" id="usdaModalStatus"></div>'
     +'<div id="usdaModalResults"></div>'
     +'</div>'
-    +'<div class="usda-modal-toggle" onclick="toggleProductModalPanel()">&#127850; Feed one of my products (treats/recipes)</div>'
-    +'<div class="usda-modal-panel" id="productModalPanel" style="display:none">'
-    +'<div id="productRowsContainer">'+buildProductRowsHtml(savedProducts)+'</div>'
-    +'</div>'
     +'<button class="save-btn" onclick="saveModal()">Save Items</button>'
     +'</div></div>';
 
   document.getElementById("mbg").addEventListener("click",function(e){if(e.target===this)closeModal();});
-}
-
-function toggleProductModalPanel(){
-  var panel=document.getElementById("productModalPanel");
-  panel.style.display = (panel.style.display==="none") ? "block" : "none";
 }
 
 function toggleUsdaModalPanel(){
@@ -6583,749 +6622,760 @@ function renderGuide(){
     +'<button class="save-btn" onclick="doExport()">Export Selected Data</button>'
     +'<div id="exportOutputWrap" style="display:none;margin-top:12px">'
     +'<textarea id="exportOutput" class="usda-snippet" readonly style="min-height:110px;color:#4caf50"></textarea>'
-    +'<button class="addins-btn" onclick="copyExportOutput()">Copy to Clipboard</button>'
-    +'<button class="addins-btn" onclick="downloadExportFile()">Download as File</button>'
-    +'<div id="exportStatus" class="usda-status" style="margin-top:6px"></div>'
-    +'</div>'
-    +'<div class="recipe-divider" style="margin:18px 0"></div>'
-    +'<div class="guide-section">Import</div>'
-    +'<div class="usda-key-hint" style="margin-bottom:10px">Paste previously exported data below. Only the categories checked above will be imported.</div>'
-    +'<textarea id="importInput" class="usda-snippet" placeholder="Paste exported data here..." style="min-height:90px"></textarea>'
-    +'<button class="save-btn" onclick="applyImport()">Import Selected Data</button>'
-    +'<div id="importStatus" class="usda-status" style="margin-top:8px"></div>'
-    +'</div>';
 
-  html+='<div class="footer-disclaimer">&#9888;&#65039; Nutritional information only. Not a substitute for veterinary advice. No liability assumed.</div>';
+```
++'<button class="addins-btn" onclick="copyExportOutput()">Copy to Clipboard</button>'
++'<button class="addins-btn" onclick="downloadExportFile()">Download as File</button>'
++'<div id="exportStatus" class="usda-status" style="margin-top:6px"></div>'
++'</div>'
++'<div class="recipe-divider" style="margin:18px 0"></div>'
++'<div class="guide-section">Import</div>'
++'<div class="usda-key-hint" style="margin-bottom:10px">Paste previously exported data below. Only the categories checked above will be imported.</div>'
++'<textarea id="importInput" class="usda-snippet" placeholder="Paste exported data here..." style="min-height:90px"></textarea>'
++'<button class="save-btn" onclick="applyImport()">Import Selected Data</button>'
++'<div id="importStatus" class="usda-status" style="margin-top:8px"></div>'
++'</div>';
+```
 
-  document.getElementById("page-guide").innerHTML=html;
-  styleTitleIcons("#page-guide .guide-title");
-  makeGuideCardsCollapsible();
-  mountEmbeddedVideos();
-  runCalc();
-  updateProteinPickCount();
+html+=’<div class="footer-disclaimer">⚠️ Nutritional information only. Not a substitute for veterinary advice. No liability assumed.</div>’;
+
+document.getElementById(“page-guide”).innerHTML=html;
+styleTitleIcons(”#page-guide .guide-title”);
+makeGuideCardsCollapsible();
+mountEmbeddedVideos();
+runCalc();
+updateProteinPickCount();
 }
 
 function mountEmbeddedVideos(){
-  var feedingFrame=document.getElementById("feedingVideoFrame");
-  if(feedingFrame) feedingFrame.srcdoc=FEEDING_VIDEO_HTML;
-  var howtoFrame=document.getElementById("howtoVideoFrame");
-  if(howtoFrame) howtoFrame.srcdoc=HOWTO_VIDEO_HTML;
-  var proteinsFrame=document.getElementById("proteinsVideoFrame");
-  if(proteinsFrame) proteinsFrame.srcdoc=PROTEINS_VIDEO_HTML;
-  var organsFrame=document.getElementById("organsVideoFrame");
-  if(organsFrame) organsFrame.srcdoc=ORGANS_VIDEO_HTML;
-  var vegetablesFrame=document.getElementById("vegetablesVideoFrame");
-  if(vegetablesFrame) vegetablesFrame.srcdoc=VEGETABLES_VIDEO_HTML;
-  var starchesFrame=document.getElementById("starchesVideoFrame");
-  if(starchesFrame) starchesFrame.srcdoc=STARCHES_VIDEO_HTML;
-  var constantsFrame=document.getElementById("constantsVideoFrame");
-  if(constantsFrame) constantsFrame.srcdoc=CONSTANTS_VIDEO_HTML;
-  var aboutFrame=document.getElementById("aboutVideoFrame");
-  if(aboutFrame) aboutFrame.srcdoc=ABOUT_VIDEO_HTML;
-  var myaAndIFrame=document.getElementById("myaAndIVideoFrame");
-  if(myaAndIFrame) myaAndIFrame.srcdoc=MYA_AND_I_VIDEO_HTML;
-  var safeFoodFrame=document.getElementById("safeFoodVideoFrame");
-  if(safeFoodFrame) safeFoodFrame.srcdoc=SAFE_FOOD_VIDEO_HTML;
-  var recipeBoxFrame=document.getElementById("recipeBoxVideoFrame");
-  if(recipeBoxFrame) recipeBoxFrame.srcdoc=RECIPEBOX_VIDEO_HTML;
+var feedingFrame=document.getElementById(“feedingVideoFrame”);
+if(feedingFrame) feedingFrame.srcdoc=FEEDING_VIDEO_HTML;
+var howtoFrame=document.getElementById(“howtoVideoFrame”);
+if(howtoFrame) howtoFrame.srcdoc=HOWTO_VIDEO_HTML;
+var proteinsFrame=document.getElementById(“proteinsVideoFrame”);
+if(proteinsFrame) proteinsFrame.srcdoc=PROTEINS_VIDEO_HTML;
+var organsFrame=document.getElementById(“organsVideoFrame”);
+if(organsFrame) organsFrame.srcdoc=ORGANS_VIDEO_HTML;
+var vegetablesFrame=document.getElementById(“vegetablesVideoFrame”);
+if(vegetablesFrame) vegetablesFrame.srcdoc=VEGETABLES_VIDEO_HTML;
+var starchesFrame=document.getElementById(“starchesVideoFrame”);
+if(starchesFrame) starchesFrame.srcdoc=STARCHES_VIDEO_HTML;
+var constantsFrame=document.getElementById(“constantsVideoFrame”);
+if(constantsFrame) constantsFrame.srcdoc=CONSTANTS_VIDEO_HTML;
+var aboutFrame=document.getElementById(“aboutVideoFrame”);
+if(aboutFrame) aboutFrame.srcdoc=ABOUT_VIDEO_HTML;
+var myaAndIFrame=document.getElementById(“myaAndIVideoFrame”);
+if(myaAndIFrame) myaAndIFrame.srcdoc=MYA_AND_I_VIDEO_HTML;
+var safeFoodFrame=document.getElementById(“safeFoodVideoFrame”);
+if(safeFoodFrame) safeFoodFrame.srcdoc=SAFE_FOOD_VIDEO_HTML;
+var recipeBoxFrame=document.getElementById(“recipeBoxVideoFrame”);
+if(recipeBoxFrame) recipeBoxFrame.srcdoc=RECIPEBOX_VIDEO_HTML;
 }
 
 function styleTitleIcons(selector){
-  var titles=document.querySelectorAll(selector);
-  for(var i=0;i<titles.length;i++){
-    var t=titles[i];
-    if(t.getAttribute("data-iconized")==="1") continue;
-    var text=t.textContent.trim();
-    var parts=text.split(/\s+/);
-    if(parts.length<2) continue; // nothing to split into icon + text
-    var icon=parts.shift();
-    var rest=parts.join(" ");
-    t.innerHTML="";
-    var row=document.createElement("span");
-    row.className="title-icon-row";
-    var chip=document.createElement("span");
-    chip.className="icon-chip";
-    chip.textContent=icon;
-    var txt=document.createElement("span");
-    txt.className="title-text";
-    txt.textContent=rest;
-    row.appendChild(chip);
-    row.appendChild(txt);
-    t.appendChild(row);
-    t.setAttribute("data-iconized","1");
-  }
+var titles=document.querySelectorAll(selector);
+for(var i=0;i<titles.length;i++){
+var t=titles[i];
+if(t.getAttribute(“data-iconized”)===“1”) continue;
+var text=t.textContent.trim();
+var parts=text.split(/\s+/);
+if(parts.length<2) continue; // nothing to split into icon + text
+var icon=parts.shift();
+var rest=parts.join(” “);
+t.innerHTML=””;
+var row=document.createElement(“span”);
+row.className=“title-icon-row”;
+var chip=document.createElement(“span”);
+chip.className=“icon-chip”;
+chip.textContent=icon;
+var txt=document.createElement(“span”);
+txt.className=“title-text”;
+txt.textContent=rest;
+row.appendChild(chip);
+row.appendChild(txt);
+t.appendChild(row);
+t.setAttribute(“data-iconized”,“1”);
+}
 }
 
 function makeGuideCardsCollapsible(){
-  var cards=document.querySelectorAll("#page-guide .guide-card");
-  for(var i=0;i<cards.length;i++){
-    var card=cards[i];
-    var title=card.querySelector(".guide-title");
-    if(!title || title.className.indexOf("collapsible-title")!==-1) continue; // already processed
+var cards=document.querySelectorAll(”#page-guide .guide-card”);
+for(var i=0;i<cards.length;i++){
+var card=cards[i];
+var title=card.querySelector(”.guide-title”);
+if(!title || title.className.indexOf(“collapsible-title”)!==-1) continue; // already processed
 
-    // Move every sibling after the title into one wrapper div
-    var wrapper=document.createElement("div");
-    wrapper.className="collapsible-content";
-    var node=title.nextSibling;
-    while(node){
-      var next=node.nextSibling;
-      wrapper.appendChild(node);
-      node=next;
+```
+// Move every sibling after the title into one wrapper div
+var wrapper=document.createElement("div");
+wrapper.className="collapsible-content";
+var node=title.nextSibling;
+while(node){
+  var next=node.nextSibling;
+  wrapper.appendChild(node);
+  node=next;
+}
+card.appendChild(wrapper);
+
+var arrow=document.createElement("span");
+arrow.className="collapse-arrow";
+arrow.innerHTML="&#9662;";
+title.appendChild(arrow);
+title.className+=" collapsible-title";
+
+title.addEventListener("click",(function(wrapperEl,arrowEl){
+  return function(){
+    var hidden=wrapperEl.className.indexOf("is-hidden")!==-1;
+    if(hidden){
+      wrapperEl.className=wrapperEl.className.replace(" is-hidden","");
+      arrowEl.innerHTML="&#9662;";
+    } else {
+      wrapperEl.className+=" is-hidden";
+      arrowEl.innerHTML="&#9656;";
     }
-    card.appendChild(wrapper);
+  };
+})(wrapper,arrow));
+```
 
-    var arrow=document.createElement("span");
-    arrow.className="collapse-arrow";
-    arrow.innerHTML="&#9662;";
-    title.appendChild(arrow);
-    title.className+=" collapsible-title";
-
-    title.addEventListener("click",(function(wrapperEl,arrowEl){
-      return function(){
-        var hidden=wrapperEl.className.indexOf("is-hidden")!==-1;
-        if(hidden){
-          wrapperEl.className=wrapperEl.className.replace(" is-hidden","");
-          arrowEl.innerHTML="&#9662;";
-        } else {
-          wrapperEl.className+=" is-hidden";
-          arrowEl.innerHTML="&#9656;";
-        }
-      };
-    })(wrapper,arrow));
-  }
+}
 }
 
 function runCalc(){
-  var lbEl=document.getElementById("calcWeight");
-  var actEl=document.getElementById("calcActivity");
-  if(!lbEl||!actEl) return;
-  var lb=parseFloat(lbEl.value)||0;
-  var factor=parseFloat(actEl.value)||1.6;
-  var activityLabel=actEl.options[actEl.selectedIndex] ? actEl.options[actEl.selectedIndex].text : "";
-  var kg=lb/2.2046;
-  var rer=70*Math.pow(kg,0.75);
-  var mer=rer*factor;
-  var kcalPerOz=42.2; // derived from Mya's plan: ~1,350 kcal / 32 oz daily food
-  var ozPerDay=mer/kcalPerOz;
-  var ozPerMeal=ozPerDay/2;
+var lbEl=document.getElementById(“calcWeight”);
+var actEl=document.getElementById(“calcActivity”);
+if(!lbEl||!actEl) return;
+var lb=parseFloat(lbEl.value)||0;
+var factor=parseFloat(actEl.value)||1.6;
+var activityLabel=actEl.options[actEl.selectedIndex] ? actEl.options[actEl.selectedIndex].text : “”;
+var kg=lb/2.2046;
+var rer=70*Math.pow(kg,0.75);
+var mer=rer*factor;
+var kcalPerOz=42.2; // derived from Mya’s plan: ~1,350 kcal / 32 oz daily food
+var ozPerDay=mer/kcalPerOz;
+var ozPerMeal=ozPerDay/2;
 
-  _calcState={weight:lb,factor:factor,activityLabel:activityLabel,rer:rer,mer:mer,ozPerDay:ozPerDay,ozPerMeal:ozPerMeal};
-  try{localStorage.setItem("mya_calc_state",JSON.stringify(_calcState));}catch(e){}
+_calcState={weight:lb,factor:factor,activityLabel:activityLabel,rer:rer,mer:mer,ozPerDay:ozPerDay,ozPerMeal:ozPerMeal};
+try{localStorage.setItem(“mya_calc_state”,JSON.stringify(_calcState));}catch(e){}
 
-  document.getElementById("calcResult").innerHTML=
-    '<div class="calc-out"><span>RER (resting energy)</span><span>'+Math.round(rer)+' kcal/day</span></div>'
-    +'<div class="calc-out highlight"><span>MER (daily calories)</span><span>'+Math.round(mer)+' kcal/day</span></div>'
-    +'<div class="calc-out"><span>Est. total food</span><span>'+ozPerDay.toFixed(1)+' oz/day</span></div>'
-    +'<div class="calc-out"><span>Per meal (2&times;/day)</span><span>'+ozPerMeal.toFixed(1)+' oz</span></div>';
+document.getElementById(“calcResult”).innerHTML=
+‘<div class="calc-out"><span>RER (resting energy)</span><span>’+Math.round(rer)+’ kcal/day</span></div>’
++’<div class="calc-out highlight"><span>MER (daily calories)</span><span>’+Math.round(mer)+’ kcal/day</span></div>’
++’<div class="calc-out"><span>Est. total food</span><span>’+ozPerDay.toFixed(1)+’ oz/day</span></div>’
++’<div class="calc-out"><span>Per meal (2×/day)</span><span>’+ozPerMeal.toFixed(1)+’ oz</span></div>’;
 
-  updateHeaderSub();
+updateHeaderSub();
 }
 
 // ── EXPORT / IMPORT ───────────────────────────────────────────────────────────
 var EXPORT_CATEGORIES = [
-  { id:"fed",          label:"Feeding Log (marked fed / not fed)",              keys:["mya_fed"] },
-  { id:"addins",       label:"Additional Items logged per meal",                keys:["mya_addins"] },
-  { id:"notes",        label:"Daily Notes",                                     keys:["mya_notes"] },
-  { id:"swaps",        label:"Ingredient Swaps (protein/starch/veg/organ/broth)",keys:["mya_protein_swaps","mya_starch_swaps","mya_veg_swaps","mya_organ_swaps","mya_broth_swaps"] },
-  { id:"amounts",      label:"Amount Adjustments (oz overrides)",               keys:["mya_amount_overrides"] },
-  { id:"suppchecks",   label:"Supplement Checkboxes (eggshell, herb cube, etc.)",keys:["mya_supp_checks"] },
-  { id:"customaddins", label:"Custom Ingredients Added via USDA Lookup",         keys:["mya_custom_addins"] },
-  { id:"products",     label:"My Recipe Box (custom products) &amp; product servings logged", keys:["mya_custom_products","mya_products_log"] },
-  { id:"petsettings",  label:"Pet Name, Photo &amp; Calculator Settings",       keys:["mya_pet_name","mya_pet_photo","mya_calc_state"] },
-  { id:"usdakey",      label:"USDA API Key",                                    keys:["mya_usda_key"] }
+{ id:“fed”,          label:“Feeding Log (marked fed / not fed)”,              keys:[“mya_fed”] },
+{ id:“addins”,       label:“Additional Items logged per meal”,                keys:[“mya_addins”] },
+{ id:“notes”,        label:“Daily Notes”,                                     keys:[“mya_notes”] },
+{ id:“swaps”,        label:“Ingredient Swaps (protein/starch/veg/organ/broth)”,keys:[“mya_protein_swaps”,“mya_starch_swaps”,“mya_veg_swaps”,“mya_organ_swaps”,“mya_broth_swaps”] },
+{ id:“amounts”,      label:“Amount Adjustments (oz overrides)”,               keys:[“mya_amount_overrides”] },
+{ id:“suppchecks”,   label:“Supplement Checkboxes (eggshell, herb cube, etc.)”,keys:[“mya_supp_checks”] },
+{ id:“customaddins”, label:“Custom Ingredients Added via USDA Lookup”,         keys:[“mya_custom_addins”] },
+{ id:“products”,     label:“My Recipe Box (custom products) & product servings logged”, keys:[“mya_custom_products”,“mya_products_log”] },
+{ id:“petsettings”,  label:“Pet Name, Photo & Calculator Settings”,       keys:[“mya_pet_name”,“mya_pet_photo”,“mya_calc_state”] },
+{ id:“usdakey”,      label:“USDA API Key”,                                    keys:[“mya_usda_key”] }
 ];
 
 function buildCategoryCheckboxRows(){
-  var rows="";
-  for(var i=0;i<EXPORT_CATEGORIES.length;i++){
-    var c=EXPORT_CATEGORIES[i];
-    rows+='<label class="export-row"><input type="checkbox" id="cat_'+c.id+'" checked onchange="syncSelectAllCategories()"><span>'+c.label+'</span></label>';
-  }
-  return rows;
+var rows=””;
+for(var i=0;i<EXPORT_CATEGORIES.length;i++){
+var c=EXPORT_CATEGORIES[i];
+rows+=’<label class="export-row"><input type="checkbox" id="cat_'+c.id+'" checked onchange="syncSelectAllCategories()"><span>’+c.label+’</span></label>’;
+}
+return rows;
 }
 
 function toggleSelectAllCategories(checked){
-  for(var i=0;i<EXPORT_CATEGORIES.length;i++){
-    var el=document.getElementById("cat_"+EXPORT_CATEGORIES[i].id);
-    if(el) el.checked=checked;
-  }
+for(var i=0;i<EXPORT_CATEGORIES.length;i++){
+var el=document.getElementById(“cat_”+EXPORT_CATEGORIES[i].id);
+if(el) el.checked=checked;
+}
 }
 
 function syncSelectAllCategories(){
-  var all=document.getElementById("catSelectAll");
-  if(!all) return;
-  var checkedCount=0;
-  for(var i=0;i<EXPORT_CATEGORIES.length;i++){
-    var el=document.getElementById("cat_"+EXPORT_CATEGORIES[i].id);
-    if(el && el.checked) checkedCount++;
-  }
-  all.checked=(checkedCount===EXPORT_CATEGORIES.length);
-  all.indeterminate=(checkedCount>0 && checkedCount<EXPORT_CATEGORIES.length);
+var all=document.getElementById(“catSelectAll”);
+if(!all) return;
+var checkedCount=0;
+for(var i=0;i<EXPORT_CATEGORIES.length;i++){
+var el=document.getElementById(“cat_”+EXPORT_CATEGORIES[i].id);
+if(el && el.checked) checkedCount++;
+}
+all.checked=(checkedCount===EXPORT_CATEGORIES.length);
+all.indeterminate=(checkedCount>0 && checkedCount<EXPORT_CATEGORIES.length);
 }
 
 function doExport(){
-  var data={};
-  var anySelected=false;
-  for(var i=0;i<EXPORT_CATEGORIES.length;i++){
-    var c=EXPORT_CATEGORIES[i];
-    var el=document.getElementById("cat_"+c.id);
-    if(el && el.checked){
-      anySelected=true;
-      for(var j=0;j<c.keys.length;j++){
-        var k=c.keys[j];
-        var v=null;
-        try{ v=localStorage.getItem(k); }catch(e){}
-        if(v!==null) data[k]=v;
-      }
-    }
-  }
-  if(!anySelected){
-    document.getElementById("exportStatus").innerHTML="Select at least one category first.";
-    document.getElementById("exportStatus").className="usda-status err";
-    return;
-  }
-  var json=JSON.stringify(data,null,2);
-  document.getElementById("exportOutput").value=json;
-  document.getElementById("exportOutputWrap").style.display="block";
-  document.getElementById("exportStatus").innerHTML="";
+var data={};
+var anySelected=false;
+for(var i=0;i<EXPORT_CATEGORIES.length;i++){
+var c=EXPORT_CATEGORIES[i];
+var el=document.getElementById(“cat_”+c.id);
+if(el && el.checked){
+anySelected=true;
+for(var j=0;j<c.keys.length;j++){
+var k=c.keys[j];
+var v=null;
+try{ v=localStorage.getItem(k); }catch(e){}
+if(v!==null) data[k]=v;
+}
+}
+}
+if(!anySelected){
+document.getElementById(“exportStatus”).innerHTML=“Select at least one category first.”;
+document.getElementById(“exportStatus”).className=“usda-status err”;
+return;
+}
+var json=JSON.stringify(data,null,2);
+document.getElementById(“exportOutput”).value=json;
+document.getElementById(“exportOutputWrap”).style.display=“block”;
+document.getElementById(“exportStatus”).innerHTML=””;
 }
 
 function copyExportOutput(){
-  var box=document.getElementById("exportOutput");
-  if(!box || !box.value) return;
-  var status=document.getElementById("exportStatus");
-  if(navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(box.value).then(function(){
-      status.className="usda-status"; status.innerHTML="Copied to clipboard!";
-    }).catch(function(){ box.select(); });
-  } else {
-    box.select();
-    try{ document.execCommand("copy"); status.className="usda-status"; status.innerHTML="Copied to clipboard!"; }catch(e){}
-  }
+var box=document.getElementById(“exportOutput”);
+if(!box || !box.value) return;
+var status=document.getElementById(“exportStatus”);
+if(navigator.clipboard && navigator.clipboard.writeText){
+navigator.clipboard.writeText(box.value).then(function(){
+status.className=“usda-status”; status.innerHTML=“Copied to clipboard!”;
+}).catch(function(){ box.select(); });
+} else {
+box.select();
+try{ document.execCommand(“copy”); status.className=“usda-status”; status.innerHTML=“Copied to clipboard!”; }catch(e){}
+}
 }
 
 function downloadExportFile(){
-  var box=document.getElementById("exportOutput");
-  if(!box || !box.value) return;
-  var blob=new Blob([box.value],{type:"application/json"});
-  var url=URL.createObjectURL(blob);
-  var a=document.createElement("a");
-  a.href=url;
-  a.download="dog-meal-planner-backup.json";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  setTimeout(function(){ URL.revokeObjectURL(url); },1000);
-  document.getElementById("exportStatus").className="usda-status";
-  document.getElementById("exportStatus").innerHTML="Download started!";
+var box=document.getElementById(“exportOutput”);
+if(!box || !box.value) return;
+var blob=new Blob([box.value],{type:“application/json”});
+var url=URL.createObjectURL(blob);
+var a=document.createElement(“a”);
+a.href=url;
+a.download=“dog-meal-planner-backup.json”;
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
+setTimeout(function(){ URL.revokeObjectURL(url); },1000);
+document.getElementById(“exportStatus”).className=“usda-status”;
+document.getElementById(“exportStatus”).innerHTML=“Download started!”;
 }
 
 function applyImport(){
-  var ta=document.getElementById("importInput");
-  var status=document.getElementById("importStatus");
-  var raw=ta.value.trim();
-  if(!raw){
-    status.className="usda-status err"; status.innerHTML="Paste exported data first.";
-    return;
-  }
-  var data;
-  try{ data=JSON.parse(raw); }catch(e){
-    status.className="usda-status err"; status.innerHTML="That doesn't look like valid exported data.";
-    return;
-  }
+var ta=document.getElementById(“importInput”);
+var status=document.getElementById(“importStatus”);
+var raw=ta.value.trim();
+if(!raw){
+status.className=“usda-status err”; status.innerHTML=“Paste exported data first.”;
+return;
+}
+var data;
+try{ data=JSON.parse(raw); }catch(e){
+status.className=“usda-status err”; status.innerHTML=“That doesn’t look like valid exported data.”;
+return;
+}
 
-  var importedCount=0;
-  for(var i=0;i<EXPORT_CATEGORIES.length;i++){
-    var c=EXPORT_CATEGORIES[i];
-    var el=document.getElementById("cat_"+c.id);
-    if(el && el.checked){
-      for(var j=0;j<c.keys.length;j++){
-        var k=c.keys[j];
-        if(data.hasOwnProperty(k)){
-          try{ localStorage.setItem(k,data[k]); importedCount++; }catch(e){}
-        }
-      }
-    }
-  }
+var importedCount=0;
+for(var i=0;i<EXPORT_CATEGORIES.length;i++){
+var c=EXPORT_CATEGORIES[i];
+var el=document.getElementById(“cat_”+c.id);
+if(el && el.checked){
+for(var j=0;j<c.keys.length;j++){
+var k=c.keys[j];
+if(data.hasOwnProperty(k)){
+try{ localStorage.setItem(k,data[k]); importedCount++; }catch(e){}
+}
+}
+}
+}
 
-  if(importedCount===0){
-    status.className="usda-status err"; status.innerHTML="Nothing matched the selected categories.";
-    return;
-  }
+if(importedCount===0){
+status.className=“usda-status err”; status.innerHTML=“Nothing matched the selected categories.”;
+return;
+}
 
-  reloadAllStateFromStorage();
-  renderGuide();
-  var newStatus=document.getElementById("importStatus");
-  if(newStatus){ newStatus.className="usda-status"; newStatus.innerHTML="Imported successfully!"; }
+reloadAllStateFromStorage();
+renderGuide();
+var newStatus=document.getElementById(“importStatus”);
+if(newStatus){ newStatus.className=“usda-status”; newStatus.innerHTML=“Imported successfully!”; }
 }
 
 function reloadAllStateFromStorage(){
-  try{ fedLog=JSON.parse(localStorage.getItem("mya_fed")||"{}"); }catch(e){}
-  try{ addinsLog=JSON.parse(localStorage.getItem("mya_addins")||"{}"); }catch(e){}
-  try{ productsLog=JSON.parse(localStorage.getItem("mya_products_log")||"{}"); }catch(e){}
-  try{ customProducts=JSON.parse(localStorage.getItem("mya_custom_products")||"{}"); }catch(e){}
-  try{ notesLog=JSON.parse(localStorage.getItem("mya_notes")||"{}"); }catch(e){}
-  try{ USDA_KEY=localStorage.getItem("mya_usda_key")||""; }catch(e){}
-  try{ customAddins=JSON.parse(localStorage.getItem("mya_custom_addins")||"{}"); }catch(e){}
-  try{ suppChecks=JSON.parse(localStorage.getItem("mya_supp_checks")||"{}"); }catch(e){}
-  try{ proteinOverrides=JSON.parse(localStorage.getItem("mya_protein_swaps")||"{}"); }catch(e){}
-  try{ vegOverrides=JSON.parse(localStorage.getItem("mya_veg_swaps")||"{}"); }catch(e){}
-  try{ organOverrides=JSON.parse(localStorage.getItem("mya_organ_swaps")||"{}"); }catch(e){}
-  try{ brothOverrides=JSON.parse(localStorage.getItem("mya_broth_swaps")||"{}"); }catch(e){}
-  try{ starchOverrides=JSON.parse(localStorage.getItem("mya_starch_swaps")||"{}"); }catch(e){}
-  try{ amountOverrides=JSON.parse(localStorage.getItem("mya_amount_overrides")||"{}"); }catch(e){}
-  try{ petName=localStorage.getItem("mya_pet_name")||""; }catch(e){}
-  try{
-    var sc=JSON.parse(localStorage.getItem("mya_calc_state")||"null");
-    if(sc) _calcState=sc;
-  }catch(e){}
+try{ fedLog=JSON.parse(localStorage.getItem(“mya_fed”)||”{}”); }catch(e){}
+try{ addinsLog=JSON.parse(localStorage.getItem(“mya_addins”)||”{}”); }catch(e){}
+try{ productsLog=JSON.parse(localStorage.getItem(“mya_products_log”)||”{}”); }catch(e){}
+try{ customProducts=JSON.parse(localStorage.getItem(“mya_custom_products”)||”{}”); }catch(e){}
+try{ notesLog=JSON.parse(localStorage.getItem(“mya_notes”)||”{}”); }catch(e){}
+try{ USDA_KEY=localStorage.getItem(“mya_usda_key”)||””; }catch(e){}
+try{ customAddins=JSON.parse(localStorage.getItem(“mya_custom_addins”)||”{}”); }catch(e){}
+try{ suppChecks=JSON.parse(localStorage.getItem(“mya_supp_checks”)||”{}”); }catch(e){}
+try{ proteinOverrides=JSON.parse(localStorage.getItem(“mya_protein_swaps”)||”{}”); }catch(e){}
+try{ vegOverrides=JSON.parse(localStorage.getItem(“mya_veg_swaps”)||”{}”); }catch(e){}
+try{ organOverrides=JSON.parse(localStorage.getItem(“mya_organ_swaps”)||”{}”); }catch(e){}
+try{ brothOverrides=JSON.parse(localStorage.getItem(“mya_broth_swaps”)||”{}”); }catch(e){}
+try{ starchOverrides=JSON.parse(localStorage.getItem(“mya_starch_swaps”)||”{}”); }catch(e){}
+try{ amountOverrides=JSON.parse(localStorage.getItem(“mya_amount_overrides”)||”{}”); }catch(e){}
+try{ petName=localStorage.getItem(“mya_pet_name”)||””; }catch(e){}
+try{
+var sc=JSON.parse(localStorage.getItem(“mya_calc_state”)||“null”);
+if(sc) _calcState=sc;
+}catch(e){}
 
-  var names=Object.keys(customAddins);
-  for(var i=0;i<names.length;i++) ADDINS[names[i]]=customAddins[names[i]];
-  ADDIN_NAMES=Object.keys(ADDINS);
+var names=Object.keys(customAddins);
+for(var i=0;i<names.length;i++) ADDINS[names[i]]=customAddins[names[i]];
+ADDIN_NAMES=Object.keys(ADDINS);
 
-  var petInput=document.getElementById("petNameInput");
-  if(petInput) petInput.value=petName;
-  try{
-    var _photo=localStorage.getItem("mya_pet_photo");
-    if(_photo) showPetPhoto(_photo);
-  }catch(e){}
-  updateHeaderSub();
+var petInput=document.getElementById(“petNameInput”);
+if(petInput) petInput.value=petName;
+try{
+var _photo=localStorage.getItem(“mya_pet_photo”);
+if(_photo) showPetPhoto(_photo);
+}catch(e){}
+updateHeaderSub();
 }
 
-
 function saveUsdaKey(v){
-  USDA_KEY=v;
-  try{localStorage.setItem("mya_usda_key",v);}catch(e){}
+USDA_KEY=v;
+try{localStorage.setItem(“mya_usda_key”,v);}catch(e){}
 }
 
 function buildUsdaTypeChips(targetId){
-  targetId=targetId||"usdaTypesRow";
-  var html="";
-  for(var i=0;i<USDA_DATA_TYPES.length;i++){
-    var t=USDA_DATA_TYPES[i];
-    var on=usdaSelectedTypes[t];
-    html+='<button class="usda-type-chip'+(on?" on":"")+'" onclick="toggleUsdaType(\''+t+'\',\''+targetId+'\')" type="button">'+t+'</button>';
-  }
-  return html;
+targetId=targetId||“usdaTypesRow”;
+var html=””;
+for(var i=0;i<USDA_DATA_TYPES.length;i++){
+var t=USDA_DATA_TYPES[i];
+var on=usdaSelectedTypes[t];
+html+=’<button class=“usda-type-chip’+(on?” on”:””)+’” onclick=“toggleUsdaType('’+t+’','’+targetId+’')” type=“button”>’+t+’</button>’;
+}
+return html;
 }
 
 function toggleUsdaType(t,targetId){
-  usdaSelectedTypes[t]=!usdaSelectedTypes[t];
-  document.getElementById(targetId||"usdaTypesRow").innerHTML=buildUsdaTypeChips(targetId);
+usdaSelectedTypes[t]=!usdaSelectedTypes[t];
+document.getElementById(targetId||“usdaTypesRow”).innerHTML=buildUsdaTypeChips(targetId);
 }
 
 function fetchUsdaSearch(q, types, onResults, onError){
-  var url="https://api.nal.usda.gov/fdc/v1/foods/search?api_key="+encodeURIComponent(USDA_KEY);
-  fetch(url,{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({query:q,dataType:types,pageSize:15})
-  })
-  .then(function(res){
-    if(res.status===401||res.status===403){ throw new Error("Invalid API key. Double-check the key you pasted."); }
-    if(res.status===429){ throw new Error("Rate limit reached. Wait a bit and try again."); }
-    if(!res.ok){ throw new Error("USDA server error ("+res.status+")."); }
-    return res.json();
-  })
-  .then(function(data){ onResults(data.foods||[]); })
-  .catch(function(err){ onError(err.message||"Search failed. Check your connection and API key."); });
+var url=“https://api.nal.usda.gov/fdc/v1/foods/search?api_key=”+encodeURIComponent(USDA_KEY);
+fetch(url,{
+method:“POST”,
+headers:{“Content-Type”:“application/json”},
+body:JSON.stringify({query:q,dataType:types,pageSize:15})
+})
+.then(function(res){
+if(res.status===401||res.status===403){ throw new Error(“Invalid API key. Double-check the key you pasted.”); }
+if(res.status===429){ throw new Error(“Rate limit reached. Wait a bit and try again.”); }
+if(!res.ok){ throw new Error(“USDA server error (”+res.status+”).”); }
+return res.json();
+})
+.then(function(data){ onResults(data.foods||[]); })
+.catch(function(err){ onError(err.message||“Search failed. Check your connection and API key.”); });
 }
 
 function fetchUsdaDetail(fdcId, onDetail, onError){
-  var url="https://api.nal.usda.gov/fdc/v1/food/"+fdcId+"?api_key="+encodeURIComponent(USDA_KEY);
-  fetch(url)
-    .then(function(res){
-      if(!res.ok){ throw new Error("Couldn't load food details ("+res.status+")."); }
-      return res.json();
-    })
-    .then(onDetail)
-    .catch(function(err){ onError(err.message||"Couldn't load food details."); });
+var url=“https://api.nal.usda.gov/fdc/v1/food/”+fdcId+”?api_key=”+encodeURIComponent(USDA_KEY);
+fetch(url)
+.then(function(res){
+if(!res.ok){ throw new Error(“Couldn’t load food details (”+res.status+”).”); }
+return res.json();
+})
+.then(onDetail)
+.catch(function(err){ onError(err.message||“Couldn’t load food details.”); });
 }
 
 function getNutrientFields(entry){
-  if(entry.nutrient){
-    return { name: entry.nutrient.name||"", unit: entry.nutrient.unitName||"", value: (entry.amount!=null?entry.amount:entry.value) };
-  }
-  return { name: entry.nutrientName||"", unit: entry.unitName||"", value: entry.value };
+if(entry.nutrient){
+return { name: entry.nutrient.name||””, unit: entry.nutrient.unitName||””, value: (entry.amount!=null?entry.amount:entry.value) };
+}
+return { name: entry.nutrientName||””, unit: entry.unitName||””, value: entry.value };
 }
 
 function extractPer100g(foodDetail){
-  var entries=foodDetail.foodNutrients||[];
-  var raw=zeroN();
-  var found={};
+var entries=foodDetail.foodNutrients||[];
+var raw=zeroN();
+var found={};
 
-  var directMap=[
-    {key:"protein",    match:["Protein"]},
-    {key:"fat",        match:["Total lipid (fat)"]},
-    {key:"calcium",    match:["Calcium, Ca"]},
-    {key:"phosphorus", match:["Phosphorus, P"]},
-    {key:"potassium",  match:["Potassium, K"]},
-    {key:"sodium",     match:["Sodium, Na"]},
-    {key:"chloride",   match:["Chloride, Cl","Chloride"]},
-    {key:"magnesium",  match:["Magnesium, Mg"]},
-    {key:"iron",       match:["Iron, Fe"]},
-    {key:"copper",     match:["Copper, Cu"]},
-    {key:"zinc",       match:["Zinc, Zn"]},
-    {key:"selenium",   match:["Selenium, Se"]},
-    {key:"vitK",       match:["Vitamin K (phylloquinone)"]},
-    {key:"vitB1",      match:["Thiamin"]},
-    {key:"vitB2",      match:["Riboflavin"]},
-    {key:"vitB3",      match:["Niacin"]},
-    {key:"vitB5",      match:["Pantothenic acid"]},
-    {key:"vitB6",      match:["Vitamin B-6"]},
-    {key:"vitB12",     match:["Vitamin B-12"]},
-    {key:"folate",     match:["Folate, total"]},
-    {key:"choline",    match:["Choline, total"]}
-  ];
+var directMap=[
+{key:“protein”,    match:[“Protein”]},
+{key:“fat”,        match:[“Total lipid (fat)”]},
+{key:“calcium”,    match:[“Calcium, Ca”]},
+{key:“phosphorus”, match:[“Phosphorus, P”]},
+{key:“potassium”,  match:[“Potassium, K”]},
+{key:“sodium”,     match:[“Sodium, Na”]},
+{key:“chloride”,   match:[“Chloride, Cl”,“Chloride”]},
+{key:“magnesium”,  match:[“Magnesium, Mg”]},
+{key:“iron”,       match:[“Iron, Fe”]},
+{key:“copper”,     match:[“Copper, Cu”]},
+{key:“zinc”,       match:[“Zinc, Zn”]},
+{key:“selenium”,   match:[“Selenium, Se”]},
+{key:“vitK”,       match:[“Vitamin K (phylloquinone)”]},
+{key:“vitB1”,      match:[“Thiamin”]},
+{key:“vitB2”,      match:[“Riboflavin”]},
+{key:“vitB3”,      match:[“Niacin”]},
+{key:“vitB5”,      match:[“Pantothenic acid”]},
+{key:“vitB6”,      match:[“Vitamin B-6”]},
+{key:“vitB12”,     match:[“Vitamin B-12”]},
+{key:“folate”,     match:[“Folate, total”]},
+{key:“choline”,    match:[“Choline, total”]}
+];
 
-  for(var i=0;i<entries.length;i++){
-    var f=getNutrientFields(entries[i]);
-    if(!f.name || f.value==null) continue;
+for(var i=0;i<entries.length;i++){
+var f=getNutrientFields(entries[i]);
+if(!f.name || f.value==null) continue;
 
-    for(var d=0;d<directMap.length;d++){
-      if(found[directMap[d].key]) continue;
-      for(var mi=0;mi<directMap[d].match.length;mi++){
-        if(f.name===directMap[d].match[mi]){ raw[directMap[d].key]=f.value; found[directMap[d].key]=true; break; }
-      }
-    }
-
-    if(!found.iodine && f.name==="Iodine, I"){ raw.iodine=f.value/1000; found.iodine=true; } // mcg -> mg
-
-    if(!found.vitA && f.name==="Vitamin A, IU"){ raw.vitA=f.value; found.vitA=true; }
-    if(!found.vitA && f.name==="Vitamin A, RAE"){ raw.vitA=f.value*3.33; }
-
-    if(!found.vitD && f.name.indexOf("Vitamin D")===0){
-      if(f.unit==="IU"){ raw.vitD=f.value; found.vitD=true; }
-      else { raw.vitD=f.value*40; found.vitD=true; } // mcg -> IU
-    }
-
-    if(!found.vitE && f.name==="Vitamin E (alpha-tocopherol)"){ raw.vitE=f.value*1.49; found.vitE=true; } // mg -> IU approx
-
-    if(/18:3|20:5|22:6/.test(f.name) && /n-3/i.test(f.name)){
-      var mg3=(f.unit==="G")?f.value*1000:f.value;
-      raw.omega3=(raw.omega3||0)+mg3;
-    }
-    if(/18:2|20:4/.test(f.name) && /n-6/i.test(f.name)){
-      var mg6=(f.unit==="G")?f.value*1000:f.value;
-      raw.omega6=(raw.omega6||0)+mg6;
-    }
+```
+for(var d=0;d<directMap.length;d++){
+  if(found[directMap[d].key]) continue;
+  for(var mi=0;mi<directMap[d].match.length;mi++){
+    if(f.name===directMap[d].match[mi]){ raw[directMap[d].key]=f.value; found[directMap[d].key]=true; break; }
   }
-  return raw;
+}
+
+if(!found.iodine && f.name==="Iodine, I"){ raw.iodine=f.value/1000; found.iodine=true; } // mcg -> mg
+
+if(!found.vitA && f.name==="Vitamin A, IU"){ raw.vitA=f.value; found.vitA=true; }
+if(!found.vitA && f.name==="Vitamin A, RAE"){ raw.vitA=f.value*3.33; }
+
+if(!found.vitD && f.name.indexOf("Vitamin D")===0){
+  if(f.unit==="IU"){ raw.vitD=f.value; found.vitD=true; }
+  else { raw.vitD=f.value*40; found.vitD=true; } // mcg -> IU
+}
+
+if(!found.vitE && f.name==="Vitamin E (alpha-tocopherol)"){ raw.vitE=f.value*1.49; found.vitE=true; } // mg -> IU approx
+
+if(/18:3|20:5|22:6/.test(f.name) && /n-3/i.test(f.name)){
+  var mg3=(f.unit==="G")?f.value*1000:f.value;
+  raw.omega3=(raw.omega3||0)+mg3;
+}
+if(/18:2|20:4/.test(f.name) && /n-6/i.test(f.name)){
+  var mg6=(f.unit==="G")?f.value*1000:f.value;
+  raw.omega6=(raw.omega6||0)+mg6;
+}
+```
+
+}
+return raw;
 }
 
 function per100gToPerOz(per100){
-  var ozFactor=28.3495/100;
-  var perOz={};
-  for(var k=0;k<KEYS.length;k++) perOz[KEYS[k]]=+(((per100[KEYS[k]]||0))*ozFactor).toFixed(4);
-  return perOz;
+var ozFactor=28.3495/100;
+var perOz={};
+for(var k=0;k<KEYS.length;k++) perOz[KEYS[k]]=+(((per100[KEYS[k]]||0))*ozFactor).toFixed(4);
+return perOz;
 }
 
 // ── HISTORY (embedded under Calendar tab) ───────────────────────────────────
 function setHistView(v){ histView=v; renderCalendarPage(); }
 
-function setHistMode(checked){ histMode = checked ? "actual" : "scheduled"; renderCalendarPage(); }
+function setHistMode(checked){ histMode = checked ? “actual” : “scheduled”; renderCalendarPage(); }
 
 var _histNavDir = 0;
 function navHistory(dir){
-  _histNavDir = dir;
-  if(histView==="day"){
-    var nd1=addDays(histYear,histMonth,histDay,dir);
-    histYear=nd1.y; histMonth=nd1.m; histDay=nd1.d;
-  } else if(histView==="week"){
-    var nd=addDays(histYear,histMonth,histDay,dir*7);
-    histYear=nd.y; histMonth=nd.m; histDay=nd.d;
-  } else if(histView==="month"){
-    var dt=new Date(histYear,histMonth+dir,1);
-    histYear=dt.getFullYear(); histMonth=dt.getMonth();
-  } else {
-    histYear+=dir;
-  }
-  renderCalendarPage();
+_histNavDir = dir;
+if(histView===“day”){
+var nd1=addDays(histYear,histMonth,histDay,dir);
+histYear=nd1.y; histMonth=nd1.m; histDay=nd1.d;
+} else if(histView===“week”){
+var nd=addDays(histYear,histMonth,histDay,dir*7);
+histYear=nd.y; histMonth=nd.m; histDay=nd.d;
+} else if(histView===“month”){
+var dt=new Date(histYear,histMonth+dir,1);
+histYear=dt.getFullYear(); histMonth=dt.getMonth();
+} else {
+histYear+=dir;
+}
+renderCalendarPage();
 }
 
-function jumpToMonth(y,m){ histYear=y; histMonth=m; histView="month"; renderCalendarPage(); }
+function jumpToMonth(y,m){ histYear=y; histMonth=m; histView=“month”; renderCalendarPage(); }
 
 function buildHistoryHtml(){
-  var views=["day","week","month","year"];
-  var toggle='<div class="view-toggle">';
-  for(var i=0;i<views.length;i++){
-    var v=views[i];
-    var lbl=v==="day"?"Day":v==="week"?"Week":v==="month"?"Month":"Year";
-    toggle+='<button class="view-btn'+(histView===v?" active":"")+'" onclick="setHistView(\''+v+'\')">'+lbl+'</button>';
-  }
-  toggle+='</div>';
+var views=[“day”,“week”,“month”,“year”];
+var toggle=’<div class="view-toggle">’;
+for(var i=0;i<views.length;i++){
+var v=views[i];
+var lbl=v===“day”?“Day”:v===“week”?“Week”:v===“month”?“Month”:“Year”;
+toggle+=’<button class=“view-btn’+(histView===v?” active”:””)+’” onclick=“setHistView('’+v+’')”>’+lbl+’</button>’;
+}
+toggle+=’</div>’;
 
-  var checkbox='<label class="actual-toggle"><input type="checkbox" id="actualChk" onchange="setHistMode(this.checked)"'
-    +(histMode==="actual"?" checked":"")+'> Show actual fed meals (hide scheduled)</label>';
+var checkbox=’<label class="actual-toggle"><input type=“checkbox” id=“actualChk” onchange=“setHistMode(this.checked)”’
++(histMode===“actual”?” checked”:””)+’> Show actual fed meals (hide scheduled)</label>’;
 
-  var navLabel="";
-  if(histView==="day"){
-    navLabel=fmtDate(histYear,histMonth,histDay);
-  } else if(histView==="week"){
-    var st=startOfWeek(histYear,histMonth,histDay);
-    var en=addDays(st.y,st.m,st.d,6);
-    navLabel=monthAbbrev(st.m)+" "+st.d+" &ndash; "+monthAbbrev(en.m)+" "+en.d+(en.y!==st.y?", "+en.y:"");
-  } else if(histView==="month"){
-    navLabel=monthAbbrev(histMonth)+" "+histYear;
-  } else {
-    navLabel=String(histYear);
-  }
+var navLabel=””;
+if(histView===“day”){
+navLabel=fmtDate(histYear,histMonth,histDay);
+} else if(histView===“week”){
+var st=startOfWeek(histYear,histMonth,histDay);
+var en=addDays(st.y,st.m,st.d,6);
+navLabel=monthAbbrev(st.m)+” “+st.d+” – “+monthAbbrev(en.m)+” “+en.d+(en.y!==st.y?”, “+en.y:””);
+} else if(histView===“month”){
+navLabel=monthAbbrev(histMonth)+” “+histYear;
+} else {
+navLabel=String(histYear);
+}
 
-  var nav='<div class="hist-nav-row">'
-    +'<button class="nav-btn" onclick="navHistory(-1)">&#8249;</button>'
-    +'<div class="hist-period-label">'+navLabel+'</div>'
-    +'<button class="nav-btn" onclick="navHistory(1)">&#8250;</button>'
-    +'</div>';
+var nav=’<div class="hist-nav-row">’
++’<button class="nav-btn" onclick="navHistory(-1)">‹</button>’
++’<div class="hist-period-label">’+navLabel+’</div>’
++’<button class="nav-btn" onclick="navHistory(1)">›</button>’
++’</div>’;
 
-  var content="";
-  if(histView==="day")   content=buildDayView();
-  if(histView==="week")  content=buildWeekView();
-  if(histView==="month") content=buildMonthView();
-  if(histView==="year")  content=buildYearView();
+var content=””;
+if(histView===“day”)   content=buildDayView();
+if(histView===“week”)  content=buildWeekView();
+if(histView===“month”) content=buildMonthView();
+if(histView===“year”)  content=buildYearView();
 
-  var dirClass = _histNavDir>0 ? "slide-in-right" : (_histNavDir<0 ? "slide-in-left" : "");
-  _histNavDir = 0;
-  content = '<div class="'+("hist-content-anim "+dirClass).trim()+'">'+content+'</div>';
+var dirClass = _histNavDir>0 ? “slide-in-right” : (_histNavDir<0 ? “slide-in-left” : “”);
+_histNavDir = 0;
+content = ‘<div class=”’+(“hist-content-anim “+dirClass).trim()+’”>’+content+’</div>’;
 
-  return toggle+checkbox+nav+content;
+return toggle+checkbox+nav+content;
 }
 
 function buildAddlItemsLine(ds,slot,prefix){
-  var addins=addinsLog[ds+"_"+slot]||{};
-  var items=Object.keys(addins).filter(function(k){return addins[k]>0;});
-  var products=productsLog[ds+"_"+slot]||{};
-  var productIds=Object.keys(products).filter(function(k){return products[k]>0;});
-  if(items.length===0 && productIds.length===0) return "";
-  var parts=[];
-  for(var i=0;i<items.length;i++) parts.push(items[i]+" "+addins[items[i]]+"oz");
-  for(var j=0;j<productIds.length;j++){
-    var prod=getProduct(productIds[j]);
-    parts.push((prod?prod.name:"(deleted)")+" x"+products[productIds[j]]);
-  }
-  return '<div class="week-addl-line">&#127857; '+(prefix?prefix+": ":"")+parts.join(", ")+'</div>';
+var addins=addinsLog[ds+”*”+slot]||{};
+var items=Object.keys(addins).filter(function(k){return addins[k]>0;});
+var products=productsLog[ds+”*”+slot]||{};
+var productIds=Object.keys(products).filter(function(k){return products[k]>0;});
+if(items.length===0 && productIds.length===0) return “”;
+var parts=[];
+for(var i=0;i<items.length;i++) parts.push(items[i]+” “+addins[items[i]]+“oz”);
+for(var j=0;j<productIds.length;j++){
+var prod=getProduct(productIds[j]);
+parts.push((prod?prod.name:”(deleted)”)+” x”+products[productIds[j]]);
+}
+return ‘<div class="week-addl-line">🍱 ‘+(prefix?prefix+”: “:””)+parts.join(”, “)+’</div>’;
 }
 
 function buildDayView(){
-  var ds=dateKey(histYear,histMonth,histDay);
-  var dow=getDOW(histYear,histMonth,histDay);
-  var dn=DAYS_OF_WEEK[dow];
-  var wk=getWK(histYear,histMonth,histDay);
-  var dm=(WEEKS[wk]||{})[dn]||{};
-  var amFed=!!fedLog[ds+"_am"], pmFed=!!fedLog[ds+"_pm"];
-  var note=notesLog[ds]||"";
+var ds=dateKey(histYear,histMonth,histDay);
+var dow=getDOW(histYear,histMonth,histDay);
+var dn=DAYS_OF_WEEK[dow];
+var wk=getWK(histYear,histMonth,histDay);
+var dm=(WEEKS[wk]||{})[dn]||{};
+var amFed=!!fedLog[ds+”_am”], pmFed=!!fedLog[ds+”_pm”];
+var note=notesLog[ds]||””;
 
-  var html='<div class="day-view-card">';
+var html=’<div class="day-view-card">’;
 
-  // AM
-  var amEff=getEffectiveMeal(ds,"am",dm.am);
-  html+='<div class="day-detail-meal"><div class="dd-label">AM'+(amFed?" &#10003; Fed":" &mdash; not fed")+'</div>';
-  if(!dm.am){
-    html+='<div class="dd-detail">No meal scheduled</div>';
-  } else if(histMode==="actual" && !amFed){
-    html+='<div class="dd-detail">Not fed</div>';
-  } else {
-    var amShown=(histMode==="actual")?amEff:dm.am;
-    if(histMode==="actual" && getProteinOverride(ds,"am")) html+='<div class="swap-note">&#8646; swapped from '+dm.am.protein+'</div>';
-    html+='<div class="dd-protein">'+amShown.protein+'</div><div class="dd-detail">'+amShown.starch+' &middot; '+amShown.veg+(amShown.organ?' &middot; '+amShown.organ:'')+'</div>';
-  }
-  html+=buildAddlItemsLine(ds,"am");
-  html+='</div>';
+// AM
+var amEff=getEffectiveMeal(ds,“am”,dm.am);
+html+=’<div class="day-detail-meal"><div class="dd-label">AM’+(amFed?” ✓ Fed”:” — not fed”)+’</div>’;
+if(!dm.am){
+html+=’<div class="dd-detail">No meal scheduled</div>’;
+} else if(histMode===“actual” && !amFed){
+html+=’<div class="dd-detail">Not fed</div>’;
+} else {
+var amShown=(histMode===“actual”)?amEff:dm.am;
+if(histMode===“actual” && getProteinOverride(ds,“am”)) html+=’<div class="swap-note">⇆ swapped from ‘+dm.am.protein+’</div>’;
+html+=’<div class="dd-protein">’+amShown.protein+’</div><div class="dd-detail">’+amShown.starch+’ · ‘+amShown.veg+(amShown.organ?’ · ‘+amShown.organ:’’)+’</div>’;
+}
+html+=buildAddlItemsLine(ds,“am”);
+html+=’</div>’;
 
-  // PM
-  var pmEff=getEffectiveMeal(ds,"pm",dm.pm);
-  html+='<div class="day-detail-meal"><div class="dd-label">PM'+(pmFed?" &#10003; Fed":" &mdash; not fed")+'</div>';
-  if(!dm.pm){
-    html+='<div class="dd-detail">No meal scheduled</div>';
-  } else if(histMode==="actual" && !pmFed){
-    html+='<div class="dd-detail">Not fed</div>';
-  } else {
-    var pmShown=(histMode==="actual")?pmEff:dm.pm;
-    if(histMode==="actual" && getProteinOverride(ds,"pm")) html+='<div class="swap-note">&#8646; swapped from '+dm.pm.protein+'</div>';
-    html+='<div class="dd-protein">'+pmShown.protein+'</div><div class="dd-detail">'+pmShown.starch+' &middot; '+pmShown.veg+(pmShown.organ?' &middot; '+pmShown.organ:'')+'</div>';
-  }
-  html+=buildAddlItemsLine(ds,"pm");
-  html+='</div>';
+// PM
+var pmEff=getEffectiveMeal(ds,“pm”,dm.pm);
+html+=’<div class="day-detail-meal"><div class="dd-label">PM’+(pmFed?” ✓ Fed”:” — not fed”)+’</div>’;
+if(!dm.pm){
+html+=’<div class="dd-detail">No meal scheduled</div>’;
+} else if(histMode===“actual” && !pmFed){
+html+=’<div class="dd-detail">Not fed</div>’;
+} else {
+var pmShown=(histMode===“actual”)?pmEff:dm.pm;
+if(histMode===“actual” && getProteinOverride(ds,“pm”)) html+=’<div class="swap-note">⇆ swapped from ‘+dm.pm.protein+’</div>’;
+html+=’<div class="dd-protein">’+pmShown.protein+’</div><div class="dd-detail">’+pmShown.starch+’ · ‘+pmShown.veg+(pmShown.organ?’ · ‘+pmShown.organ:’’)+’</div>’;
+}
+html+=buildAddlItemsLine(ds,“pm”);
+html+=’</div>’;
 
-  // Note (inline editable)
-  html+='<div class="guide-section">Notes</div>'
-    +'<textarea id="dayViewNote" class="note-textarea" placeholder="Add a note for this day...">'+escapeHtml(note)+'</textarea>'
-    +'<button class="save-btn" onclick="saveDayViewNote(\''+ds+'\')">Save Note</button>';
+// Note (inline editable)
+html+=’<div class="guide-section">Notes</div>’
++’<textarea id="dayViewNote" class="note-textarea" placeholder="Add a note for this day...">’+escapeHtml(note)+’</textarea>’
++’<button class="save-btn" onclick="saveDayViewNote(\''+ds+'\')">Save Note</button>’;
 
-  html+='</div>';
-  return html;
+html+=’</div>’;
+return html;
 }
 
 function saveDayViewNote(ds){
-  var el=document.getElementById("dayViewNote");
-  var v=el?el.value.trim():"";
-  if(v) notesLog[ds]=v; else delete notesLog[ds];
-  try{localStorage.setItem("mya_notes",JSON.stringify(notesLog));}catch(e){}
-  renderCalendarPage();
+var el=document.getElementById(“dayViewNote”);
+var v=el?el.value.trim():””;
+if(v) notesLog[ds]=v; else delete notesLog[ds];
+try{localStorage.setItem(“mya_notes”,JSON.stringify(notesLog));}catch(e){}
+renderCalendarPage();
 }
 
 function buildWeekView(){
-  var st=startOfWeek(histYear,histMonth,histDay);
-  var html="";
-  for(var i=0;i<7;i++){
-    var dt=addDays(st.y,st.m,st.d,i);
-    var ds=dateKey(dt.y,dt.m,dt.d);
-    var dow=getDOW(dt.y,dt.m,dt.d);
-    var dn=DAYS_OF_WEEK[dow];
-    var wk=getWK(dt.y,dt.m,dt.d);
-    var dm=(WEEKS[wk]||{})[dn]||{};
-    var amFed=!!fedLog[ds+"_am"];
-    var pmFed=!!fedLog[ds+"_pm"];
-    var note=notesLog[ds]||"";
-    var isToday=(dt.y===today.getFullYear()&&dt.m===today.getMonth()&&dt.d===today.getDate());
-    var notePreview = note ? ("&#128221; "+escapeHtml(note.length>70?note.slice(0,70)+"…":note)) : "+ Add note";
+var st=startOfWeek(histYear,histMonth,histDay);
+var html=””;
+for(var i=0;i<7;i++){
+var dt=addDays(st.y,st.m,st.d,i);
+var ds=dateKey(dt.y,dt.m,dt.d);
+var dow=getDOW(dt.y,dt.m,dt.d);
+var dn=DAYS_OF_WEEK[dow];
+var wk=getWK(dt.y,dt.m,dt.d);
+var dm=(WEEKS[wk]||{})[dn]||{};
+var amFed=!!fedLog[ds+”_am”];
+var pmFed=!!fedLog[ds+”_pm”];
+var note=notesLog[ds]||””;
+var isToday=(dt.y===today.getFullYear()&&dt.m===today.getMonth()&&dt.d===today.getDate());
+var notePreview = note ? (”📝 “+escapeHtml(note.length>70?note.slice(0,70)+”…”:note)) : “+ Add note”;
 
-    var amText, pmText;
-    if(histMode==="actual"){
-      var amEff=getEffectiveMeal(ds,"am",dm.am);
-      var pmEff=getEffectiveMeal(ds,"pm",dm.pm);
-      amText = amFed ? ("&#10003; AM: "+(amEff?amEff.protein:"&mdash;")) : "AM: Not fed";
-      pmText = pmFed ? ("&#10003; PM: "+(pmEff?pmEff.protein:"&mdash;")) : "PM: Not fed";
-    } else {
-      amText = (amFed?"&#10003; ":"")+"AM: "+(dm.am?dm.am.protein:"&mdash;");
-      pmText = (pmFed?"&#10003; ":"")+"PM: "+(dm.pm?dm.pm.protein:"&mdash;");
-    }
+```
+var amText, pmText;
+if(histMode==="actual"){
+  var amEff=getEffectiveMeal(ds,"am",dm.am);
+  var pmEff=getEffectiveMeal(ds,"pm",dm.pm);
+  amText = amFed ? ("&#10003; AM: "+(amEff?amEff.protein:"&mdash;")) : "AM: Not fed";
+  pmText = pmFed ? ("&#10003; PM: "+(pmEff?pmEff.protein:"&mdash;")) : "PM: Not fed";
+} else {
+  amText = (amFed?"&#10003; ":"")+"AM: "+(dm.am?dm.am.protein:"&mdash;");
+  pmText = (pmFed?"&#10003; ":"")+"PM: "+(dm.pm?dm.pm.protein:"&mdash;");
+}
 
-    html+='<div class="week-day-row'+(isToday?" today":"")+'">'
-      +'<div class="week-day-name">'+dn+' &middot; '+monthAbbrev(dt.m)+' '+dt.d+'</div>'
-      +'<div class="week-meals">'
-      +'<div class="week-meal-pill'+(amFed?" fed":"")+'">'+amText+'</div>'
-      +'<div class="week-meal-pill'+(pmFed?" fed":"")+'">'+pmText+'</div>'
-      +'</div>'
-      +buildAddlItemsLine(ds,"am","AM")
-      +buildAddlItemsLine(ds,"pm","PM")
-      +'<div class="week-note" onclick="openDayDetail(\''+ds+'\')">'+notePreview+'</div>'
-      +'</div>';
-  }
-  return html;
+html+='<div class="week-day-row'+(isToday?" today":"")+'">'
+  +'<div class="week-day-name">'+dn+' &middot; '+monthAbbrev(dt.m)+' '+dt.d+'</div>'
+  +'<div class="week-meals">'
+  +'<div class="week-meal-pill'+(amFed?" fed":"")+'">'+amText+'</div>'
+  +'<div class="week-meal-pill'+(pmFed?" fed":"")+'">'+pmText+'</div>'
+  +'</div>'
+  +buildAddlItemsLine(ds,"am","AM")
+  +buildAddlItemsLine(ds,"pm","PM")
+  +'<div class="week-note" onclick="openDayDetail(\''+ds+'\')">'+notePreview+'</div>'
+  +'</div>';
+```
+
+}
+return html;
 }
 
 function buildMonthView(){
-  var y=histYear, m=histMonth;
-  var firstDow=getDOW(y,m,1);
-  var daysInMonth=new Date(y,m+1,0).getDate();
+var y=histYear, m=histMonth;
+var firstDow=getDOW(y,m,1);
+var daysInMonth=new Date(y,m+1,0).getDate();
 
-  var html='<div class="month-weekdays">';
-  var wd=["S","M","T","W","T","F","S"];
-  for(var i=0;i<7;i++) html+='<div class="month-weekday-cell">'+wd[i]+'</div>';
-  html+='</div><div class="month-grid">';
+var html=’<div class="month-weekdays">’;
+var wd=[“S”,“M”,“T”,“W”,“T”,“F”,“S”];
+for(var i=0;i<7;i++) html+=’<div class="month-weekday-cell">’+wd[i]+’</div>’;
+html+=’</div><div class="month-grid">’;
 
-  for(var i=0;i<firstDow;i++) html+='<div class="month-cell empty"></div>';
+for(var i=0;i<firstDow;i++) html+=’<div class="month-cell empty"></div>’;
 
-  for(var d=1; d<=daysInMonth; d++){
-    var ds=dateKey(y,m,d);
-    var amFed=!!fedLog[ds+"_am"];
-    var pmFed=!!fedLog[ds+"_pm"];
-    var hasNote=!!notesLog[ds];
-    var isToday=(y===today.getFullYear()&&m===today.getMonth()&&d===today.getDate());
-    var fc=(amFed?1:0)+(pmFed?1:0);
-    var cls="month-cell"+(isToday?" today":"")+(fc===2?" full-fed":fc===1?" half-fed":"");
-    html+='<div class="'+cls+'" onclick="openDayDetail(\''+ds+'\')">'
-      +'<div class="month-cell-day">'+d+'</div>'
-      +'<div class="month-cell-dots"><span class="m-dot'+(amFed?" on":"")+'"></span><span class="m-dot'+(pmFed?" on":"")+'"></span></div>'
-      +(hasNote?'<div class="note-dot"></div>':'')
-      +'</div>';
-  }
-  html+='</div>';
-  return html;
+for(var d=1; d<=daysInMonth; d++){
+var ds=dateKey(y,m,d);
+var amFed=!!fedLog[ds+”_am”];
+var pmFed=!!fedLog[ds+”_pm”];
+var hasNote=!!notesLog[ds];
+var isToday=(y===today.getFullYear()&&m===today.getMonth()&&d===today.getDate());
+var fc=(amFed?1:0)+(pmFed?1:0);
+var cls=“month-cell”+(isToday?” today”:””)+(fc===2?” full-fed”:fc===1?” half-fed”:””);
+html+=’<div class="'+cls+'" onclick="openDayDetail(\''+ds+'\')">’
++’<div class="month-cell-day">’+d+’</div>’
++’<div class="month-cell-dots"><span class=“m-dot’+(amFed?” on”:””)+’”></span><span class=“m-dot’+(pmFed?” on”:””)+’”></span></div>’
++(hasNote?’<div class="note-dot"></div>’:’’)
++’</div>’;
+}
+html+=’</div>’;
+return html;
 }
 
 function buildYearView(){
-  var y=histYear;
-  var html='<div class="year-grid">';
-  for(var m=0;m<12;m++){
-    var daysInMonth=new Date(y,m+1,0).getDate();
-    var firstDow=getDOW(y,m,1);
-    html+='<div class="mini-month" onclick="jumpToMonth('+y+','+m+')">'
-      +'<div class="mini-month-label">'+monthAbbrev(m)+'</div>'
-      +'<div class="mini-grid">';
-    for(var i=0;i<firstDow;i++) html+='<span class="mini-cell empty"></span>';
-    for(var d=1; d<=daysInMonth; d++){
-      var ds=dateKey(y,m,d);
-      var amFed=!!fedLog[ds+"_am"];
-      var pmFed=!!fedLog[ds+"_pm"];
-      var fc=(amFed?1:0)+(pmFed?1:0);
-      var cls="mini-cell"+(fc===2?" full":fc===1?" half":"");
-      html+='<span class="'+cls+'"></span>';
-    }
-    html+='</div></div>';
-  }
-  html+='</div>';
-  return html;
+var y=histYear;
+var html=’<div class="year-grid">’;
+for(var m=0;m<12;m++){
+var daysInMonth=new Date(y,m+1,0).getDate();
+var firstDow=getDOW(y,m,1);
+html+=’<div class="mini-month" onclick="jumpToMonth('+y+','+m+')">’
++’<div class="mini-month-label">’+monthAbbrev(m)+’</div>’
++’<div class="mini-grid">’;
+for(var i=0;i<firstDow;i++) html+=’<span class="mini-cell empty"></span>’;
+for(var d=1; d<=daysInMonth; d++){
+var ds=dateKey(y,m,d);
+var amFed=!!fedLog[ds+”_am”];
+var pmFed=!!fedLog[ds+”_pm”];
+var fc=(amFed?1:0)+(pmFed?1:0);
+var cls=“mini-cell”+(fc===2?” full”:fc===1?” half”:””);
+html+=’<span class="'+cls+'"></span>’;
+}
+html+=’</div></div>’;
+}
+html+=’</div>’;
+return html;
 }
 
 function openDayDetail(ds){
-  var parts=ds.split("-");
-  var y=parseInt(parts[0],10), m=parseInt(parts[1],10), d=parseInt(parts[2],10);
-  var dow=getDOW(y,m,d), wk=getWK(y,m,d), dn=DAYS_OF_WEEK[dow];
-  var dm=(WEEKS[wk]||{})[dn]||{};
-  var amFed=!!fedLog[ds+"_am"], pmFed=!!fedLog[ds+"_pm"];
-  var note=notesLog[ds]||"";
-  var label=fmtDate(y,m,d);
+var parts=ds.split(”-”);
+var y=parseInt(parts[0],10), m=parseInt(parts[1],10), d=parseInt(parts[2],10);
+var dow=getDOW(y,m,d), wk=getWK(y,m,d), dn=DAYS_OF_WEEK[dow];
+var dm=(WEEKS[wk]||{})[dn]||{};
+var amFed=!!fedLog[ds+”_am”], pmFed=!!fedLog[ds+”_pm”];
+var note=notesLog[ds]||””;
+var label=fmtDate(y,m,d);
 
-  var html='<div class="overlay" id="ddbg"><div class="modal">'
-    +'<div class="modal-head"><div class="modal-title">'+label+'</div>'
-    +'<button class="modal-close" onclick="closeDayDetail()">&#10005;</button></div>';
+var html=’<div class="overlay" id="ddbg"><div class="modal">’
++’<div class="modal-head"><div class="modal-title">’+label+’</div>’
++’<button class="modal-close" onclick="closeDayDetail()">✕</button></div>’;
 
-  // AM block — in "actual" mode, hide scheduled details unless it was actually fed, and show the swap if any
-  var amDetail;
-  var amEff=getEffectiveMeal(ds,"am",dm.am);
-  if(!dm.am){
-    amDetail='<div class="dd-detail">No meal scheduled</div>';
-  } else if(histMode==="actual" && !amFed){
-    amDetail='<div class="dd-detail">Not fed</div>';
-  } else {
-    var amShown=(histMode==="actual")?amEff:dm.am;
-    var amSwapNote=(histMode==="actual" && getProteinOverride(ds,"am")) ? '<div class="swap-note">&#8646; swapped from '+dm.am.protein+'</div>' : '';
-    amDetail='<div class="dd-protein">'+amShown.protein+'</div>'+amSwapNote+'<div class="dd-detail">'+amShown.starch+' &middot; '+amShown.veg+(amShown.organ?' &middot; '+amShown.organ:'')+'</div>';
-  }
-  html+='<div class="day-detail-meal"><div class="dd-label">AM'+(amFed?" &#10003; Fed":" &mdash; not fed")+'</div>'+amDetail+'</div>';
+// AM block — in “actual” mode, hide scheduled details unless it was actually fed, and show the swap if any
+var amDetail;
+var amEff=getEffectiveMeal(ds,“am”,dm.am);
+if(!dm.am){
+amDetail=’<div class="dd-detail">No meal scheduled</div>’;
+} else if(histMode===“actual” && !amFed){
+amDetail=’<div class="dd-detail">Not fed</div>’;
+} else {
+var amShown=(histMode===“actual”)?amEff:dm.am;
+var amSwapNote=(histMode===“actual” && getProteinOverride(ds,“am”)) ? ‘<div class="swap-note">⇆ swapped from ‘+dm.am.protein+’</div>’ : ‘’;
+amDetail=’<div class="dd-protein">’+amShown.protein+’</div>’+amSwapNote+’<div class="dd-detail">’+amShown.starch+’ · ‘+amShown.veg+(amShown.organ?’ · ‘+amShown.organ:’’)+’</div>’;
+}
+html+=’<div class="day-detail-meal"><div class="dd-label">AM’+(amFed?” ✓ Fed”:” — not fed”)+’</div>’+amDetail+’</div>’;
 
-  // PM block — same logic
-  var pmDetail;
-  var pmEff=getEffectiveMeal(ds,"pm",dm.pm);
-  if(!dm.pm){
-    pmDetail='<div class="dd-detail">No meal scheduled</div>';
-  } else if(histMode==="actual" && !pmFed){
-    pmDetail='<div class="dd-detail">Not fed</div>';
-  } else {
-    var pmShown=(histMode==="actual")?pmEff:dm.pm;
-    var pmSwapNote=(histMode==="actual" && getProteinOverride(ds,"pm")) ? '<div class="swap-note">&#8646; swapped from '+dm.pm.protein+'</div>' : '';
-    pmDetail='<div class="dd-protein">'+pmShown.protein+'</div>'+pmSwapNote+'<div class="dd-detail">'+pmShown.starch+' &middot; '+pmShown.veg+(pmShown.organ?' &middot; '+pmShown.organ:'')+'</div>';
-  }
-  html+='<div class="day-detail-meal"><div class="dd-label">PM'+(pmFed?" &#10003; Fed":" &mdash; not fed")+'</div>'+pmDetail+'</div>';
+// PM block — same logic
+var pmDetail;
+var pmEff=getEffectiveMeal(ds,“pm”,dm.pm);
+if(!dm.pm){
+pmDetail=’<div class="dd-detail">No meal scheduled</div>’;
+} else if(histMode===“actual” && !pmFed){
+pmDetail=’<div class="dd-detail">Not fed</div>’;
+} else {
+var pmShown=(histMode===“actual”)?pmEff:dm.pm;
+var pmSwapNote=(histMode===“actual” && getProteinOverride(ds,“pm”)) ? ‘<div class="swap-note">⇆ swapped from ‘+dm.pm.protein+’</div>’ : ‘’;
+pmDetail=’<div class="dd-protein">’+pmShown.protein+’</div>’+pmSwapNote+’<div class="dd-detail">’+pmShown.starch+’ · ‘+pmShown.veg+(pmShown.organ?’ · ‘+pmShown.organ:’’)+’</div>’;
+}
+html+=’<div class="day-detail-meal"><div class="dd-label">PM’+(pmFed?” ✓ Fed”:” — not fed”)+’</div>’+pmDetail+’</div>’;
 
-  html+='<div class="modal-hint" style="margin-top:10px">Notes</div>'
-    +'<textarea id="noteInput" class="note-textarea" placeholder="Add a note for this day...">'+escapeHtml(note)+'</textarea>'
-    +'<button class="save-btn" onclick="saveDayNote(\''+ds+'\')">Save Note</button>';
+html+=’<div class="modal-hint" style="margin-top:10px">Notes</div>’
++’<textarea id="noteInput" class="note-textarea" placeholder="Add a note for this day...">’+escapeHtml(note)+’</textarea>’
++’<button class="save-btn" onclick="saveDayNote(\''+ds+'\')">Save Note</button>’;
 
-  html+='</div></div>';
+html+=’</div></div>’;
 
-  document.getElementById("modal-root").innerHTML=html;
-  document.getElementById("ddbg").addEventListener("click",function(e){ if(e.target===this) closeDayDetail(); });
+document.getElementById(“modal-root”).innerHTML=html;
+document.getElementById(“ddbg”).addEventListener(“click”,function(e){ if(e.target===this) closeDayDetail(); });
 }
 
-function closeDayDetail(){ document.getElementById("modal-root").innerHTML=""; }
+function closeDayDetail(){ document.getElementById(“modal-root”).innerHTML=””; }
 
 function saveDayNote(ds){
-  var el=document.getElementById("noteInput");
-  var v=el?el.value.trim():"";
-  if(v) notesLog[ds]=v; else delete notesLog[ds];
-  try{localStorage.setItem("mya_notes",JSON.stringify(notesLog));}catch(e){}
-  closeDayDetail();
-  renderCalendarPage();
+var el=document.getElementById(“noteInput”);
+var v=el?el.value.trim():””;
+if(v) notesLog[ds]=v; else delete notesLog[ds];
+try{localStorage.setItem(“mya_notes”,JSON.stringify(notesLog));}catch(e){}
+closeDayDetail();
+renderCalendarPage();
 }
 
 // ── BOOT ──────────────────────────────────────────────────────────────────────
-document.getElementById("petNameInput").value=petName;
+document.getElementById(“petNameInput”).value=petName;
 try{
-  var _savedPhoto=localStorage.getItem("mya_pet_photo");
-  if(_savedPhoto) showPetPhoto(_savedPhoto);
+var _savedPhoto=localStorage.getItem(“mya_pet_photo”);
+if(_savedPhoto) showPetPhoto(_savedPhoto);
 }catch(e){}
 updateHeaderSub();
 regenerateRotation();
@@ -7335,22 +7385,23 @@ maybeShowOnboardingOnBoot();
 // Swipe left/right on the Feeding Schedule tab to move between days —
 // mirrors the Prev/Next buttons but feels native on a touch screen.
 (function setupCalendarSwipe(){
-  var startX=null, startY=null;
-  var el=document.getElementById("page-calendar");
-  if(!el) return;
-  el.addEventListener("touchstart", function(e){
-    var t=e.touches[0]; startX=t.clientX; startY=t.clientY;
-  }, {passive:true});
-  el.addEventListener("touchend", function(e){
-    if(startX===null) return;
-    var t=e.changedTouches[0];
-    var dx=t.clientX-startX, dy=t.clientY-startY;
-    if(Math.abs(dx)>55 && Math.abs(dx)>Math.abs(dy)*1.5){
-      if(dx<0) changeDay(1); else changeDay(-1);
-    }
-    startX=null; startY=null;
-  }, {passive:true});
+var startX=null, startY=null;
+var el=document.getElementById(“page-calendar”);
+if(!el) return;
+el.addEventListener(“touchstart”, function(e){
+var t=e.touches[0]; startX=t.clientX; startY=t.clientY;
+}, {passive:true});
+el.addEventListener(“touchend”, function(e){
+if(startX===null) return;
+var t=e.changedTouches[0];
+var dx=t.clientX-startX, dy=t.clientY-startY;
+if(Math.abs(dx)>55 && Math.abs(dx)>Math.abs(dy)*1.5){
+if(dx<0) changeDay(1); else changeDay(-1);
+}
+startX=null; startY=null;
+}, {passive:true});
 })();
 </script>
+
 </body>
 </html>

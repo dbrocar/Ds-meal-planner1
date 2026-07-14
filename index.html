@@ -5739,28 +5739,6 @@ function showTab(name){
 function renderPlan(){
   var html = "";
 
-  // AAFCO Targets
-  html += '<div class="section-title">Daily Nutritional Targets &mdash; AAFCO 2023 + NRC 2006</div>';
-  html += '<div style="font-size:12px;color:#666;margin-bottom:4px">Targets follow the AAFCO 2023 Dog Food Nutrient Profiles for Adult Maintenance, cross-referenced against the NRC 2006 Recommended Allowances.</div>';
-  html += '<div style="font-size:12px;color:#666;margin-bottom:12px">For '+(petName?escapeHtml(petName):"your dog")+' &bull; '+fmtLbs(_calcState.weight||60)+' adult &bull; ~'+Math.round(_calcState.mer||1334)+' kcal/day</div>';
-
-  var groups = ["Macros","Minerals","Fatty Acids","Vitamins"];
-  for(var gi=0;gi<groups.length;gi++){
-    var g=groups[gi];
-    var items=AAFCO.filter(function(a){return a.group===g;});
-    html+='<div class="aafco-group"><div class="aafco-group-label">'+g+'</div><div class="aafco-grid">';
-    for(var ai=0;ai<items.length;ai++){
-      var a=items[ai];
-      var range = a.max<9000 ? a.min+" &ndash; "+a.max+" "+a.unit : a.min+"+ "+a.unit;
-      html+='<div class="aafco-cell"><div class="aafco-cell-name">'+a.label+'</div><div class="aafco-cell-val">'+range+'</div></div>';
-    }
-    html+='</div>';
-    if(g==="Minerals"){
-      html+='<div class="ratio-note">&#9878; <strong>Calcium : Phosphorus ratio</strong> &mdash; AAFCO requires between <strong>1:1 and 2:1</strong> (ideal ~1.2&ndash;1.4:1). This is the only nutrient ratio AAFCO specifically regulates, since imbalance affects bone development regardless of how much of each mineral is present individually.</div>';
-    }
-    html+='</div>';
-  }
-
   // 4-Week Rotation — reads live from WEEKS, which regenerateRotation() builds
   // from whatever proteins the operator selected in the Guide tab.
   html += '<div class="section-title" style="margin-top:6px">4-Week Meal Rotation</div>';
@@ -5800,7 +5778,6 @@ function renderPlan(){
 
   html+='<div style="font-size:12px;color:#555;margin-top:6px;margin-bottom:16px">&#8635; Rotation repeats every 4 weeks &bull; AM on Thu &amp; Sun is the variety/alt protein &bull; Change proteins on the Guide tab</div>';
 
-  html+=buildShoppingListHtml();
   document.getElementById("page-plan").innerHTML=html;
 }
 
@@ -7407,16 +7384,16 @@ function buildFreezerHtml(){
 var _shopWeek=1;
 var shoppingChecks={};
 try{ shoppingChecks=JSON.parse(localStorage.getItem("mya_shopping_checks")||"{}"); }catch(e){}
-function setShopWeek(wk){ _shopWeek=wk; renderPlan(); }
+function setShopWeek(wk){ _shopWeek=wk; renderUtilities(); }
 function toggleShopItem(key){
   if(shoppingChecks[key]) delete shoppingChecks[key]; else shoppingChecks[key]=1;
   try{ localStorage.setItem("mya_shopping_checks",JSON.stringify(shoppingChecks)); }catch(e){}
-  renderPlan();
+  renderUtilities();
 }
 function clearShopWeek(wk){
   for(var k in shoppingChecks) if(k.indexOf("wk"+wk+":")===0) delete shoppingChecks[k];
   try{ localStorage.setItem("mya_shopping_checks",JSON.stringify(shoppingChecks)); }catch(e){}
-  renderPlan();
+  renderUtilities();
 }
 function computeShoppingList(wk){
   var protein={}, veg={}, starch={}, organMeals=0;
@@ -7838,6 +7815,34 @@ function renderGuide(){
       +'</div>';
   }
   html+='<div style="font-size:12px;color:#555;margin-top:8px">Rotate to ensure nutritional variety &bull; Change your lineup above</div>';
+
+  // ── Daily Nutrition Targets collapsible sub-section ──────────────────────
+  var nutTargetsContent='<div style="font-size:12px;color:#666;margin-bottom:4px">Targets follow the AAFCO 2023 Dog Food Nutrient Profiles for Adult Maintenance, cross-referenced against the NRC 2006 Recommended Allowances.</div>'
+    +'<div style="font-size:12px;color:#666;margin-bottom:12px">For '+(petName?escapeHtml(petName):"your dog")+' &bull; '+fmtLbs(_calcState.weight||60)+' adult &bull; ~'+Math.round(_calcState.mer||1334)+' kcal/day</div>';
+  var nutGroups=["Macros","Minerals","Fatty Acids","Vitamins"];
+  for(var ngi=0;ngi<nutGroups.length;ngi++){
+    var ng=nutGroups[ngi];
+    var nitems=AAFCO.filter(function(a){return a.group===ng;});
+    nutTargetsContent+='<div class="aafco-group"><div class="aafco-group-label">'+ng+'</div><div class="aafco-grid">';
+    for(var nai=0;nai<nitems.length;nai++){
+      var na=nitems[nai];
+      var nrange=na.max<9000?na.min+" &ndash; "+na.max+" "+na.unit:na.min+"+ "+na.unit;
+      nutTargetsContent+='<div class="aafco-cell"><div class="aafco-cell-name">'+na.label+'</div><div class="aafco-cell-val">'+nrange+'</div></div>';
+    }
+    nutTargetsContent+='</div>';
+    if(ng==="Minerals"){
+      nutTargetsContent+='<div class="ratio-note">&#9878; <strong>Calcium : Phosphorus ratio</strong> &mdash; AAFCO requires between <strong>1:1 and 2:1</strong> (ideal ~1.2&ndash;1.4:1). This is the only nutrient ratio AAFCO specifically regulates, since imbalance affects bone development regardless of how much of each mineral is present individually.</div>';
+    }
+    nutTargetsContent+='</div>';
+  }
+  html+='<div style="margin-top:16px;border-top:1px solid rgba(200,147,58,0.2);padding-top:14px">'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:2px 0" onclick="toggleUtilSection(\'nutrtargets\')">'
+    +'<span class="guide-section" style="margin:0">Daily Nutritional Targets &mdash; AAFCO 2023 + NRC 2006</span>'
+    +'<span class="collapse-arrow" id="util-arrow-nutrtargets">&#9656;</span>'
+    +'</div>'
+    +'<div class="collapsible-content is-hidden" id="util-body-nutrtargets" style="margin-top:10px">'+nutTargetsContent+'</div>'
+    +'</div>';
+
   html+='</div>';
 
   html+='<div class="footer-disclaimer">&#9888;&#65039; Nutritional information only. Not a substitute for veterinary advice. No liability assumed.</div>';
@@ -7851,45 +7856,116 @@ function renderGuide(){
 }
 
 // ── UTILITIES ─────────────────────────────────────────────────────────────────
+function toggleUtilSection(id){
+  var body=document.getElementById('util-body-'+id);
+  var arrow=document.getElementById('util-arrow-'+id);
+  if(!body) return;
+  if(body.className.indexOf('is-hidden')!==-1){
+    body.className=body.className.replace(' is-hidden','');
+    arrow.innerHTML='&#9662;';
+  } else {
+    body.className+=' is-hidden';
+    arrow.innerHTML='&#9656;';
+  }
+}
+
+function utilSection(id, title, content, open){
+  var o=open||false;
+  return '<div class="guide-card" style="margin-bottom:10px">'
+    +'<div class="guide-title collapsible-title" onclick="toggleUtilSection(\''+id+'\')">'
+    +title+'<span class="collapse-arrow" id="util-arrow-'+id+'">'+(o?'&#9662;':'&#9656;')+'</span>'
+    +'</div>'
+    +'<div class="collapsible-content'+(o?'':' is-hidden')+'" id="util-body-'+id+'" style="margin-top:10px">'
+    +content
+    +'</div>'
+    +'</div>';
+}
+
 function renderUtilities(){
-  var html='<div class="guide-card" id="utilities-card">'
-    +'<div class="guide-title">&#128296; Utilities</div>'
+  var html='<div style="padding-bottom:24px">'
+    +'<div class="guide-title" style="margin-bottom:12px;pointer-events:none">&#128296; Utilities</div>';
 
-    +'<div class="guide-section">Install as an App</div>'
-    +'<div class="usda-key-hint" style="margin-bottom:8px">FRESHBOWL METHOD can live on your home screen like a native app &mdash; full screen, its own icon. iPhone/iPad: Share &rarr; <strong>Add to Home Screen</strong>. Android/Chrome: browser menu &rarr; <strong>Install app</strong>. Data stays on this device, so keep periodic Exports as your backup.</div>'
+  // 1 — Install as an App
+  html+=utilSection('install','&#128241; Install as an App',
+    '<div class="usda-key-hint" style="margin-bottom:8px">FRESHBOWL METHOD can live on your home screen like a native app &mdash; full screen, its own icon. iPhone/iPad: Share &rarr; <strong>Add to Home Screen</strong>. Android/Chrome: browser menu &rarr; <strong>Install app</strong>. Data stays on this device, so keep periodic Exports as your backup.</div>'
     +'<button class="save-btn" id="pwaInstallBtn" onclick="triggerInstall()">&#128241; Install FRESHBOWL METHOD</button>'
+  );
 
-    +'<div class="guide-section" style="margin-top:16px">Units</div>'
-    +'<div class="usda-key-hint" style="margin-bottom:8px">How weights are displayed throughout the app. All logged data is kept in one internal format, so switching is instant and lossless.</div>'
+  // 2 — Units
+  html+=utilSection('units','&#9878; Units',
+    '<div class="usda-key-hint" style="margin-bottom:8px">How weights are displayed throughout the app. All logged data is kept in one internal format, so switching is instant and lossless.</div>'
     +'<div class="dog-switch-row" style="margin-top:2px">'
     +'<button class="dog-chip'+(UNITS==="us"?" active":"")+'" onclick="setUnits(\'us\')">US (oz / lb)</button>'
     +'<button class="dog-chip'+(UNITS==="metric"?" active":"")+'" onclick="setUnits(\'metric\')">Metric (g / kg)</button>'
     +'</div>'
+  );
 
-    +'<div class="guide-section" style="margin-top:16px">USDA API Key</div>'
-    +'<div class="usda-key-row">'
+  // 3 — USDA API Key
+  html+=utilSection('usda','&#128300; USDA API Key',
+    '<div class="usda-key-row">'
     +'<input type="text" id="usdaKeyInput" class="usda-key-input" placeholder="Paste your free USDA FDC API key" value="'+escapeHtml(USDA_KEY)+'" oninput="saveUsdaKey(this.value)">'
     +'<div class="usda-key-hint">Free key (instant, no approval wait): <a href="https://fdc.nal.usda.gov/api-key-signup.html" target="_blank">fdc.nal.usda.gov/api-key-signup</a>. Stored only in this browser &mdash; never uploaded to GitHub. Paste it here once, then use the &#128300; USDA search inside the <strong>+ Add Items</strong> box on the Feeding Schedule tab to look up and add new ingredients.</div>'
     +'</div>'
+  );
 
-    +'<div class="guide-section" style="margin-top:16px">Safe Dog Food Reference</div>'
-    +'<div class="embedded-video-mount"><iframe class="embedded-video-frame" style="height:560px" srcdoc="" data-video="safefood" id="safeFoodVideoFrame"></iframe></div>'
+  // 4 — Safe Dog Food Reference
+  html+=utilSection('safefood','&#9989; Safe Dog Food Reference',
+    '<div class="embedded-video-mount"><iframe class="embedded-video-frame" style="height:560px" srcdoc="" data-video="safefood" id="safeFoodVideoFrame"></iframe></div>'
     +'<div class="usda-key-hint" style="margin-bottom:6px">General guidance only &mdash; every dog is different, always confirm with your vet. The app checks anything you add on the Feeding Schedule tab against this same list.</div>'
     +'<div class="safety-cols">'
     +'<div class="safety-col eat"><div class="safety-col-title">EAT</div>'+SAFETY_LIST.filter(function(x){return x.status==="safe";}).map(function(x){return '<div class="safety-item">'+x.name+'</div>';}).join('')+'</div>'
     +'<div class="safety-col limit"><div class="safety-col-title">LIMIT</div>'+SAFETY_LIST.filter(function(x){return x.status==="limit";}).map(function(x){return '<div class="safety-item">'+x.name+'</div>';}).join('')+'</div>'
     +'<div class="safety-col avoid"><div class="safety-col-title">AVOID</div>'+SAFETY_LIST.filter(function(x){return x.status==="avoid";}).map(function(x){return '<div class="safety-item">'+x.name+'</div>';}).join('')+'</div>'
     +'</div>'
+  );
 
-    +'<div class="guide-section" style="margin-top:16px">My Recipe Box</div>'
-    +'<div class="embedded-video-mount"><iframe class="embedded-video-frame" style="height:520px" srcdoc="" data-video="recipebox" id="recipeBoxVideoFrame"></iframe></div>'
+  // 5 — My Recipe Box
+  html+=utilSection('recipebox','&#129380; My Recipe Box',
+    '<div class="embedded-video-mount"><iframe class="embedded-video-frame" style="height:520px" srcdoc="" data-video="recipebox" id="recipeBoxVideoFrame"></iframe></div>'
     +'<div class="usda-key-hint" style="margin-bottom:10px">Bake something yourself &mdash; treats, biscuits, anything with a few ingredients mixed together? Build it here once as a <strong>product</strong>, then log it by the serving from any meal\'s Additional Items, instead of re-entering every ingredient each time.</div>'
     +buildRecipeBoxList()
     +'<button class="save-btn" onclick="openProductBuilder(null)">+ Add New Product</button>'
+  );
 
-    +buildFreezerHtml()
-    +'<div class="guide-section" style="margin-top:16px">Export / Import Data</div>'
-    +'<div class="usda-key-hint" style="margin-bottom:12px">Back up your feeding history, swaps, notes, and settings &mdash; or restore them on another device.</div>'
+  // 6 — Freezer Inventory
+  var freezerContent='<div class="usda-key-hint" style="margin-bottom:8px">Update counts as you batch and as portions come out. Anything below its minimum shows a re-batch warning here and on the Home page.</div>';
+  for(var i=0;i<FREEZER_ITEMS.length;i++){
+    var it=FREEZER_ITEMS[i];
+    var qty=freezerQty(it.k), min=freezerMin(it.k);
+    var low=(freezerInv[it.k]&&qty<min);
+    freezerContent+='<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid rgba(44,74,94,0.08)">'
+      +'<div style="flex:1;min-width:0"><div style="font-size:14px;font-weight:600;color:#2c4a5e">'+it.label+(low?' <span style="color:#e05252;font-size:12px;font-weight:800">&#9888; batch soon</span>':'')+'</div>'
+      +'<div style="font-size:11.5px;color:#7a95a8">min <input type="number" min="0" value="'+min+'" style="width:34px;border:none;border-bottom:1px solid rgba(44,74,94,0.2);background:transparent;font-family:inherit;font-size:11.5px;color:#7a95a8" onchange="setFreezerMin(\''+it.k+'\',this.value)"> '+it.unit+'</div></div>'
+      +'<button class="dog-chip" style="padding:4px 13px" onclick="bumpFreezer(\''+it.k+'\',-1)">&minus;</button>'
+      +'<span style="min-width:34px;text-align:center;font-size:17px;font-weight:800;color:'+(low?'#e05252':'#2c4a5e')+'">'+qty+'</span>'
+      +'<button class="dog-chip" style="padding:4px 12px" onclick="bumpFreezer(\''+it.k+'\',1)">+</button>'
+      +'</div>';
+  }
+  html+=utilSection('freezer','&#10052;&#65039; Freezer Inventory', freezerContent);
+
+  // 7 — Shopping List
+  var shopRows=computeShoppingList(_shopWeek);
+  var shopContent='<div style="font-size:12px;color:#666;margin-bottom:8px">Generated from the live rotation and standard portions &mdash; 14 meals. Swap weeks below; check things off as you shop.</div>'
+    +'<div class="dog-switch-row">';
+  for(var sw=1;sw<=4;sw++) shopContent+='<button class="dog-chip'+(sw===_shopWeek?" active":"")+'" onclick="setShopWeek('+sw+')">Week '+sw+'</button>';
+  shopContent+='</div><div style="margin-top:8px">';
+  var shopLastGroup="";
+  for(var si=0;si<shopRows.length;si++){
+    var sr=shopRows[si];
+    if(sr.group!==shopLastGroup){ shopContent+='<div class="guide-section"'+(shopLastGroup?' style="margin-top:10px"':'')+'>'+sr.group+'</div>'; shopLastGroup=sr.group; }
+    var skey="wk"+_shopWeek+":"+sr.name.replace(/[^A-Za-z0-9]/g,"_");
+    var schecked=!!shoppingChecks[skey];
+    shopContent+='<label class="export-row" style="border-bottom:1px solid rgba(44,74,94,0.06)">'
+      +'<input type="checkbox" '+(schecked?'checked ':'')+'onchange="toggleShopItem(\''+skey+'\')">'
+      +'<span style="flex:1;'+(schecked?'text-decoration:line-through;opacity:0.55':'')+'"><strong>'+sr.name+'</strong> &mdash; '+sr.amt+'</span>'
+      +'</label>';
+  }
+  shopContent+='<button class="addins-btn" style="margin-top:10px" onclick="clearShopWeek('+_shopWeek+')">Reset checkmarks for Week '+_shopWeek+'</button></div>';
+  html+=utilSection('shopping','&#128722; Shopping List', shopContent);
+
+  // 8 — Export / Import Data
+  html+=utilSection('exportimport','&#128190; Export / Import Data',
+    '<div class="usda-key-hint" style="margin-bottom:12px">Back up your feeding history, swaps, notes, and settings &mdash; or restore them on another device.</div>'
     +'<label class="export-row select-all-row"><input type="checkbox" id="catSelectAll" checked onchange="toggleSelectAllCategories(this.checked)"><span><strong>Select All</strong></span></label>'
     +'<div id="categoryCheckboxList">'+buildCategoryCheckboxRows()+'</div>'
     +'<button class="save-btn" onclick="doExport()">Export Selected Data</button>'
@@ -7905,10 +7981,12 @@ function renderUtilities(){
     +'<textarea id="importInput" class="usda-snippet" placeholder="Paste exported data here..." style="min-height:90px"></textarea>'
     +'<button class="save-btn" onclick="applyImport()">Import Selected Data</button>'
     +'<div id="importStatus" class="usda-status" style="margin-top:8px"></div>'
-    +'</div>';
+  );
+
+  html+='</div>';
 
   document.getElementById("page-utilities").innerHTML=html;
-  styleTitleIcons("#page-utilities .guide-title");
+  styleTitleIcons("#page-utilities .guide-title:not(.collapsible-title)");
   mountEmbeddedVideos();
 }
 

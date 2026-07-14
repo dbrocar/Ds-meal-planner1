@@ -468,24 +468,35 @@ body{background:linear-gradient(180deg,#dfeaf1,#cfe0ea);background-attachment:fi
 .embedded-video-mount{ margin-bottom:14px; border-radius:14px; overflow:hidden; background:#e7f1f7; }
 
 /* ── Home tab ──────────────────────────────────────────────────────────── */
-.home-hero{
-  background:linear-gradient(135deg,#fdf3e0,#eaf4fa);
-  border:1px solid rgba(200,147,58,0.25);
-  border-radius:18px;
-  padding:18px 18px 16px;
+/* ── Home Dashboard Card ──────────────────────────────────────── */
+.home-dash-card{
+  background:linear-gradient(135deg,#fdf3e0 0%,#eaf4fa 100%);
+  border:1px solid rgba(200,147,58,0.30);
+  border-radius:20px; padding:18px 16px 16px;
   margin-bottom:14px;
+  box-shadow:0 3px 14px rgba(44,74,94,0.09);
 }
-.home-hero-title{ font-size:20px; font-weight:800; color:#2c4a5e; margin-bottom:4px; }
-.home-hero-sub{ font-size:14px; color:#5b7d90; font-weight:600; }
-.home-meal-row{ display:flex; gap:10px; margin-bottom:16px; }
-.home-meal-chip{
+.home-dash-greeting{ font-size:19px; font-weight:800; color:#2c4a5e; margin-bottom:2px; }
+.home-dash-date{ font-size:13px; color:#5b7d90; font-weight:600; margin-bottom:16px; }
+.home-dash-meals{ display:flex; gap:10px; margin-bottom:16px; }
+.home-dash-meal{
   flex:1; background:#fff; border:2px solid rgba(44,74,94,0.12);
-  border-radius:14px; padding:10px 12px; text-align:center;
+  border-radius:14px; padding:12px 10px; text-align:center;
+  cursor:pointer; transition:border-color .15s, background .15s;
+  -webkit-tap-highlight-color:transparent;
 }
-.home-meal-chip.fed{ background:rgba(76,175,80,.08); border-color:rgba(76,175,80,.4); }
-.home-meal-label{ display:block; font-size:12px; font-weight:800; color:#8098a8; letter-spacing:1px; margin-bottom:3px; }
-.home-meal-status{ display:block; font-size:15px; font-weight:700; color:#2c4a5e; }
-.home-meal-chip.fed .home-meal-status{ color:#2f7d4f; }
+.home-dash-meal:active{ opacity:.85; }
+.home-dash-meal.fed{ background:rgba(76,175,80,.08); border-color:rgba(76,175,80,.40); }
+.home-dash-slot{ font-size:11px; font-weight:800; color:#8098a8; letter-spacing:1.2px; margin-bottom:5px; }
+.home-dash-protein{ font-size:14px; font-weight:700; color:#2c4a5e; line-height:1.25; margin-bottom:6px; }
+.home-dash-meal.fed .home-dash-protein{ color:#2a6e40; }
+.home-dash-status{ font-size:13px; font-weight:700; color:#8098a8; }
+.home-dash-meal.fed .home-dash-status{ color:#2f7d4f; }
+.home-dash-treat-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px; }
+.home-dash-treat-title{ font-size:14px; font-weight:800; color:#2c4a5e; }
+.home-dash-treat-val{ font-size:13px; font-weight:700; }
+.home-dash-treat-bar{ height:8px; background:rgba(44,74,94,0.10); border-radius:99px; overflow:hidden; margin-bottom:5px; }
+.home-dash-treat-hint{ font-size:12px; color:#8098a8; }
 .home-nav-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
 .home-nav-tile{
   background:#fff; border:1px solid rgba(44,74,94,0.12); border-radius:14px;
@@ -6303,6 +6314,11 @@ function toggleFed(key){
   try{localStorage.setItem("mya_fed",JSON.stringify(fedLog));}catch(e){}
   renderCalendarPage();
 }
+function toggleFedHome(key){
+  fedLog[key]=!fedLog[key];
+  try{localStorage.setItem("mya_fed",JSON.stringify(fedLog));}catch(e){}
+  renderHome();
+}
 
 // ── ADDITIONAL ITEMS MODAL (per meal) ────────────────────────────────────────
 var _mk="";
@@ -7531,8 +7547,23 @@ function buildShoppingListHtml(){
 function renderHome(){
   var ds=dateKey(curYear,curMonth,curDay);
   var amFed=!!fedLog[ds+"_am"], pmFed=!!fedLog[ds+"_pm"];
-  var name=petName?escapeHtml(petName):"your dog";
-  var greeting=petName?("Hi! Here's "+escapeHtml(petName)+"'s day"):"Hi! Here's today's plan";
+  var dow=getDOW(curYear,curMonth,curDay);
+  var wk=getWK(curYear,curMonth,curDay);
+  var dn=DAYS_OF_WEEK[dow];
+  var dm=(WEEKS[wk]||{})[dn]||{};
+  var amMeal=getEffectiveMeal(ds,"am",dm.am);
+  var pmMeal=getEffectiveMeal(ds,"pm",dm.pm);
+  function shortP(n){ return (n||"—").replace("(85/15)","").replace(" (canned)","").replace("Ground ","").trim(); }
+  var amProtein=amMeal?shortP(amMeal.protein):"—";
+  var pmProtein=pmMeal?shortP(pmMeal.protein):"—";
+  var greeting=petName?("Hi! Here\u2019s "+escapeHtml(petName)+"\u2019s today"):"Hi! Here\u2019s today\u2019s plan";
+  var dateLbl=fmtDate(curYear,curMonth,curDay);
+
+  // Treat budget values
+  var treatUsed=calcTreatKcalForDay(ds);
+  var treatBudget=Math.max(1,Math.round((_calcState.mer||1334)*0.10));
+  var treatPct=Math.min(100,Math.round(treatUsed/treatBudget*100));
+  var treatColor=treatPct<75?"#5ab07a":(treatPct<=100?"#d9a23a":"#e05252");
 
   var html='<div class="home-profile-card">'
     +'<label class="home-profile-photo" id="petPhotoBox">'
@@ -7556,15 +7587,36 @@ function renderHome(){
   html+='<button class="dog-chip add" onclick="addDog()">+ Add Dog</button>'
     +'</div>';
 
-  html+='<div class="home-hero">'
-    +'<div class="home-hero-title">&#128075; '+greeting+'</div>'
-    +'<div class="home-hero-sub">'+(selectedProteins.length||4)+' proteins in rotation</div>'
-    +'</div>';
+  // ── Dashboard card ────────────────────────────────────────────
+  html+='<div class="home-dash-card">'
 
-  html+='<div class="home-meal-row">'
-    +'<div class="home-meal-chip'+(amFed?" fed":"")+'"><span class="home-meal-label">AM</span><span class="home-meal-status">'+(amFed?"&#10003; Fed":"Not yet")+'</span></div>'
-    +'<div class="home-meal-chip'+(pmFed?" fed":"")+'"><span class="home-meal-label">PM</span><span class="home-meal-status">'+(pmFed?"&#10003; Fed":"Not yet")+'</span></div>'
-    +'</div>';
+    // Greeting + date
+    +'<div class="home-dash-greeting">&#128075; '+greeting+'</div>'
+    +'<div class="home-dash-date">'+dateLbl+' &bull; Week '+wk+'</div>'
+
+    // AM / PM meal chips
+    +'<div class="home-dash-meals">'
+    +'<div class="home-dash-meal'+(amFed?" fed":"")+'" onclick="toggleFedHome(\''+ds+'_am\')">'
+      +'<div class="home-dash-slot">AM</div>'
+      +'<div class="home-dash-protein">'+amProtein+'</div>'
+      +'<div class="home-dash-status">'+(amFed?"&#10003; Fed":"Tap to mark fed")+'</div>'
+    +'</div>'
+    +'<div class="home-dash-meal'+(pmFed?" fed":"")+'" onclick="toggleFedHome(\''+ds+'_pm\')">'
+      +'<div class="home-dash-slot">PM</div>'
+      +'<div class="home-dash-protein">'+pmProtein+'</div>'
+      +'<div class="home-dash-status">'+(pmFed?"&#10003; Fed":"Tap to mark fed")+'</div>'
+    +'</div>'
+    +'</div>'
+
+    // Treat budget
+    +'<div class="home-dash-treat-head">'
+      +'<span class="home-dash-treat-title">&#127850; Treat Budget</span>'
+      +'<span class="home-dash-treat-val" style="color:'+treatColor+'">'+treatUsed+' / '+treatBudget+' kcal</span>'
+    +'</div>'
+    +'<div class="home-dash-treat-bar"><div style="height:100%;width:'+treatPct+'%;background:'+treatColor+';border-radius:99px"></div></div>'
+    +'<div class="home-dash-treat-hint">Extras &amp; treats should stay under ~10% of daily calories. Logged through + Add Items.</div>'
+
+    +'</div>'; // end .home-dash-card
 
   var lowItems=lowFreezerItems();
   if(lowItems.length){
@@ -7572,8 +7624,6 @@ function renderHome(){
       +'<span style="font-size:14px;font-weight:800;color:#e05252">&#10052;&#65039; Freezer running low:</span> '
       +'<span style="font-size:14px;color:#4a6a7d">'+lowItems.join(", ")+' &mdash; tap to update inventory</span></div>';
   }
-
-  html+=buildTreatBudgetHtml();
 
   html+='<div class="home-nav-grid">'
     +'<button class="home-nav-tile" onclick="showTab(\'calendar\')"><span class="home-nav-icon">&#128197;</span><span>Feeding Schedule</span></button>'

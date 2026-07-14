@@ -5735,50 +5735,131 @@ function showTab(name){
   if(name==="utilities")  renderUtilities();
 }
 
-// ── PLAN TAB ──────────────────────────────────────────────────────────────────
+// ── DOG PROFILE + MEAL PLAN ───────────────────────────────────────────────────
 function renderPlan(){
-  var html = "";
+  var html='<div class="guide-card" id="dog-profile-card">'
+    +'<div class="guide-title">&#128062; Dog Profile</div>'
 
-  // 4-Week Rotation — reads live from WEEKS, which regenerateRotation() builds
-  // from whatever proteins the operator selected in the Guide tab.
-  html += '<div class="section-title" style="margin-top:6px">4-Week Meal Rotation</div>';
+    +'<div class="guide-section">Daily Calorie &amp; Feeding Calculator</div>'
+    +'<div class="calc-formula">RER = 70 &times; (weight in kg)<sup>0.75</sup><br>MER = RER &times; activity factor</div>'
+    +'<div class="calc-row"><label class="calc-label">Weight ('+(UNITS==="metric"?"kg":"lb")+')</label>'
+    +'<input type="number" id="calcWeight" class="calc-input" value="'+(UNITS==="metric" ? Math.round((_calcState.weight||60)*0.45359*10)/10 : Math.round(_calcState.weight||60))+'" min="1" step="0.5" oninput="runCalc()"></div>'
+    +'<div class="calc-row"><label class="calc-label">Life Stage / Activity</label>'
+    +'<select id="calcActivity" class="calc-select" onchange="runCalc()">'
+    +'<option value="1.0">Weight loss</option>'
+    +'<option value="1.2">Inactive / obese-prone</option>'
+    +'<option value="1.4">Senior / less active</option>'
+    +'<option value="1.6" selected>Spayed/Neutered adult &mdash; moderate activity</option>'
+    +'<option value="1.8">Intact adult &mdash; moderate activity</option>'
+    +'<option value="2.0">Active adult</option>'
+    +'<option value="3.0">Highly active / working dog</option>'
+    +'<option value="2.0">Puppy (4 months to adult)</option>'
+    +'<option value="3.0">Puppy (under 4 months)</option>'
+    +'</select></div>'
+    +'<div class="calc-result" id="calcResult"></div>'
+    +'<div class="calc-note">Estimates only &mdash; always confirm with your veterinarian before changing a feeding plan. Oz/day is approximated using this diet\'s density (~42 kcal/oz of prepared food); actual density varies by recipe.</div>'
 
+    +'<div class="guide-section" style="margin-top:16px">Allergies &amp; Foods to Avoid</div>'
+    +'<div class="usda-key-hint" style="margin-bottom:8px">Separate items with commas. The Meal Plan Advisor checks against this list before answering food questions.</div>'
+    +'<textarea id="dogAllergiesInput" class="note-textarea" placeholder="e.g. chicken, beef fat trimmings, dairy" style="min-height:60px" oninput="saveDogAllergies(this.value)">'+escapeHtml(dogAllergies)+'</textarea>'
+
+    +'<div class="guide-section" style="margin-top:14px">Health Notes &amp; Preferences</div>'
+    +'<div class="usda-key-hint" style="margin-bottom:8px">Anything worth remembering &mdash; sensitivities, conditions, things your vet has flagged, food preferences.</div>'
+    +'<textarea id="dogHealthNotesInput" class="note-textarea" placeholder="e.g. sensitive stomach, prone to pancreatitis, prefers softer textures" style="min-height:60px" oninput="saveDogHealthNotes(this.value)">'+escapeHtml(dogHealthNotes)+'</textarea>'
+
+    +'<div class="guide-section" style="margin-top:16px">Choose Your Dog\'s Proteins</div>'
+    +'<div class="embedded-video-mount"><iframe class="embedded-video-frame" style="height:800px" srcdoc="" data-video="proteins" id="proteinsVideoFrame"></iframe></div>'
+    +'<div class="usda-key-hint" style="margin-bottom:8px">Pick up to '+MAX_SELECTED_PROTEINS+' proteins to build the 4-week rotation from. Fish species (sardines, salmon) automatically become the Thursday &amp; Sunday variety-day protein; the rest fill the AM/PM main slots.</div>'
+    +'<div class="protein-pick-count" id="proteinPickCount"></div>'
+    +'<div class="protein-pick-grid" id="proteinPickGrid">'+buildProteinPickerRows()+'</div>'
+    +'<button class="save-btn" onclick="applyProteinSelection()">Save &amp; Rebuild Rotation</button>'
+    +(DOGS.length>1 ? '<div style="margin-top:14px"><span class="usda-modal-toggle" style="color:#e05252" onclick="deleteDog(activeDogId)">&#128465; Remove this dog and all their data</span></div>' : '');
+
+  html+='<div class="guide-section" style="margin-top:16px">Active Protein Reference</div>';
+  var proteinMeta = {
+    "Beef (85/15)":{fat:"Moderate",tag:"mod"}, "Ground Turkey":{fat:"Lean",tag:"lean"},
+    "Ground Chicken":{fat:"Lean",tag:"lean"}, "Pork Loin":{fat:"Lean",tag:"lean"},
+    "Lamb":{fat:"Moderate",tag:"mod"}, "Veal":{fat:"Lean",tag:"lean"},
+    "Bison":{fat:"Lean",tag:"lean"}, "Duck":{fat:"Moderate&ndash;High",tag:"mod"},
+    "Sardines (canned)":{fat:"High &ndash; Omega-3s",tag:"high"}, "Salmon (canned)":{fat:"High &ndash; Omega-3s",tag:"high"}
+  };
+  var activeList = selectedProteins.length ? selectedProteins : PROTEIN_CATALOG.map(function(c){return c.name;});
+  for(var i=0;i<activeList.length;i++){
+    var pn=activeList[i];
+    var meta=proteinMeta[pn]||{fat:"&mdash;",tag:"mod"};
+    html+='<div class="protein-row">'
+      +'<span class="protein-name">'+shortProtLabel(pn)+'</span>'
+      +'<span class="protein-tag tag-'+meta.tag+'">'+meta.fat+'</span>'
+      +'</div>';
+  }
+  html+='<div style="font-size:12px;color:#555;margin-top:8px">Rotate to ensure nutritional variety &bull; Save &amp; Rebuild Rotation above to update</div>';
+
+  // Daily Nutrition Targets collapsible
+  var nutTargetsContent='<div style="font-size:12px;color:#666;margin-bottom:4px">Targets follow the AAFCO 2023 Dog Food Nutrient Profiles for Adult Maintenance, cross-referenced against the NRC 2006 Recommended Allowances.</div>'
+    +'<div style="font-size:12px;color:#666;margin-bottom:12px">For '+(petName?escapeHtml(petName):"your dog")+' &bull; '+fmtLbs(_calcState.weight||60)+' adult &bull; ~'+Math.round(_calcState.mer||1334)+' kcal/day</div>';
+  var nutGroups=["Macros","Minerals","Fatty Acids","Vitamins"];
+  for(var ngi=0;ngi<nutGroups.length;ngi++){
+    var ng=nutGroups[ngi];
+    var nitems=AAFCO.filter(function(a){return a.group===ng;});
+    nutTargetsContent+='<div class="aafco-group"><div class="aafco-group-label">'+ng+'</div><div class="aafco-grid">';
+    for(var nai=0;nai<nitems.length;nai++){
+      var na=nitems[nai];
+      var nrange=na.max<9000?na.min+" &ndash; "+na.max+" "+na.unit:na.min+"+ "+na.unit;
+      nutTargetsContent+='<div class="aafco-cell"><div class="aafco-cell-name">'+na.label+'</div><div class="aafco-cell-val">'+nrange+'</div></div>';
+    }
+    nutTargetsContent+='</div>';
+    if(ng==="Minerals"){
+      nutTargetsContent+='<div class="ratio-note">&#9878; <strong>Calcium : Phosphorus ratio</strong> &mdash; AAFCO requires between <strong>1:1 and 2:1</strong> (ideal ~1.2&ndash;1.4:1). This is the only nutrient ratio AAFCO specifically regulates, since imbalance affects bone development regardless of how much of each mineral is present individually.</div>';
+    }
+    nutTargetsContent+='</div>';
+  }
+  html+='<div style="margin-top:16px;border-top:1px solid rgba(200,147,58,0.2);padding-top:14px">'
+    +'<div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:2px 0" onclick="toggleUtilSection(\'nutrtargets\')">'
+    +'<span class="guide-section" style="margin:0">Daily Nutritional Targets &mdash; AAFCO 2023 + NRC 2006</span>'
+    +'<span class="collapse-arrow" id="util-arrow-nutrtargets">&#9656;</span>'
+    +'</div>'
+    +'<div class="collapsible-content is-hidden" id="util-body-nutrtargets" style="margin-top:10px">'+nutTargetsContent+'</div>'
+    +'</div>';
+
+  html+='</div>'; // close dog-profile-card
+
+  // 4-Week Meal Plan — collapsible card
   var dayOrderDisp=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
   var dayLabels=["M","T","W","Th","F","Sa","Su"];
-
   function shortProt(n){ return (n||"").replace("(85/15)","").replace(" (canned)","").replace("Ground ","").trim(); }
 
+  var planContent='';
   for(var wk=1; wk<=4; wk++){
     var wkDays=WEEKS[wk]||{};
     var mondayMeal=wkDays["Mon"];
-    var mainTitle = mondayMeal ? (shortProt(mondayMeal.am.protein)+" &amp; "+shortProt(mondayMeal.pm.protein)) : ("Week "+wk);
-
-    html+='<div class="rotation-week">'
+    var mainTitle=mondayMeal?(shortProt(mondayMeal.am.protein)+" &amp; "+shortProt(mondayMeal.pm.protein)):("Week "+wk);
+    planContent+='<div class="rotation-week">'
       +'<div class="rotation-week-header">'
       +'<div class="rotation-week-title">Week '+wk+' &mdash; '+mainTitle+'</div>'
-      +'</div>'
-      +'<div class="rotation-row">';
-
+      +'</div><div class="rotation-row">';
     for(var di=0;di<7;di++){
       var dn=dayOrderDisp[di];
       var dm=wkDays[dn];
-      if(!dm){ html+='<div class="day-cell land"></div>'; continue; }
+      if(!dm){ planContent+='<div class="day-cell land"></div>'; continue; }
       var amIsFish=isFishMeal(dm.am.protein);
-      var amProt=shortProt(dm.am.protein);
-      var pmProt=shortProt(dm.pm.protein);
-      html+='<div class="day-cell '+(amIsFish?"fish":"land")+'">'
+      planContent+='<div class="day-cell '+(amIsFish?"fish":"land")+'">'
         +'<div class="day-cell-name">'+dayLabels[di]+'</div>'
         +(amIsFish?'<div class="fish-icon">&#127997;</div>':'')
-        +'<div class="day-cell-am">'+amProt+'</div>'
-        +'<div class="day-cell-pm" style="color:'+(amIsFish?"#64b5f6":"#888")+'">'+pmProt+'</div>'
+        +'<div class="day-cell-am">'+shortProt(dm.am.protein)+'</div>'
+        +'<div class="day-cell-pm" style="color:'+(amIsFish?"#64b5f6":"#888")+'">'+shortProt(dm.pm.protein)+'</div>'
         +'</div>';
     }
-    html+='</div></div>';
+    planContent+='</div></div>';
   }
+  planContent+='<div style="font-size:12px;color:#555;margin-top:6px;margin-bottom:4px">&#8635; Rotation repeats every 4 weeks &bull; AM on Thu &amp; Sun is the variety/alt protein &bull; Save &amp; Rebuild Rotation above to update</div>';
 
-  html+='<div style="font-size:12px;color:#555;margin-top:6px;margin-bottom:16px">&#8635; Rotation repeats every 4 weeks &bull; AM on Thu &amp; Sun is the variety/alt protein &bull; Change proteins on the Guide tab</div>';
+  html+=utilSection('mealplan','&#128203; 4-Week Meal Plan', planContent);
 
   document.getElementById("page-plan").innerHTML=html;
+  styleTitleIcons("#page-plan .guide-title:not(.collapsible-title)");
+  mountEmbeddedVideos();
+  runCalc();
+  updateProteinPickCount();
 }
 
 // ── CALENDAR ──────────────────────────────────────────────────────────────────
@@ -6584,14 +6665,14 @@ function saveProductFromBuilder(){
   saveProduct({ id:_productDraft.id, name:_productDraft.name.trim(), servings:_productDraft.servings, notes:(_productDraft.notes||"").trim(), ingredients:validIngredients });
   _productDraft=null;
   closeModal();
-  renderGuide();
+  renderUtilities();
 }
 
 function deleteProductFromBuilder(id){
   deleteProduct(id);
   _productDraft=null;
   closeModal();
-  renderGuide();
+  renderUtilities();
 }
 
 function saveModal(){
@@ -6817,7 +6898,7 @@ function applyProteinSelection(){
   }
   saveSelectedProteins(_proteinDraft.slice());
   _proteinDraft=null;
-  renderGuide();
+  renderPlan();
 }
 
 // ── ONBOARDING WALKTHROUGH (first launch + replayable from Guide tab) ────────
@@ -7497,7 +7578,7 @@ function renderHome(){
   html+='<div class="home-nav-grid">'
     +'<button class="home-nav-tile" onclick="showTab(\'calendar\')"><span class="home-nav-icon">&#128197;</span><span>Feeding Schedule</span></button>'
     +'<button class="home-nav-tile" onclick="showTab(\'nutrition\')"><span class="home-nav-icon">&#128202;</span><span>Nutrition</span></button>'
-    +'<button class="home-nav-tile" onclick="showTab(\'plan\')"><span class="home-nav-icon">&#128203;</span><span>Meal Plan</span></button>'
+    +'<button class="home-nav-tile" onclick="showTab(\'plan\')"><span class="home-nav-icon">&#128062;</span><span>Dog Profile</span></button>'
     +'<button class="home-nav-tile" onclick="showTab(\'care\')"><span class="home-nav-icon">&#129657;</span><span>Health &amp; Weight</span></button>'
     +'<button class="home-nav-tile" onclick="showTab(\'guide\')"><span class="home-nav-icon">&#128214;</span><span>Guide</span></button>'
     +'<button class="home-nav-tile" onclick="showTab(\'utilities\')"><span class="home-nav-icon">&#128296;</span><span>Utilities</span></button>'
@@ -7534,13 +7615,9 @@ function syncProfileWidgets(){
   updateHeaderSub();
 }
 
-// Jump to the full Dog Profile section on the Guide tab
+// Jump to the Dog Profile page
 function goToDogProfile(){
-  showTab("guide");
-  setTimeout(function(){
-    var card=document.getElementById("dog-profile-card");
-    if(card) card.scrollIntoView({behavior:"smooth",block:"start"});
-  },80);
+  showTab("plan");
 }
 
 function askHomeAdvisor(){
@@ -7755,104 +7832,12 @@ function renderGuide(){
     +'<div id="aiAdvisorAnswer" style="font-size:14.5px;color:#2c4a5e;line-height:1.7;margin-top:4px"></div>'
     +'</div>';
 
-  // ══════════════════════════════════════════════════════════════════════
-  // DOG PROFILE — everything specifically about this dog: the calculator,
-  // allergies/health notes, and the protein rotation picker + reference.
-  // ══════════════════════════════════════════════════════════════════════
-  html+='<div class="guide-card" id="dog-profile-card">'
-    +'<div class="guide-title">&#128062; Dog Profile</div>'
-
-    +'<div class="guide-section">Daily Calorie &amp; Feeding Calculator</div>'
-    +'<div class="calc-formula">RER = 70 &times; (weight in kg)<sup>0.75</sup><br>MER = RER &times; activity factor</div>'
-    +'<div class="calc-row"><label class="calc-label">Weight ('+(UNITS==="metric"?"kg":"lb")+')</label>'
-    +'<input type="number" id="calcWeight" class="calc-input" value="'+(UNITS==="metric" ? Math.round((_calcState.weight||60)*0.45359*10)/10 : Math.round(_calcState.weight||60))+'" min="1" step="0.5" oninput="runCalc()"></div>'
-    +'<div class="calc-row"><label class="calc-label">Life Stage / Activity</label>'
-    +'<select id="calcActivity" class="calc-select" onchange="runCalc()">'
-    +'<option value="1.0">Weight loss</option>'
-    +'<option value="1.2">Inactive / obese-prone</option>'
-    +'<option value="1.4">Senior / less active</option>'
-    +'<option value="1.6" selected>Spayed/Neutered adult &mdash; moderate activity</option>'
-    +'<option value="1.8">Intact adult &mdash; moderate activity</option>'
-    +'<option value="2.0">Active adult</option>'
-    +'<option value="3.0">Highly active / working dog</option>'
-    +'<option value="2.0">Puppy (4 months to adult)</option>'
-    +'<option value="3.0">Puppy (under 4 months)</option>'
-    +'</select></div>'
-    +'<div class="calc-result" id="calcResult"></div>'
-    +'<div class="calc-note">Estimates only &mdash; always confirm with your veterinarian before changing a feeding plan. Oz/day is approximated using this diet\'s density (~42 kcal/oz of prepared food); actual density varies by recipe.</div>'
-
-    +'<div class="guide-section" style="margin-top:16px">Allergies &amp; Foods to Avoid</div>'
-    +'<div class="usda-key-hint" style="margin-bottom:8px">Separate items with commas. The Meal Plan Advisor checks against this list before answering food questions.</div>'
-    +'<textarea id="dogAllergiesInput" class="note-textarea" placeholder="e.g. chicken, beef fat trimmings, dairy" style="min-height:60px" oninput="saveDogAllergies(this.value)">'+escapeHtml(dogAllergies)+'</textarea>'
-
-    +'<div class="guide-section" style="margin-top:14px">Health Notes &amp; Preferences</div>'
-    +'<div class="usda-key-hint" style="margin-bottom:8px">Anything worth remembering &mdash; sensitivities, conditions, things your vet has flagged, food preferences.</div>'
-    +'<textarea id="dogHealthNotesInput" class="note-textarea" placeholder="e.g. sensitive stomach, prone to pancreatitis, prefers softer textures" style="min-height:60px" oninput="saveDogHealthNotes(this.value)">'+escapeHtml(dogHealthNotes)+'</textarea>'
-
-    +'<div class="guide-section" style="margin-top:16px">Choose Your Dog\'s Proteins</div>'
-    +'<div class="embedded-video-mount"><iframe class="embedded-video-frame" style="height:800px" srcdoc="" data-video="proteins" id="proteinsVideoFrame"></iframe></div>'
-    +'<div class="usda-key-hint" style="margin-bottom:8px">Pick up to '+MAX_SELECTED_PROTEINS+' proteins to build the 4-week rotation from. Fish species (sardines, salmon) automatically become the Thursday &amp; Sunday variety-day protein; the rest fill the AM/PM main slots.</div>'
-    +'<div class="protein-pick-count" id="proteinPickCount"></div>'
-    +'<div class="protein-pick-grid" id="proteinPickGrid">'+buildProteinPickerRows()+'</div>'
-    +'<button class="save-btn" onclick="applyProteinSelection()">Save &amp; Rebuild Rotation</button>'
-    +(DOGS.length>1 ? '<div style="margin-top:14px"><span class="usda-modal-toggle" style="color:#e05252" onclick="deleteDog(activeDogId)">&#128465; Remove this dog and all their data</span></div>' : '');
-
-  html+='<div class="guide-section" style="margin-top:16px">Active Protein Reference</div>';
-  var proteinMeta = {
-    "Beef (85/15)":{fat:"Moderate",tag:"mod"}, "Ground Turkey":{fat:"Lean",tag:"lean"},
-    "Ground Chicken":{fat:"Lean",tag:"lean"}, "Pork Loin":{fat:"Lean",tag:"lean"},
-    "Lamb":{fat:"Moderate",tag:"mod"}, "Veal":{fat:"Lean",tag:"lean"},
-    "Bison":{fat:"Lean",tag:"lean"}, "Duck":{fat:"Moderate&ndash;High",tag:"mod"},
-    "Sardines (canned)":{fat:"High &ndash; Omega-3s",tag:"high"}, "Salmon (canned)":{fat:"High &ndash; Omega-3s",tag:"high"}
-  };
-  var activeList = selectedProteins.length ? selectedProteins : PROTEIN_CATALOG.map(function(c){return c.name;});
-  for(var i=0;i<activeList.length;i++){
-    var pn=activeList[i];
-    var meta=proteinMeta[pn]||{fat:"&mdash;",tag:"mod"};
-    html+='<div class="protein-row">'
-      +'<span class="protein-name">'+shortProtLabel(pn)+'</span>'
-      +'<span class="protein-tag tag-'+meta.tag+'">'+meta.fat+'</span>'
-      +'</div>';
-  }
-  html+='<div style="font-size:12px;color:#555;margin-top:8px">Rotate to ensure nutritional variety &bull; Change your lineup above</div>';
-
-  // ── Daily Nutrition Targets collapsible sub-section ──────────────────────
-  var nutTargetsContent='<div style="font-size:12px;color:#666;margin-bottom:4px">Targets follow the AAFCO 2023 Dog Food Nutrient Profiles for Adult Maintenance, cross-referenced against the NRC 2006 Recommended Allowances.</div>'
-    +'<div style="font-size:12px;color:#666;margin-bottom:12px">For '+(petName?escapeHtml(petName):"your dog")+' &bull; '+fmtLbs(_calcState.weight||60)+' adult &bull; ~'+Math.round(_calcState.mer||1334)+' kcal/day</div>';
-  var nutGroups=["Macros","Minerals","Fatty Acids","Vitamins"];
-  for(var ngi=0;ngi<nutGroups.length;ngi++){
-    var ng=nutGroups[ngi];
-    var nitems=AAFCO.filter(function(a){return a.group===ng;});
-    nutTargetsContent+='<div class="aafco-group"><div class="aafco-group-label">'+ng+'</div><div class="aafco-grid">';
-    for(var nai=0;nai<nitems.length;nai++){
-      var na=nitems[nai];
-      var nrange=na.max<9000?na.min+" &ndash; "+na.max+" "+na.unit:na.min+"+ "+na.unit;
-      nutTargetsContent+='<div class="aafco-cell"><div class="aafco-cell-name">'+na.label+'</div><div class="aafco-cell-val">'+nrange+'</div></div>';
-    }
-    nutTargetsContent+='</div>';
-    if(ng==="Minerals"){
-      nutTargetsContent+='<div class="ratio-note">&#9878; <strong>Calcium : Phosphorus ratio</strong> &mdash; AAFCO requires between <strong>1:1 and 2:1</strong> (ideal ~1.2&ndash;1.4:1). This is the only nutrient ratio AAFCO specifically regulates, since imbalance affects bone development regardless of how much of each mineral is present individually.</div>';
-    }
-    nutTargetsContent+='</div>';
-  }
-  html+='<div style="margin-top:16px;border-top:1px solid rgba(200,147,58,0.2);padding-top:14px">'
-    +'<div style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;padding:2px 0" onclick="toggleUtilSection(\'nutrtargets\')">'
-    +'<span class="guide-section" style="margin:0">Daily Nutritional Targets &mdash; AAFCO 2023 + NRC 2006</span>'
-    +'<span class="collapse-arrow" id="util-arrow-nutrtargets">&#9656;</span>'
-    +'</div>'
-    +'<div class="collapsible-content is-hidden" id="util-body-nutrtargets" style="margin-top:10px">'+nutTargetsContent+'</div>'
-    +'</div>';
-
-  html+='</div>';
-
   html+='<div class="footer-disclaimer">&#9888;&#65039; Nutritional information only. Not a substitute for veterinary advice. No liability assumed.</div>';
 
   document.getElementById("page-guide").innerHTML=html;
   styleTitleIcons("#page-guide .guide-title");
   makeGuideCardsCollapsible();
   mountEmbeddedVideos();
-  runCalc();
-  updateProteinPickCount();
 }
 
 // ── UTILITIES ─────────────────────────────────────────────────────────────────
@@ -8245,7 +8230,7 @@ function applyImport(){
   }
 
   reloadAllStateFromStorage();
-  renderGuide();
+  renderPlan();
   var newStatus=document.getElementById("importStatus");
   if(newStatus){ newStatus.className="usda-status"; newStatus.innerHTML="Imported successfully!"; }
 }

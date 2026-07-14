@@ -41,6 +41,28 @@ body{background:linear-gradient(180deg,#dfeaf1,#cfe0ea);background-attachment:fi
 .dog-chip{background:#ffffff;border:1px solid rgba(200,147,58,0.35);border-radius:99px;padding:6px 13px;font-family:'Baloo 2',sans-serif;font-size:14px;font-weight:700;color:#4a6a7d;cursor:pointer;}
 .dog-chip.active{background:#c8933a;border-color:#c8933a;color:#fff;}
 .dog-chip.add{border-style:dashed;color:#7a95a8;background:transparent;}
+/* Active-dog header banner (multi-dog only) */
+.active-dog-banner{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  background:linear-gradient(90deg,rgba(200,147,58,0.11),rgba(200,147,58,0.06));
+  border-top:1px solid rgba(200,147,58,0.20);
+  padding:5px 16px 6px;
+  font-size:13px;font-weight:800;color:#c8933a;letter-spacing:0.2px;
+}
+/* Print styles */
+@media print{
+  .no-print{display:none!important;}
+  body{background:#fff;color:#000;}
+  .print-meal-plan{max-width:700px;margin:0 auto;font-family:sans-serif;}
+  .print-week{page-break-inside:avoid;margin-bottom:24px;}
+  .print-week h3{font-size:14px;font-weight:700;margin-bottom:8px;border-bottom:1px solid #ccc;padding-bottom:4px;}
+  .print-day-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;}
+  .print-day{border:1px solid #ddd;border-radius:6px;padding:6px 4px;text-align:center;font-size:11px;}
+  .print-day-label{font-weight:700;font-size:10px;color:#555;margin-bottom:3px;}
+  .print-am{font-weight:600;margin-bottom:2px;}
+  .print-pm{color:#777;}
+  .print-disclaimer{font-size:10px;color:#888;margin-top:20px;border-top:1px solid #eee;padding-top:10px;line-height:1.5;}
+}
 .pet-info-box{background:#eaf4fa;border:1px solid rgba(200,147,58,0.25);border-radius:12px;padding:8px 12px 6px;margin-bottom:2px;}
 .pet-name-input{display:block;width:100%;background:transparent;border:none;border-bottom:1px solid rgba(200,147,58,0.3);color:#c8933a;font-size:15px;font-weight:600;padding:3px 0 5px;margin-bottom:4px;}
 .pet-name-input::placeholder{color:#7a95a8;opacity:0.7;}
@@ -505,7 +527,21 @@ body{background:linear-gradient(180deg,#dfeaf1,#cfe0ea);background-attachment:fi
   box-shadow:0 2px 6px rgba(60,90,110,0.08);
 }
 .home-nav-icon{ font-size:26px; }
-.home-account-card{ opacity:0.75; }
+.home-disclaimer-footer{
+  margin-top:6px; margin-bottom:20px;
+  padding:14px 16px;
+  background:rgba(224,82,82,0.05);
+  border:1px solid rgba(224,82,82,0.18);
+  border-radius:14px;
+}
+.home-disclaimer-badge{
+  font-size:12px; font-weight:800; color:#b03030;
+  letter-spacing:0.4px; margin-bottom:6px;
+}
+.home-disclaimer-text{
+  font-size:12px; color:#4a6a7d; line-height:1.65;
+}
+.home-disclaimer-text strong{ color:#2c4a5e; }
 .embedded-video-frame{ width:100%; border:none; display:block; }
 
 </style>
@@ -521,6 +557,7 @@ body{background:linear-gradient(180deg,#dfeaf1,#cfe0ea);background-attachment:fi
     </div>
     <div class="back-home-spacer" id="backHomeSpacer" style="display:none"></div>
   </div>
+  <div id="activeDogBanner" class="active-dog-banner" style="display:none"></div>
 </div>
 <div class="autosave-pill" id="autosavePill">&#10003; Autosaved</div>
 
@@ -5737,6 +5774,7 @@ function showTab(name){
   if(backBtn){ backBtn.style.display = (name==="home")?"none":"block"; }
   if(spacer){  spacer.style.display  = (name==="home")?"none":"block"; }
   window.scrollTo(0,0);
+  updateActiveDogBanner(name);
   if(name==="home")       renderHome();
   if(name==="plan")       renderPlan();
   if(name==="calendar")   renderCalendarPage();
@@ -5768,7 +5806,7 @@ function renderPlan(){
     +'<option value="3.0">Puppy (under 4 months)</option>'
     +'</select></div>'
     +'<div class="calc-result" id="calcResult"></div>'
-    +'<div class="calc-note">Estimates only &mdash; always confirm with your veterinarian before changing a feeding plan. Oz/day is approximated using this diet\'s density (~42 kcal/oz of prepared food); actual density varies by recipe.</div>'
+    +'<div class="calc-note">&#9888;&#65039; <strong>These are estimates only and are not a substitute for professional veterinary advice.</strong> Always consult a qualified veterinarian regarding your pet\u2019s health and dietary needs before changing a feeding plan. Oz/day is approximated using this diet\u2019s density (~42 kcal/oz of prepared food); actual density varies by recipe.</div>'
 
     +'<div class="guide-section" style="margin-top:16px">Allergies &amp; Foods to Avoid</div>'
     +'<div class="usda-key-hint" style="margin-bottom:8px">Separate items with commas. The Meal Plan Advisor checks against this list before answering food questions.</div>'
@@ -5862,7 +5900,8 @@ function renderPlan(){
     }
     planContent+='</div></div>';
   }
-  planContent+='<div style="font-size:12px;color:#555;margin-top:6px;margin-bottom:4px">&#8635; Rotation repeats every 4 weeks &bull; AM on Thu &amp; Sun is the variety/alt protein &bull; Save &amp; Rebuild Rotation above to update</div>';
+  planContent+='<div style="font-size:12px;color:#555;margin-top:6px;margin-bottom:12px">&#8635; Rotation repeats every 4 weeks &bull; AM on Thu &amp; Sun is the variety/alt protein &bull; Save &amp; Rebuild Rotation above to update</div>';
+  planContent+='<button class="save-btn" onclick="printMealPlan()" style="background:#2c4a5e">&#128438; Print / Save as PDF</button>';
 
   html+=utilSection('mealplan','&#128203; 4-Week Meal Plan', planContent);
 
@@ -7210,6 +7249,53 @@ function askAiAdvisorExample(text){
 }
 
 
+// ── PRINT MEAL PLAN ───────────────────────────────────────────────────────────
+function printMealPlan(){
+  var dayOrder=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  var dayLabels=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  function sp(n){ return (n||'').replace('(85/15)','').replace(' (canned)','').replace('Ground ','').trim(); }
+  var name=petName?escapeHtml(petName):'Your Dog';
+  var rows='';
+  for(var wk=1;wk<=4;wk++){
+    var wkDays=WEEKS[wk]||{};
+    var mondayMeal=wkDays['Mon'];
+    var title=mondayMeal?(sp(mondayMeal.am.protein)+' & '+sp(mondayMeal.pm.protein)):('Week '+wk);
+    rows+='<div class="print-week"><h3>Week '+wk+' &mdash; '+title+'</h3><div class="print-day-grid">';
+    for(var di=0;di<7;di++){
+      var dn=dayOrder[di];
+      var dm=wkDays[dn];
+      if(!dm){ rows+='<div class="print-day"><div class="print-day-label">'+dayLabels[di]+'</div></div>'; continue; }
+      rows+='<div class="print-day">'
+        +'<div class="print-day-label">'+dayLabels[di]+'</div>'
+        +'<div class="print-am">'+sp(dm.am.protein)+'</div>'
+        +'<div class="print-pm">'+sp(dm.pm.protein)+'</div>'
+        +'</div>';
+    }
+    rows+='</div></div>';
+  }
+  var w=window.open('','_blank');
+  w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>'+name+"'s 4-Week Meal Plan</title>"
+    +'<style>'
+    +'body{font-family:system-ui,sans-serif;padding:24px;color:#222;}'
+    +'h1{font-size:20px;margin-bottom:4px;}h2{font-size:13px;font-weight:400;color:#666;margin-bottom:20px;}'
+    +'.print-week{margin-bottom:28px;page-break-inside:avoid;}'
+    +'.print-week h3{font-size:14px;font-weight:700;border-bottom:2px solid #c8933a;padding-bottom:5px;margin-bottom:10px;color:#2c4a5e;}'
+    +'.print-day-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}'
+    +'.print-day{border:1px solid #ddd;border-radius:8px;padding:7px 5px;text-align:center;}'
+    +'.print-day-label{font-size:10px;font-weight:700;color:#888;margin-bottom:4px;text-transform:uppercase;}'
+    +'.print-am{font-size:12px;font-weight:600;color:#2c4a5e;margin-bottom:2px;}'
+    +'.print-pm{font-size:11px;color:#5b7d90;}'
+    +'.disclaimer{font-size:10px;color:#999;margin-top:28px;border-top:1px solid #eee;padding-top:10px;line-height:1.5;}'
+    +'</style></head><body>'
+    +'<h1>&#128062; '+name+"'s 4-Week Meal Plan</h1>"
+    +'<h2>FRESHBOWL METHOD &mdash; generated '+new Date().toLocaleDateString()+'</h2>'
+    +rows
+    +'<div class="disclaimer"><strong>IMPORTANT DISCLAIMER:</strong> This meal plan is not a substitute for professional veterinary advice. Always consult a qualified veterinarian regarding your pet\u2019s health, dietary needs, and any medical conditions. We are not veterinary professionals and do not provide veterinary or medical advice.</div>'
+    +'</body></html>');
+  w.document.close();
+  setTimeout(function(){ w.print(); }, 300);
+}
+
 // ── TREAT BUDGET ──────────────────────────────────────────────────────────────
 // kcal per oz for extras. Anything not listed falls back to 4/9 Atwater on its
 // tracked protein/fat (understates carby foods, so the common ones are listed).
@@ -7644,9 +7730,9 @@ function renderHome(){
     +'<div id="homeAdvisorAnswer" style="font-size:14.5px;color:#2c4a5e;line-height:1.7;margin-top:8px"></div>'
     +'</div>';
 
-  html+='<div class="guide-card home-account-card">'
-    +'<div class="guide-title">&#128274; Account &amp; Sync</div>'
-    +'<div class="usda-key-hint">Login, registration, and password recovery will live here &mdash; coming in a future update. For now, everything stays saved privately on this device.</div>'
+  html+='<div class="home-disclaimer-footer">'
+    +'<div class="home-disclaimer-badge">&#9888;&#65039; Important Disclaimer</div>'
+    +'<div class="home-disclaimer-text"><strong>FRESHBOWL METHOD is not a substitute for professional veterinary advice.</strong> Always consult a qualified veterinarian regarding your pet\u2019s health, dietary needs, and any medical conditions. We are not veterinary professionals and do not provide veterinary or medical advice. Nutritional values are estimates and may not reflect the exact ingredients you use. Use of this app is at your own discretion and risk.</div>'
     +'</div>';
 
   document.getElementById("page-home").innerHTML=html;
@@ -7663,6 +7749,21 @@ function syncProfileWidgets(){
     if(_photo) showPetPhoto(_photo);
   }catch(e){}
   updateHeaderSub();
+  updateActiveDogBanner("home");
+}
+function updateActiveDogBanner(tabName){
+  var banner=document.getElementById("activeDogBanner");
+  if(!banner) return;
+  // Only show when multiple dogs exist and we're NOT on the home page
+  // (home already has the dog-switch chips as the indicator)
+  if(DOGS.length<2 || tabName==="home"){
+    banner.style.display="none";
+    return;
+  }
+  var dog=getActiveDog();
+  var name=dog&&dog.name?escapeHtml(dog.name):"Unnamed";
+  banner.style.display="flex";
+  banner.innerHTML='&#128021; '+name+'\'s data';
 }
 
 // Jump to the Dog Profile page
@@ -7700,7 +7801,8 @@ function renderGuide(){
 
     +'<div class="disclaimer-card" style="margin-top:14px">'
     +'<div class="disclaimer-title">&#9888;&#65039; Important Disclaimer</div>'
-    +'<div class="disclaimer-body">This app is for informational and organizational purposes only and is <strong>not a substitute for veterinary advice</strong>. Recipes and AAFCO/NRC targets shown here are general guidelines, not a personalized diet prescription for your dog. Nutrient values are estimates based on standard food-composition data and may not reflect the exact ingredients you use.</div>'
+    +'<div class="disclaimer-body"><strong>IMPORTANT DISCLAIMER:</strong> The Services are not a substitute for professional veterinary advice. Always consult with a qualified veterinarian regarding your pet\u2019s health, dietary needs, and any medical conditions. We are not veterinary professionals and do not provide veterinary or medical advice.</div>'
+    +'<div class="disclaimer-body" style="margin-top:8px">This app is for informational and organizational purposes only. Recipes and AAFCO/NRC targets shown here are general guidelines, not a personalized diet prescription for your dog. Nutrient values are estimates based on standard food-composition data and may not reflect the exact ingredients you use.</div>'
     +'<div class="disclaimer-body" style="margin-top:8px"><strong>Always consult a licensed veterinarian</strong> before starting, changing, or continuing any homemade diet &mdash; especially for puppies, seniors, pregnant/nursing dogs, or dogs with existing health conditions. The creator of this app assumes no responsibility or liability for any illness, injury, or harm resulting from its use.</div>'
     +'</div>'
 
@@ -8814,6 +8916,13 @@ function flashAutosave(){
   pill.classList.add("show");
   if(_autosaveTimer) clearTimeout(_autosaveTimer);
   _autosaveTimer=setTimeout(function(){ pill.classList.remove("show"); },1400);
+}
+
+// ── SERVICE WORKER ────────────────────────────────────────────────────────────
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('./freshbowl-sw.js').catch(function(){});
+  });
 }
 
 // ── BOOT ──────────────────────────────────────────────────────────────────────
